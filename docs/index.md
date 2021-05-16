@@ -1,17 +1,46 @@
-# Welcome to MkDocs
+# Authentication
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+| Method      | Description                          |
+| ----------- | ------------------------------------ |
+| `GET`       | :material-check:     Fetch resource  |
+| `POST`       | :material-check-all: Submit data |
 
-## Commands
+To authenticate with [mafia](https://mafia.gg/) you need to pass
+the user token with your POST request
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+### Getting the cookie
+Make a POST request to `https://mafia.gg/api/user-session`
+with this payload
+```json
+{ "login" : username, "password": password }
+```
 
-## Project layout
+Response
+```python
+{
+    id: str, 
+    username: str,
+    email: str(email), 
+    hostBannedUsernames: list,
+    isPatreonLinked: bool,
+    activePatreon: bool,
+    needsVerification: bool, 
+    createdAt: str(timestamp)
+}
+```
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+Store this `cookie`
+
+#### Example (Get cookie)
+=== "Python"
+```python
+from requests import Session
+
+with Session() as s:
+    cookie = s.post(URL, json={'login': username, 'password': password})
+if cookie.status_code == 401:
+    raise WrongPassword("You provided incorrect password")
+cookie = cookie.cookies.get_dict()
+```
+
+
