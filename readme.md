@@ -1,5 +1,17 @@
-## How to use
-####Clone this repo
+# MafiaggBot
+![Website](https://img.shields.io/website?label=Docs&style=for-the-badge&up_color=%E2%9D%8C&up_message=%E2%9C%85&url=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F)
+  * [Setting up the bot](#setting-up-the-bot)
+  * [Clone this repo](#clone-this-repo)
+  * [Install the dependencies](#install-the-dependencies)
+  * [Set environment variables](#set-environment-variables)
+  * [.env support](#env-support)
+  * [Run the bot](#run-the-bot)
+
+<!-- toc -->
+
+
+### Setting up the bot
+#### Clone this repo
 ```shell
 git clone https://github.com/blacksmithop/MafiaggBot
 
@@ -30,5 +42,3 @@ python3 runbot.py
 Note: When you run the bot for the first time,
 it will download the deck and setup data
 and store it in `bot/data/` folder.
-
-[API docs](https://blacksmithop.github.io/mafiaggbot/)
