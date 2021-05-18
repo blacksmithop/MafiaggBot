@@ -14,6 +14,7 @@ git clone https://github.com/blacksmithop/MafiaggBot
 
 cd MafiaggBot
 ```
+
 You can also download the latest release [here](https://github.com/blacksmithop/MafiaggBot/releases)
 
 
