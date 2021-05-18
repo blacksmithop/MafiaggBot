@@ -1,4 +1,5 @@
 name: Upload Release
+on: [push]
 uses: ncipollo/release-action@v1
 with:
     artifacts: "mafiabot.zip"
