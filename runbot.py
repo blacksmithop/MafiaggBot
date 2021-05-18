@@ -1,5 +1,8 @@
 from bot.mafia import Mafia
+from sys import exit
 
 m = Mafia()
-
-m.run()
+try:
+    m.run()
+except KeyboardInterrupt:
+    exit(1)
