@@ -11,7 +11,7 @@ jobs:
         filename: 'mafiabot.zip'
         exclusions: '*.git* /*.github/*'
     - name: Upload Release
-        uses: ncipollo/release-action@v1
-        with:
-            artifacts: "release.zip"
-            token: ${{ secrets.RELEASE_TOKEN }}
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "release.zip"
+        token: ${{ secrets.RELEASE_TOKEN }}
