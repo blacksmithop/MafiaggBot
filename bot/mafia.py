@@ -41,7 +41,6 @@ class Mafia:
              'roomId': self.room, 'auth': auth})
         await self.ws.send(output)
         info = loads(await self.ws.recv())
-        print(info)
         self.bot.roles = info['events'][1]['roles']
         await self.ws.send(dumps({'type': 'presence', 'isPlayer': False}))
 
@@ -50,6 +49,9 @@ class Mafia:
         asyncio.get_event_loop().run_until_complete(self.ws_send(self.engine, self.auth))
         print("Bot has started listening to commands")
         asyncio.get_event_loop().run_until_complete(self._run())
+
+    def __del__(self):
+        print("Bot stopped, shutting down")
 
     async def _run(self):
         while True:
@@ -66,6 +68,7 @@ class Mafia:
                     await self.ws.send(dumps(chat))
                     await self.ws.send(dumps({'type': 'newGame', 'roomId': self.room}))
                     await self.ws_send(self.engine, self.auth)
+                    print("New game, clearing the cache(user)")
                     self.bot.reset_cache()
                 else:
                     await self.ws.send(dumps(resp))

@@ -2,6 +2,7 @@ from json import loads
 from bot.deck import Deck
 from bot.role import Role
 from bot.build import Setup
+from bot.setting import Setting
 from typing import Union
 from requests import Session
 from inspect import getmembers, isfunction
@@ -21,6 +22,7 @@ class Bot:
         self._deck = Deck(user)
         self._role = Role()
         self._setup = Setup()
+        self._setting = Setting()
         self.id = _id
         self.response = {'type': 'chat', 'message': "Couldn't parse command"}
         self.rname, self.unlisted = None, None
@@ -98,32 +100,33 @@ class Bot:
         res = self._setup.search_setup(args)
         if res is None:
             self.response['message'] = f"⛔ Could not find a setup by the name {args}"
-            return self.response
-        url, size, code = res
-        args = f"""
-                ID: {code}
-                Players: {size}
-                Wiki: {url}
-                """
-        self.response['message'] = args
+        else:
+            url, size, code = res
+            args = f"""
+                    ID: {code}
+                    Players: {size}
+                    Wiki: {url}
+                    """
+            self.response['message'] = args
         return self.response
 
-    def usesetup(self, args) -> list:
+    def usesetup(self, args) -> [dict, list]:
         """ Change the current setup (give name)"""
         res = self._setup.search_setup(args.lower())
         if res is None:
             self.response['message'] = f"⛔ Could not find a setup by the name {args}"
+            return self.response
         self.response['message'] = f"✅ Set setup to {args}"
         url, cnt, _id = res
         roles = convertSetup(_id)
         self.roles = roles
         if roles is None:
             self.response['message'] = f"⛔ Could not convert {_id} to roles"
-            return [self.response]
+            return self.response
         return [{'type': 'options', 'roles': roles},
                 self.response]
 
-    def addrole(self, args) -> list:
+    def addrole(self, args) -> [dict, list]:
         """Add a role to the setup : name, amount(default=1)"""
         args = args.split()
         if len(args) == 1:
@@ -133,11 +136,11 @@ class Bot:
                 role, num = args[0], int(args[1])
             except ValueError:
                 self.response['message'] = f"⛔ {args[1]} is not a valid number"
-                return [self.response]
+                return self.response
         _id = self._role.get_role(role.lower())
         if _id is None:
             self.response['message'] = f"⛔ Could not find a role by the name {args}"
-            return [self.response]
+            return self.response
         if _id in self.roles:
             self.roles[_id] += num
         else:
@@ -146,7 +149,7 @@ class Bot:
         return [{'type': 'options', 'roles': self.roles},
                 self.response]
 
-    def removerole(self, args) -> list:
+    def removerole(self, args) -> [dict, list]:
         """Removes a role from the setup : name, amount(default=1)"""
         args = args.split()
         if len(args) == 1:
@@ -156,11 +159,11 @@ class Bot:
                 role, num = args[0], int(args[1])
             except ValueError:
                 self.response['message'] = f"⛔ {args[1]} is not a valid number"
-                return [self.response]
+                return self.response
         _id = self._role.get_role(role.lower())
         if _id is None:
             self.response['message'] = f"⛔ Could not find a role by the name {args}"
-            return [self.response]
+            return self.response
         if _id in self.roles:
             if num < self.roles[_id]:
                 self.roles[_id] -= num
@@ -170,7 +173,7 @@ class Bot:
                 self.response['message'] = f"✅ Removed {role} from setup"
             elif num > self.roles[_id]:
                 self.response['message'] = f"⛔ Cannot remove {num} {role}, there are only {self.roles[_id]}"
-                return [self.response]
+                return self.response
             return [{'type': 'options', 'roles': self.roles},
                     self.response]
 
@@ -207,22 +210,22 @@ class Bot:
         return [{'type': 'options', 'roomName': self.rname},
                 self.response]
 
-    def setcode(self, args) -> list:
+    def setcode(self, args) -> [dict, list]:
         """ Change the current setup (give ID)"""
         roles = convertSetup(args.strip())
         if roles is None:
             self.response['message'] = f"⛔ Couldn't convert {args} to roles"
-            return [self.response]
+            return self.response
         self.response['message'] = f"✅ Set setup to {args}"
         return [{'type': 'options', 'roles': roles},
                 self.response]
 
-    def setdeck(self, args) -> list:
+    def setdeck(self, args) -> [dict, list]:
         """ Change the current deck (give name)"""
         _id = self._deck.search_deck(args)
         if not _id:
             self.response['message'] = f"⛔ Could not find a deck with the name {args}"
-            return [self.response]
+            return self.response
         self.response['message'] = f"✅ Set deck to {args}"
         return [{'type': 'options', 'deck': _id},
                 self.response]
@@ -271,12 +274,51 @@ class Bot:
             self.response['message'] = f"✅ Command [{fn[0][0]}] : {fn[0][1].__doc__}"
         return self.response
 
-    def ping(self)->list:
+    def ping(self) -> list:
         """ Sends a ping """
         self.response['message'] = "Pong! 🏓"
         return [
             {"type": "ping"}, self.response
         ]
+
+    def edit(self, args)->[dict, list]:
+        """ Edits the room settings, See $edit list for all"""
+        args = args.split()
+        if len(args) == 1:
+            opt = args[0]
+            exist = self._setting.is_valid(opt)
+            if exist is None or opt == "list":
+                self.response['message'] = f"📜 Valid options are" \
+                                           f" {', '.join(list(self._setting.edits.keys()))}"
+                return self.response
+            else:
+                if exist['allowed'] == "str":
+                    self.response['message'] = f"📜 Valid options for {opt} are " \
+                                               f"{', '.join(exist['options'])}"
+                elif exist["allowed"] == "bool":
+                    self.response['message'] = f"📜 Valid options for {opt} are True, False"
+                else:
+                    self.response['message'] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                return self.response
+        else:
+            opt, new = args
+            setting = self._setting.edit_option(opt, new)
+            if setting is None:
+                self.response['message'] = f"⛔ {opt} is not a valid setting, valid options are" \
+                                           f"{', '.join(list(self._setting.edits.keys()))}"
+                return self.response
+            elif setting is False:
+                exist = self._setting.is_valid(opt)
+                if exist['allowed'] == "str":
+                    self.response['message'] = f"⛔ Valid options for {opt} are " \
+                                               f"{', '.join(exist['options'])}"
+                elif exist['allowed'] == "bool":
+                    self.response['message'] = f"⛔ Valid options for {opt} are True, False"
+                else:
+                    self.response['message'] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                return self.response
+        self.response['message'] = f"✅ Set {opt} to {new}"
+        return [self.response, setting]
 
 
 def convertSetup(roles: str) -> dict:
