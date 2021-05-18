@@ -14,5 +14,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         artifacts: "mafiabot.zip"
-        tag: latest
+        tag: Bot
         token: ${{ secrets.RELEASE_TOKEN }}
