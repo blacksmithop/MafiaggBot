@@ -13,6 +13,6 @@ jobs:
     - name: Upload Release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "release.zip"
+        artifacts: "mafiabot.zip"
         tag: latest
         token: ${{ secrets.RELEASE_TOKEN }}
