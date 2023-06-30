@@ -39,3 +39,7 @@ python3 runbot.py
 Note: When you run the bot for the first time,
 it will download the deck and setup data
 and store it in `bot/data/` folder.
+
+### To Do
+
+- [ ] Fix Setup data parsing
