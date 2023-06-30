@@ -41,7 +41,7 @@ class Mafia:
              'roomId': self.room, 'auth': auth})
         await self.ws.send(output)
         info = loads(await self.ws.recv())
-        self.bot.roles = info['events'][1]['roles']
+        self.bot.roles = info['events'][2]['roles']
         await self.ws.send(dumps({'type': 'presence', 'isPlayer': False}))
 
     def run(self):

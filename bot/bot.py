@@ -21,7 +21,7 @@ class Bot:
         self.prefix = "$"
         self._deck = Deck(user)
         self._role = Role()
-        self._setup = Setup()
+        # self._setup = Setup() # Get setups from API / Scrap with new wiki format
         self._setting = Setting()
         self.id = _id
         self.response = {'type': 'chat', 'message': "Couldn't parse command"}
