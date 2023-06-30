@@ -25,17 +25,11 @@ python3 -m pip install -r requirements.txt
 ```
 ---
 ### Set environment variables
-`MAFIA_GG_USERNAME` - username
-`MAFIA_GG_PASSWORD` - password
-### Use .env file
-Run 
-```
-python3 -m pip install python-dotenv
-```
+
 Create a .env file
 ```
-USER=username
-PASS=password
+MAFIA_GG_USERNAME=username
+MAFIA_GG_PASSWORD=password
 ```
 ---
 ### Run the bot
