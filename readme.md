@@ -25,8 +25,8 @@ python3 -m pip install -r requirements.txt
 ```
 ---
 ### Set environment variables
-`USER` - username
-`PASS` - password
+`MAFIA_GG_USERNAME` - username
+`MAFIA_GG_PASSWORD` - password
 ### Use .env file
 Run 
 ```
