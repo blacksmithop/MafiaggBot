@@ -15,4 +15,4 @@ jobs:
       with:
         artifacts: "mafiabot.zip"
         tag: stable
-        token: ${{ secrets.RELEASE_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN  }}
