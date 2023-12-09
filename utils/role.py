@@ -1,6 +1,7 @@
-from utils.customtypes import DeckDict
+from difflib import SequenceMatcher
 
-RoleToId = {'shogun': '42', 'armorer': '1', 'revenant': '2', 'luckyguard': '3', 'bomb': '4', 'bulletproof': '5',
+
+roles = {'shogun': '42', 'armorer': '1', 'revenant': '2', 'luckyguard': '3', 'bomb': '4', 'bulletproof': '5',
             'confused cop': '6', 'cop': '7', 'blade master': '8', 'bodyguard': '9', 'rifleman': '10', 'detective': '11',
             'doctor': '12', 'seer': '13', 'drunk': '14', 'fortune teller': '15', 'phantom': '16', 'governor': '17',
             'grandma': '18', 'arms dealer': '19', 'hunter': '20', 'hypnotist': '21', 'dog': '22', 'insane cop': '23',
@@ -43,10 +44,20 @@ RoleToId = {'shogun': '42', 'armorer': '1', 'revenant': '2', 'luckyguard': '3', 
             'fall guy': '1611988688'}
 
 
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
 class Role:
-    def __init__(self):
-        self.role = DeckDict(RoleToId)
 
-    def get_role(self, name):
-        return self.role[name.lower()]
-
+    def getRole(self, name: str):
+        for role in roles.keys():
+            if similar(role, name) > 0.6:
+                return roles[role]
+        return None
+    
+if __name__ == "__main__":
+    role = Role()
+    print(role.getRole("fall"))
+    print(role.getRole("tailor"))
+    print(role.getRole("xudsds"))
+    
