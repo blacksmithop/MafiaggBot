@@ -2,10 +2,10 @@ from requests import Session
 from json import dump, load
 from os import getcwd, path
 from pydantic import BaseModel
-from pydantic.functional_validators import field_validator
 from typing import List, Optional
 from pathlib import Path
 from auth import Cookie
+from matcher import similar
 from time import sleep
 
 
@@ -98,7 +98,7 @@ class GenerateDeck:
             print("Saved deck data to file")
 
     def search(self, name: str) -> [bool, str]:
-        gen = (item for item in self.dataset if item.name.lower() == name.lower())
+        gen = (item for item in self.dataset if similar(item.name.lower(), name.lower()) > 0.6)
         return next(gen, None)
 
 if __name__ == "__main__":

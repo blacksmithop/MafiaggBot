@@ -1,5 +1,4 @@
-from difflib import SequenceMatcher
-
+from matcher import similar
 
 roles = {'shogun': '42', 'armorer': '1', 'revenant': '2', 'luckyguard': '3', 'bomb': '4', 'bulletproof': '5',
             'confused cop': '6', 'cop': '7', 'blade master': '8', 'bodyguard': '9', 'rifleman': '10', 'detective': '11',
@@ -44,12 +43,13 @@ roles = {'shogun': '42', 'armorer': '1', 'revenant': '2', 'luckyguard': '3', 'bo
             'fall guy': '1611988688'}
 
 
-def similar(a, b):
-    return SequenceMatcher(None, a, b).ratio()
+
 
 class Role:
 
     def getRole(self, name: str):
+        if name in roles:
+            return roles[name]
         for role in roles.keys():
             if similar(role, name) > 0.6:
                 return roles[role]
