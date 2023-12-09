@@ -1,7 +1,6 @@
 from requests import Session
 from json import dump, load
 from os import getcwd, path
-from bot.customtypes import DeckDict
 from pydantic import BaseModel, validator
 from datetime import datetime
 from typing import List
