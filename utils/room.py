@@ -11,10 +11,9 @@ class Room:
     def list_rooms(self):
         with Session() as s:
             self.json = loads(s.get(self.URL, cookies=self.payload).content)
-        rooms = self.json['rooms']
+        rooms = self.json["rooms"]
         num = len(rooms)
         lobbies = []
         if num > 0:
-            lobbies = [r['name'] for r in rooms]
+            lobbies = [r["name"] for r in rooms]
         return num, lobbies
-    
