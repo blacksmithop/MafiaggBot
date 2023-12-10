@@ -1,5 +1,3 @@
-from utils.customtypes import DeckDict
-
 options = {
     "daylength": {"true": "dayLength", "minmax": [3, 20], "allowed": "int"},
     "nightlength": {"true": "nightLength", "minmax": [3, 20], "allowed": "int"},
@@ -52,13 +50,13 @@ str2bool = {"True": True, "False": False}
 
 
 class Setting:
-    edits = DeckDict(options)
+    edits = options
 
-    def is_valid(self, option):
+    def isValid(self, option):
         return self.edits.get(option)
 
-    def edit_option(self, option, newvalue) -> [None, dict, bool]:
-        option = self.is_valid(option)
+    def editOption(self, option, newvalue) -> [None, dict, bool]:
+        option = self.isValid(option)
         if option is None:
             return
         if option["allowed"] == "str":

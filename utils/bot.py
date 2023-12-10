@@ -2,7 +2,7 @@ from json import loads
 from utils.decks import Deck
 from utils.roles import Role
 from utils.setups import Setup
-from utils.setting import Setting
+from utils.settings import Setting
 from typing import Union
 from requests import Session
 from inspect import getmembers, isfunction
