@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from pathlib import Path
 from auth import Cookie
-from matcher import similar
+from utils.helper import similar
 from time import sleep
 
 # https://mafia.gg/api/decks-random-key
