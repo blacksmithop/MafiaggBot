@@ -1,7 +1,7 @@
 from matcher import similar
 from json import load
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 
 
 class Role(BaseModel):
