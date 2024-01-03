@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import Optional, List
 
 
@@ -13,7 +13,16 @@ class Role(BaseModel):
     holiday: str = "none"
     tags: List[str] = []
 
-
+    @field_validator('description')
+    @classmethod
+    def cleanup_description(cls, v: str) -> str:
+        v = v.replace("@{item:", "[").replace("}", "]")
+        return v
+    
+    @field_validator('alignment')
+    @classmethod
+    def title_alignment(cls, v: str) -> str:
+        return v.title()
 # User
 class User(BaseModel):
     id: int
@@ -24,8 +33,7 @@ class User(BaseModel):
     isPatreonLinked: bool = False
     needsVerification: bool = False
     createdAt: str = ""
-
-
+    
 # Rooms
 class Room(BaseModel):
     id: str
