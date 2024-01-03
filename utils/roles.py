@@ -18,7 +18,7 @@ class GetRole:
             response = roles[name]
         for role in roles:
             score = similar(role.name, name)
-            if score > 0.6:
+            if score > 0.7:
                 response = role
         description = self.formatRoleData(name=name, response=response)
         return description
