@@ -250,7 +250,7 @@ class Bot:
         userData = user.getUser(userID)
         userName = userData.username
         message = f"👋 Welcome {userName}, my prefix is {self.prefix}"
-        print(message)
+        print(f"User joined {userName}")
         self.response["message"] = message
         self.cache.data[userID] = userData
         return self.response
