@@ -4,6 +4,7 @@ from json import loads
 # from utils.setups import Setup
 from utils.roles import GetRole
 from utils.decks import GetDeck
+from utils.user import GetUser
 from utils.settings import Setting
 from utils.helper import ignore_bot_message
 from typing import Union, Dict
@@ -21,6 +22,8 @@ class UserCache:
 
 role = GetRole()
 deck = GetDeck()
+user = GetUser()
+
 
 class Bot:
     def __init__(self, user, _id):
@@ -60,7 +63,6 @@ class Bot:
             else:
                 return
         elif payload["type"] == "userJoin":
-            print(payload)
             return self._welcome(payload["userId"])
         else:
             return
@@ -228,16 +230,16 @@ class Bot:
     #     self.response["message"] = f"✅ Set setup to {args}"
     #     return [{"type": "options", "roles": roles}, self.response]
 
-    def _welcome(self, _id: int) -> [None, dict]:
-        if _id in self.cache.data:
+    def _welcome(self, userID: int) -> [None, dict]:
+        if userID in self.cache.data:
             return
         # If present in cache no welcome, use lru instead
-        with Session() as s:
-            res = loads(s.get(f"https://mafia.gg/api/users/{_id}").text)
+        userData = user.getUser(userID)
+        userName = userData["username"]
         self.response[
             "message"
-        ] = f"👋 Welcome {res[0]['username']}, my prefix is {self.prefix}"
-        self.cache.data[_id] = res[0]["username"]
+        ] = f"👋 Welcome {userName}, my prefix is {self.prefix}"
+        self.cache.data[userID] =userData
         return self.response
 
     def afk(self) -> list:
