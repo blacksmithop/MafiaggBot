@@ -52,4 +52,6 @@ and store it in `bot/data/` folder.
 - [ ] Rework bot logic
 - [x] Only read cookie once, refresh if needed
 - [x] Cleanup descriptions with validator
+- [ ] Lock certain commmands as host only
+- [ ] Don't create new commands unless game end
 - [ ] Return character info (for decks in next message)
