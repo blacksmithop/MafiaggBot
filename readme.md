@@ -51,4 +51,5 @@ and store it in `bot/data/` folder.
 - [x] Reworked Roles
 - [ ] Rework bot logic
 - [ ] Only read cookie once, refresh if needed
-- [ ] Cleanup descriptions with validator
+- [x] Cleanup descriptions with validator
+- [ ] Return character info (for decks in next message)
