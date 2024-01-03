@@ -2,7 +2,6 @@ from requests import Session
 from json import dump, load
 from os import path
 from pathlib import Path
-from utils.auth import Cookie
 from utils.helper import similar
 from time import sleep
 from utils.models.models import DeckData, Deck
@@ -17,10 +16,9 @@ class GetDeck:
     RANDOM_URL = "https://mafia.gg/api/decks-random-key"
     DECK_DIR = "./data/decks"
 
-    def __init__(self):
+    def __init__(self, cookie):
         self.getDecks()
-        cookie_gen = Cookie()
-        self.cookie = cookie_gen.getCookieData()
+        self.cookie = cookie
         
     def updateOrCreate(self):
         self.createDeckDir()

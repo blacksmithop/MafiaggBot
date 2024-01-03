@@ -1,15 +1,12 @@
 from requests import Session
-from json import loads
-from utils.auth import Cookie
 from utils.models.models import Room
 
 
 class GetRooms:
     URL = "https://mafia.gg/api/rooms"
 
-    def __init__(self):
-        cookie_gen = Cookie()
-        self.cookie = cookie_gen.getCookieData()
+    def __init__(self, cookie):
+        self.cookie = cookie
         self.rooms = []
 
     def getRooms(self):

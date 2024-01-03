@@ -5,10 +5,11 @@ from json import loads
 from utils.roles import GetRole
 from utils.decks import GetDeck
 from utils.user import GetUser
+from utils.room import GetRooms
 from utils.settings import Setting
 from utils.helper import ignore_bot_message
+from utils.auth import Cookie
 from typing import Union, Dict
-from requests import Session
 from inspect import getmembers, isfunction
 
 
@@ -19,23 +20,25 @@ def commandNotFound():
 class UserCache:
     data = dict()
 
-
+cookie = Cookie()
+cookieData = cookie.getCookieData()
 role = GetRole()
-deck = GetDeck()
+deck = GetDeck(cookie=cookieData)
 user = GetUser()
-
+room = GetRooms(cookie=cookieData)
 
 class Bot:
-    def __init__(self, user, _id):
+    def __init__(self):
         self.prefix = "$"
-        # self._deck = Deck(user)
         # self._setup = Setup() # Get setups from API / Scrap with new wiki format
+        self.user = cookie
+        self.cookie = cookieData
         self._setting = Setting()
-        self.id = _id
+        self.id = cookie.user.id
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.unlisted = None, None
         self.cache = UserCache()
-        self.roles = dict()
+    
 
     def reset_cache(self):
         self.cache.data = dict()
@@ -236,9 +239,11 @@ class Bot:
         # If present in cache no welcome, use lru instead
         userData = user.getUser(userID)
         userName = userData.username
+        message = f"👋 Welcome {userName}, my prefix is {self.prefix}"
+        print(message)
         self.response[
             "message"
-        ] = f"👋 Welcome {userName}, my prefix is {self.prefix}"
+        ] = message
         self.cache.data[userID] = userData
         return self.response
 

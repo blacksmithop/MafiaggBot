@@ -1,19 +1,14 @@
 from websockets import connect
 from requests import Session
 from json import loads, dumps
-from utils.auth import Cookie
 from utils.bot import Bot
 import asyncio
+from utils.auth import Cookie
 
 
 class Mafia:
     def __init__(self):
-        cookie = Cookie()
-        self.cookie = cookie.getCookieData()
-        cookie = cookie
-        # self.user = User()
-        self.id = cookie.user.id
-        self.bot = Bot(user=self.cookie, _id=id)  # self.user.response["id"]
+        self.bot = Bot()
         self.ws = None
         self.room = None
         self.engine, self.auth = None, None
@@ -21,23 +16,20 @@ class Mafia:
     def load(self):
         options = {"name": "Bot Lobby", "unlisted": True}
         with Session() as s:
-            resp = loads(
-                s.post(
+            resp = s.post(
                     "https://mafia.gg/api/rooms/",
-                    cookies=self.cookie,
+                    cookies=self.bot.cookie,
                     json=options,
-                ).content
-            )
+                ).json()
         self.room = resp["id"]
-        room = f"Created room at https://mafia.gg/game/{self.room}"
-        print(room)
+        print(f"Created room at https://mafia.gg/game/{self.room}")
         self.get_ws()
 
     def get_ws(self):
         with Session() as s:
             resp = loads(
                 s.get(
-                    f"https://mafia.gg/api/rooms/{self.room}", cookies=self.cookie
+                    f"https://mafia.gg/api/rooms/{self.room}", cookies=self.bot.cookie
                 ).content
             )
             self.engine, self.auth = resp["engineUrl"], resp["auth"]
@@ -48,7 +40,7 @@ class Mafia:
         output = dumps(
             {
                 "type": "clientHandshake",
-                "userId": self.id,
+                "userId": self.bot.id,
                 "roomId": self.room,
                 "auth": auth,
             }
