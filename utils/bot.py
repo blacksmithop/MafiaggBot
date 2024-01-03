@@ -183,27 +183,27 @@ class Bot:
         self.response["message"] = "🦸‍♂ Relisted the room"
         return [{"type": "options", "unlisted": False}, self.response]
 
-    def unlist(self) -> list:
-        """Unlist the room"""
-        self.unlisted = True
-        self.response["message"] = "🕵️‍♀ Unlisted the room"
-        return [{"type": "options", "unlisted": self.unlisted}, self.response]
+    # def unlist(self) -> list:
+    #     """Unlist the room"""
+    #     self.unlisted = True
+    #     self.response["message"] = "🕵️‍♀ Unlisted the room"
+    #     return [{"type": "options", "unlisted": self.unlisted}, self.response]
 
     def spectate(self) -> list:
         """Become a spectator"""
         self.response["message"] = "👀 Became a spectator"
         return [{"type": "presence", "isPlayer": False}, self.response]
 
-    def player(self) -> list:
-        """Become a player"""
-        self.response["message"] = "🎮 Became a player"
-        return [{"type": "presence", "isPlayer": True}, self.response]
+    # def player(self) -> list:
+    #     """Become a player"""
+    #     self.response["message"] = "🎮 Became a player"
+    #     return [{"type": "presence", "isPlayer": True}, self.response]
 
-    def rename(self, name) -> list:
-        """Change room name"""
-        self.rname = name
-        self.response["message"] = f"✅ Renamed room to {self.rname}"
-        return [{"type": "options", "roomName": self.rname}, self.response]
+    # def rename(self, name) -> list:
+    #     """Change room name"""
+    #     self.rname = name
+    #     self.response["message"] = f"✅ Renamed room to {self.rname}"
+    #     return [{"type": "options", "roomName": self.rname}, self.response]
 
     # def setcode(self, args) -> [dict, list]:
     #     """Change the current setup (give ID)"""
