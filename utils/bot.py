@@ -235,11 +235,11 @@ class Bot:
             return
         # If present in cache no welcome, use lru instead
         userData = user.getUser(userID)
-        userName = userData["username"]
+        userName = userData.username
         self.response[
             "message"
         ] = f"👋 Welcome {userName}, my prefix is {self.prefix}"
-        self.cache.data[userID] =userData
+        self.cache.data[userID] = userData
         return self.response
 
     def afk(self) -> list:
