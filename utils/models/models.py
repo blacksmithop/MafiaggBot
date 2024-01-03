@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
 
+
 # Role
 class Role(BaseModel):
     name: str = ""
@@ -11,7 +12,8 @@ class Role(BaseModel):
     disabled: bool = False
     holiday: str = "none"
     tags: List[str] = []
-    
+
+
 # User
 class User(BaseModel):
     id: int
@@ -22,8 +24,9 @@ class User(BaseModel):
     isPatreonLinked: bool = False
     needsVerification: bool = False
     createdAt: str = ""
- 
-# Rooms   
+
+
+# Rooms
 class Room(BaseModel):
     id: str
     name: str
@@ -32,7 +35,8 @@ class Room(BaseModel):
     setupSize: int
     hostUser: User
     createdAt: str
-    
+
+
 # Pagination
 class Pagination(BaseModel):
     page: int
@@ -47,6 +51,7 @@ class Character(BaseModel):
     avatarUrl: str
     backgroundColor: str
 
+
 # Deck
 class Deck(BaseModel):
     name: str
@@ -56,6 +61,7 @@ class Deck(BaseModel):
     deckSize: int
     uploadTimestamp: int
     sampleCharacters: List[Character]
+
 
 # Deck with pagination
 class DeckData(BaseModel):

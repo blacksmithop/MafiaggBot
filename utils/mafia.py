@@ -13,7 +13,7 @@ class Mafia:
         cookie = cookie
         # self.user = User()
         self.id = cookie.user.id
-        self.bot = Bot(user=self.cookie, _id=id) # self.user.response["id"]
+        self.bot = Bot(user=self.cookie, _id=id)  # self.user.response["id"]
         self.ws = None
         self.room = None
         self.engine, self.auth = None, None

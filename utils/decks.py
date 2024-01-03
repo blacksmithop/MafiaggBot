@@ -11,8 +11,6 @@ from utils.models.models import DeckData
 # random decks key
 
 
-
-
 class GenerateDeck:
     URL = "https://mafia.gg/api/decks"
     RANDOM_URL = "https://mafia.gg/api/decks-random-key"
@@ -89,7 +87,8 @@ class GenerateDeck:
             if resp.status_code != 200:
                 return
             return resp.json()["key"]
-        
+
+
 if __name__ == "__main__":
     deck = GenerateDeck()
     print(deck.search(name="Phighting!"))

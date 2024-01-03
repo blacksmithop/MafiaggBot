@@ -1,6 +1,8 @@
 from json import loads
+
 # from utils.decks import Deck
-# from utils.roles import GetRole
+from utils.roles import GetRole
+
 # from utils.setups import Setup
 from utils.settings import Setting
 from typing import Union, Dict
@@ -12,6 +14,7 @@ from functools import wraps
 def commandNotFound():
     return None
 
+
 def ignore_bot_message(func):
     @wraps(func)
     def wrapper(self, payload: Dict):
@@ -21,10 +24,15 @@ def ignore_bot_message(func):
                     return
         res = func(self, payload)
         return res
+
     return wrapper
+
 
 class UserCache:
     data = dict()
+
+
+role = GetRole()
 
 
 class Bot:

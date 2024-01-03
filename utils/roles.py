@@ -3,9 +3,6 @@ from json import load
 from utils.models.models import Role
 
 
-
-
-
 with open("./data/roles/roles.json", "r") as f:
     data = load(f)
     roles = data["roles"]

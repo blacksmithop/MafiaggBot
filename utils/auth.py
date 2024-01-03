@@ -18,7 +18,6 @@ class Cookie:
         "Origin": "https://mafia.gg",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     }
-    
 
     def getCookieData(self):
         with Session() as s:
@@ -31,7 +30,7 @@ class Cookie:
                 headers=self.headers,
             )
             self.user = User(**resp.json())
-            
+
         if resp.status_code == 401:
             raise WrongPassword("You provided incorrect password")
         self.response = loads(resp.text)
