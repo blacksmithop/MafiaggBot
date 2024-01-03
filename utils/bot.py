@@ -43,7 +43,7 @@ class Bot:
             msg = payload["message"]
             if msg[0] != self.prefix:
                 return
-            cmd, args = self.parse_command(msg[1:])
+            cmd, args = self.parseCommand(msg[1:])
             cmd = self.get_command(cmd)
             if callable(cmd) and cmd.__doc__:
                 if args is not None:
@@ -66,7 +66,7 @@ class Bot:
             return
 
     @staticmethod
-    def parse_command(msg: str) -> list:
+    def parseCommand(msg: str) -> list:
         msg = msg.split(" ")
         if len(msg) == 2:
             cmd, args = msg
@@ -86,6 +86,22 @@ class Bot:
         deckData = deck.getDeck(args)
         self.response["message"] = deckData
         return self.response
+    
+    def usedeck(self, args) -> [dict, list]:
+        """Change the current deck (give name)"""
+        if args.lower() == "random":
+            deckID = deck.getRandomDeck()
+            match = deck.getDeckbyId(id=deckID)
+            deckName = match.name
+        else:
+            match = deck.getDeck(args, format=False)
+            if not match:
+                self.response["message"] = f"⛔ Could not find a deck with the name {args}"
+                return self.response
+            deckID = match.key
+            deckName = match.name
+        self.response["message"] = f"✅ Set deck to {deckName}"
+        return [{"type": "options", "deck": deckID}, self.response]
     
     def role(self, args) -> dict:
         """Search for a role (name)"""
@@ -211,15 +227,6 @@ class Bot:
     #         return self.response
     #     self.response["message"] = f"✅ Set setup to {args}"
     #     return [{"type": "options", "roles": roles}, self.response]
-
-    # def setdeck(self, args) -> [dict, list]:
-    #     """Change the current deck (give name)"""
-    #     _id = self._deck.search_deck(args)
-    #     if not _id:
-    #         self.response["message"] = f"⛔ Could not find a deck with the name {args}"
-    #         return self.response
-    #     self.response["message"] = f"✅ Set deck to {args}"
-    #     return [{"type": "options", "deck": _id}, self.response]
 
     def _welcome(self, _id: int) -> [None, dict]:
         if _id in self.cache.data:

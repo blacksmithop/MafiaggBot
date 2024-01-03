@@ -19,7 +19,9 @@ class GetDeck:
 
     def __init__(self):
         self.getDecks()
-
+        cookie_gen = Cookie()
+        self.cookie = cookie_gen.getCookieData()
+        
     def updateOrCreate(self):
         self.createDeckDir()
         self.generateDeckData()
@@ -33,8 +35,6 @@ class GetDeck:
                 dataset = DeckData(**data)
                 self.dataset = dataset.decks
         else:
-            cookie_gen = Cookie()
-            self.cookie = cookie_gen.getCookieData()
             self.updateOrCreate()
 
     def generateDeckData(self):
@@ -74,15 +74,27 @@ class GetDeck:
             dump(data, f, indent=4, sort_keys=True, default=str)
             print("Saved deck data to file")
 
-    def getDeck(self, name: str) -> [bool, str]:
+    def getDeck(self, name: str, format=True) -> Optional[Deck]:
         gen = (
             item
             for item in self.dataset
             if similar(item.name.lower(), name.lower()) > 0.6
         )
         response = next(gen, None)
-        deckData = self.formatDeckData(name=name, response=response)
-        return deckData
+        if format:
+            deckData = self.formatDeckData(name=name, response=response)
+            return deckData
+        else:
+            return response
+
+    def getDeckbyId(self, id: str) -> Deck:
+        gen = (
+            item
+            for item in self.dataset
+            if item.key == id
+        )
+        response = next(gen, None)
+        return response
 
     def getRandomDeck(self) -> str:
         with Session() as sess:
