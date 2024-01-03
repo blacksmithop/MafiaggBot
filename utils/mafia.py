@@ -8,8 +8,12 @@ import asyncio
 
 class Mafia:
     def __init__(self):
-        self.user = User()
-        self.bot = Bot(user=self.user.cookie, _id=self.user.response["id"])
+        cookie = Cookie()
+        self.cookie = cookie.getCookieData()
+        cookie = cookie
+        # self.user = User()
+        self.id = cookie.user.id
+        self.bot = Bot(user=self.cookie, _id=id) # self.user.response["id"]
         self.ws = None
         self.room = None
         self.engine, self.auth = None, None
@@ -20,7 +24,7 @@ class Mafia:
             resp = loads(
                 s.post(
                     "https://mafia.gg/api/rooms/",
-                    cookies=self.user.cookie,
+                    cookies=self.cookie,
                     json=options,
                 ).content
             )
@@ -33,7 +37,7 @@ class Mafia:
         with Session() as s:
             resp = loads(
                 s.get(
-                    f"https://mafia.gg/api/rooms/{self.room}", cookies=self.user.cookie
+                    f"https://mafia.gg/api/rooms/{self.room}", cookies=self.cookie
                 ).content
             )
             self.engine, self.auth = resp["engineUrl"], resp["auth"]
@@ -44,7 +48,7 @@ class Mafia:
         output = dumps(
             {
                 "type": "clientHandshake",
-                "userId": self.user.response["id"],
+                "userId": self.id,
                 "roomId": self.room,
                 "auth": auth,
             }
