@@ -1,0 +1,13 @@
+{
+    "type": "decision",
+    "timestamp": 1704287779,
+    "id": 1089455,
+    "groupId": 481769,
+    "details": {
+        "text": "votes",
+        "playerId": "153",
+        "targetPlayerId": "158"
+    },
+    "qid": 3858337,
+    "sid": 23
+}
