@@ -1,47 +1,21 @@
 from requests import Session
 from json import dump, load
-from os import getcwd, path
-from pydantic import BaseModel
-from typing import List, Optional
+from os import path
 from pathlib import Path
-from auth import Cookie
+from utils.auth import Cookie
 from utils.helper import similar
 from time import sleep
+from utils.models.models import DeckData
 
 # https://mafia.gg/api/decks-random-key
 # random decks key
 
 
-class Pagination(BaseModel):
-    page: int
-    numPages: int
-    total: int
-
-
-class Character(BaseModel):
-    playerId: int
-    name: str
-    avatarUrl: str
-    backgroundColor: str
-
-
-class Deck(BaseModel):
-    name: str
-    version: int
-    key: str
-    builtin: bool
-    deckSize: int
-    uploadTimestamp: int
-    sampleCharacters: List[Character]
-
-
-class DeckData(BaseModel):
-    pagination: Optional[Pagination]
-    decks: List[Deck]
 
 
 class GenerateDeck:
     URL = "https://mafia.gg/api/decks"
+    RANDOM_URL = "https://mafia.gg/api/decks-random-key"
     DECK_DIR = "./data/decks"
 
     def __init__(self):
@@ -109,7 +83,13 @@ class GenerateDeck:
         )
         return next(gen, None)
 
-
+    def getRandomDeck(self) -> str:
+        with Session() as sess:
+            resp = sess.get(self.RANDOM_URL, cookies=self.cookie)
+            if resp.status_code != 200:
+                return
+            return resp.json()["key"]
+        
 if __name__ == "__main__":
     deck = GenerateDeck()
     print(deck.search(name="Phighting!"))
