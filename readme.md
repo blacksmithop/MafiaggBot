@@ -50,6 +50,6 @@ and store it in `bot/data/` folder.
 - [x] Reworked Decks
 - [x] Reworked Roles
 - [ ] Rework bot logic
-- [ ] Only read cookie once, refresh if needed
+- [x] Only read cookie once, refresh if needed
 - [x] Cleanup descriptions with validator
 - [ ] Return character info (for decks in next message)
