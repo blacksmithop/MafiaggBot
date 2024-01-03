@@ -23,8 +23,9 @@ class GetRole:
     
     def formatRoleData(self, name: str, response: Optional[Role]):
         if response == None:
-            text = f"❌ Could not find a role by the name: {name}" 
-        text = f"✅ Role: {response.name} | Alignment: {response.alignment.title()} | Description: {response.description}"
+            text = f"❌ Could not find a role by the name: {name}"
+        else:
+            text = f"✅ Role: {response.name} | Alignment: {response.alignment} | Description: {response.description}"
         return text
     
     
