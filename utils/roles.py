@@ -1,18 +1,7 @@
 from utils.helper import similar
 from json import load
-from pydantic import BaseModel
-from typing import List
+from utils.models.models import Role
 
-
-class Role(BaseModel):
-    name: str = ""
-    description: str = ""
-    id: int = -1
-    alignment: str = None
-    new: bool = None
-    disabled: bool = False
-    holiday: str = "none"
-    tags: List[str] = []
 
 
 
