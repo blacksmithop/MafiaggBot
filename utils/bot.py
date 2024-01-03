@@ -223,16 +223,16 @@ class Bot:
         self.response["message"] = message
         return self.response
     
-    # def player(self) -> list:
-    #     """Become a player"""
-    #     self.response["message"] = "🎮 Became a player"
-    #     return [{"type": "presence", "isPlayer": True}, self.response]
+    def player(self) -> list:
+        """Become a player"""
+        self.response["message"] = "🎮 Became a player"
+        return [{"type": "presence", "isPlayer": True}, self.response]
 
-    # def rename(self, name) -> list:
-    #     """Change room name"""
-    #     self.rname = name
-    #     self.response["message"] = f"✅ Renamed room to {self.rname}"
-    #     return [{"type": "options", "roomName": self.rname}, self.response]
+    def rename(self, name) -> list:
+        """Change room name"""
+        self.rname = name
+        self.response["message"] = f"✅ Renamed room to {self.rname}"
+        return [{"type": "options", "roomName": self.rname}, self.response]
 
     # def setcode(self, args) -> [dict, list]:
     #     """Change the current setup (give ID)"""
@@ -269,10 +269,10 @@ class Bot:
         self.response["message"] = f"▶ Starting the game"
         return [{"type": "startGame"}, self.response]
 
-    # @staticmethod
-    # def new() -> dict:
-    #     """Creates a new room"""
-    #     return {"type": "newGame", "roomId": None}
+    @staticmethod
+    def new() -> dict:
+        """Creates a new room"""
+        return {"type": "newGame", "roomId": None}
 
     def help(self, args=None) -> dict:
         """Shows the help command"""
