@@ -17,10 +17,10 @@ class Mafia:
         options = {"name": "Bot Lobby", "unlisted": True}
         with Session() as s:
             resp = s.post(
-                    "https://mafia.gg/api/rooms/",
-                    cookies=self.bot.cookie,
-                    json=options,
-                ).json()
+                "https://mafia.gg/api/rooms/",
+                cookies=self.bot.cookie,
+                json=options,
+            ).json()
         self.room = resp["id"]
         print(f"Created room at https://mafia.gg/game/{self.room}")
         self.get_ws()

@@ -1,6 +1,7 @@
 from utils.models.models import User
 from requests import Session
 
+
 class GetUser:
     def getUser(self, id: str):
         with Session() as s:

@@ -19,7 +19,7 @@ class GetDeck:
     def __init__(self, cookie):
         self.getDecks()
         self.cookie = cookie
-        
+
     def updateOrCreate(self):
         self.createDeckDir()
         self.generateDeckData()
@@ -86,11 +86,7 @@ class GetDeck:
             return response
 
     def getDeckbyId(self, id: str) -> Deck:
-        gen = (
-            item
-            for item in self.dataset
-            if item.key == id
-        )
+        gen = (item for item in self.dataset if item.key == id)
         response = next(gen, None)
         return response
 
@@ -107,6 +103,7 @@ class GetDeck:
         else:
             text = f"✅ Deck: {response.name} | Size: {response.deckSize} | Version: {response.version}"
         return text
+
 
 if __name__ == "__main__":
     deck = GetDeck()

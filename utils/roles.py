@@ -18,19 +18,19 @@ class GetRole:
             response = roles[name]
         for role in roles:
             score = similar(role.name, name)
-            if  score > 0.6:
+            if score > 0.6:
                 response = role
         description = self.formatRoleData(name=name, response=response)
         return description
-    
+
     def formatRoleData(self, name: str, response: Optional[Role]):
         if response == None:
             text = f"❌ Could not find a role by the name: {name}"
         else:
             text = f"✅ Role: {response.name} | Alignment: {response.alignment} | Description: {response.description}"
         return text
-    
-    
+
+
 if __name__ == "__main__":
     role = GetRole()
     print(role.getRole("fall"))

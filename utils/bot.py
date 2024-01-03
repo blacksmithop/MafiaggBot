@@ -20,12 +20,14 @@ def commandNotFound():
 class UserCache:
     data = dict()
 
+
 cookie = Cookie()
 cookieData = cookie.getCookieData()
 role = GetRole()
 deck = GetDeck(cookie=cookieData)
 user = GetUser()
 room = GetRooms(cookie=cookieData)
+
 
 class Bot:
     def __init__(self):
@@ -38,7 +40,6 @@ class Bot:
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.unlisted = None, None
         self.cache = UserCache()
-    
 
     def reset_cache(self):
         self.cache.data = dict()
@@ -91,7 +92,7 @@ class Bot:
         deckData = deck.getDeck(args)
         self.response["message"] = deckData
         return self.response
-    
+
     def usedeck(self, args) -> [dict, list]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
@@ -101,13 +102,15 @@ class Bot:
         else:
             match = deck.getDeck(args, format=False)
             if not match:
-                self.response["message"] = f"⛔ Could not find a deck with the name {args}"
+                self.response[
+                    "message"
+                ] = f"⛔ Could not find a deck with the name {args}"
                 return self.response
             deckID = match.key
             deckName = match.name
         self.response["message"] = f"✅ Set deck to {deckName}"
         return [{"type": "options", "deck": deckID}, self.response]
-    
+
     def role(self, args) -> dict:
         """Search for a role (name)"""
         roleData = role.getRole(name=args)
@@ -241,9 +244,7 @@ class Bot:
         userName = userData.username
         message = f"👋 Welcome {userName}, my prefix is {self.prefix}"
         print(message)
-        self.response[
-            "message"
-        ] = message
+        self.response["message"] = message
         self.cache.data[userID] = userData
         return self.response
 
