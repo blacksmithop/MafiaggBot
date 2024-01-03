@@ -1,0 +1,3463 @@
+{
+    "roles": [
+        {
+            "name": "(Random Balanced Meeting Mafia)",
+            "description": "Represents a random Mafia-aligned role that attends the Mafia night meeting\n\nCannot be a Negative Utility or VIP role\n\nCannot be an Extra KP role unless it is Single-Use",
+            "id": 12340003,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting"
+            ]
+        },
+        {
+            "name": "(Random Cop)",
+            "description": "Represents one of the following roles: @{role:Bus Cop}, @{role:Cop}, @{role:Confused Cop}, @{role:Insane Cop}, @{role:Paranoid Cop}, @{role:Parity Cop}, @{role:Vanilla Cop}, or @{role:Naive Cop}",
+            "id": 1624907922,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "(Random Meeting Mafia)",
+            "description": "Represents a random Mafia-aligned role that attends the Mafia night meeting",
+            "id": 1625030984,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting"
+            ]
+        },
+        {
+            "name": "(Random Non-Scum Third Party)",
+            "description": "Represents a random Third Party role that is neither Non-Faction Scum nor @{role:Cult} or @{role:Liaison}",
+            "id": 12340005,
+            "alignment": "third",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "(Random Nonmeeting Mafia)",
+            "description": "Represents a random Mafia-aligned role that does not attend the Mafia night meeting",
+            "id": 1625031283,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Non-Meeting Mafia"
+            ]
+        },
+        {
+            "name": "(Random On-Condemn Villager)",
+            "description": "Represents a random Town-aligned role that sees self as @{role:Villager} and has a power that activates upon being condemned",
+            "id": 12340004,
+            "alignment": "town",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Villager"
+            ]
+        },
+        {
+            "name": "(Random PR)",
+            "description": "Represents a random Town-aligned power role that does not see self as @{role:Villager}",
+            "id": 1625029370,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "(Random Protector)",
+            "description": "Represents one of the following roles: @{role:Bodyguard}, @{role:Doctor}, @{role:Guardian}, @{role:Luckyguard}, @{role:Medic}, @{role:Nurse}, or @{role:Veterinarian}",
+            "id": 1625029035,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "(Random Third Party)",
+            "description": "Represents a random Third Party role",
+            "id": 1625031508,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "(Random Villager)",
+            "description": "Represents a random Town-aligned role that sees self as @{role:Villager}\n\n‌",
+            "id": 1625355725,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Villager"
+            ]
+        },
+        {
+            "name": "Administrator",
+            "description": "Once per game, may overturn the condemning vote and choose a new player to condemn instead\n\nCannot overturn when the majority vote is either No one or themselves",
+            "id": 999991,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Agent",
+            "description": "Each day, may send anonymous messages to any non-Town-aligned role \n\nAnonymous messages look identical to @{role:Spy}",
+            "id": 322,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power"
+            ]
+        },
+        {
+            "name": "Agoraphobe",
+            "description": "Each night, must choose a player to visit and hide behind\n\nWill be protected from night kills while hiding unless targeted using @{role:Strongman}\n\nIf the visited player is killed, the Agoraphobe will die as well",
+            "id": 1567786474,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Alcoholic",
+            "description": "Sees self as @{role:Tourist}\n\nEach night, must visit and block a player from performing night actions that require a visit",
+            "id": 1599661616,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Amnesiac",
+            "description": "Once per game, may visit a dead player and convert to their role\n\nCannot win without converting",
+            "id": 1624413356,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Anarchist",
+            "description": "Each night, may visit a non-Mafia faction player and perform one of three actions\n\nMay block them from performing visiting night actions and break their items\n\nMay frame them as \"sided with the Mafia\" and steal their items\n\nMay learn their role\n\nEach action may only be performed once",
+            "id": 1602978335,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Item Interaction",
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Roleblocker",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Announcer",
+            "description": "Sees self as a @{role:Villager}\n\nEach day, announces the names of all players who visited them the night before\n\nIf visited by a group (e.g. the Mafia), only one member’s name will be announced",
+            "id": 28,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Armorer",
+            "description": "Each night, may visit a player and give them a @{item:Vest}",
+            "id": 1,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Arms Dealer",
+            "description": "Each night, may visit a player and give them a @{item:Gun}",
+            "id": 19,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Assassin",
+            "description": "Each night, must choose a player to visit and kill\n\nDoes not attend the Mafia night meeting",
+            "id": 68,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Associate",
+            "description": "Basic Mafia-aligned role\n\nDoes not attend the Mafia night meeting",
+            "id": 1596416878,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Non-Meeting Mafia"
+            ]
+        },
+        {
+            "name": "Auditor",
+            "description": "Each night, may choose a player to visit and see what items they have",
+            "id": 91,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Author",
+            "description": "Once per game, may give a @{item:Will} to another player at night",
+            "id": 1665562409,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bee Thief",
+            "description": "Each night, may give a player a @{item:Bee Bomb}\n\nBee Bombs from the Bee Thief will explode randomly within 2-4 nights",
+            "id": 134134131,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Beekeeper",
+            "description": "Each night, may give a player a @{item:Bee Bomb}\n\nChooses how long until the Bee Bomb explodes\n\nCannot be killed by Bee Bombs\n\nTown cannot win while Beekeeper is alive\n\nWins if alive in final 2",
+            "id": 133133131,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Item Interaction",
+                "Night Power",
+                "Non-Faction Scum",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bishop",
+            "description": "Each night, may visit a player and discover sins they commit that night\n\nIf the sinner kills another, they will be guilty of Wrath \n\nIf the sinner converts or is converted, they will be guilty of Heresy \n\nIf the sinner blocks another’s night action or has their night action blocked, they will be guilty of Sloth \n\nOnly successful sins will be discovered and brought to the light",
+            "id": 321,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Blade Master",
+            "description": "Each night, may visit a player and give them a @{item:Knife}",
+            "id": 8,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bodyguard",
+            "description": "Each night, may visit and protect a player from being killed that night\n\nThe first time they protect a player, the killer will die\n\nThe second time they protect a player, the Bodyguard will die\n\nIf multiple attempts are made at once, the chosen player will die",
+            "id": 9,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bolthus",
+            "description": "Once per game, during either the day or at night, may kill a player\n\nIf the power is used during the day, kills immediately\n\nIf the power is used at night, Bolthus visits, and the kill is strengthened and pierces through protections\n\nIf another Bolthus, a @{role:Moko} or a @{role:Tapioca} are killed with this power, the Bolthus dies",
+            "id": 12340002,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "Mafia Anniversary",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bomb",
+            "description": "If killed, the Bomb will explode and kill the player that targeted them as well\n\nIf killed by a night meeting (e.g. the Mafia), one member will be chosen at random to explode \n\nIf targeted by multiple night kills, the explosion will kill one player from each group",
+            "id": 4,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Bouncer",
+            "description": "Each night, may visit a player and block all others that would visit them from performing night actions\n\nDoes not block night meeting actions from targeting the visited player",
+            "id": 1661823768,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bounty Hunter",
+            "description": "Starts with a @{item:Vest}\n\nEach day, will be given a bounty for a random player\n\nGains a point if their target dies the day they were assigned\n\nWins when they reach 3 points or if alive in final 2\n\nTown cannot win while Bounty Hunter is alive",
+            "id": 1541122637,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Non-Faction Scum",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Bozoman",
+            "description": "Sees self as @{role:Villager}\n\nWhenever Bozoman's role would be revealed or seen by a player, a random role included in the setup will be shown instead\n\nWill not reveal as @{role:Villager}, @{role:Soloman}, @{role:Impostor}, or Bozoman",
+            "id": 1555727200,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Revealing",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Brainwasher",
+            "description": "Once per game, can visit a player from another faction and convert them into a @{role:Villager}",
+            "id": 1555026977,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Bruiser",
+            "description": "Sees self as @{role:Villager}\n\nIf attempted to be killed, will bleed for a day before dying",
+            "id": 1596420536,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Villager"
+            ]
+        },
+        {
+            "name": "Buffoon",
+            "description": "Sees self as @{role:Villager}\n \nWill not receive any items",
+            "id": 1596418309,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Negative Utility",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Bulletproof",
+            "description": "Starts with a @{item:Vest}",
+            "id": 5,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Bus Cop",
+            "description": "Each night after a player is condemned, may choose a player to visit and investigate\n\nMay only investigate a player who voted for the condemned player\n\nReceives a report the next day detailing if the player is sided with the Mafia",
+            "id": 1676023569,
+            "alignment": "town",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Busboy",
+            "description": "When visiting as a group, will be the only member from the Mafia night meeting to visit and kill the target \n\nIf all Busboys are blocked from visiting, the Mafia will visit their target as a group\n\nUpon death, will reveal as @{role:Mafia}",
+            "id": 1540004252,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Butler",
+            "description": "On Night 2, must choose a player to serve\n\nWhen that player dies, the Butler is revealed\n\nAppears as “NOT sided with the Mafia” on investigations",
+            "id": 1643595684,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting",
+                "Negative Utility",
+                "Night Power",
+                "Revealing",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Candle",
+            "description": "Upon death, all votes will be anonymous the following day\n\nPlayers can see their own votes but will not see any others",
+            "id": 27,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Negative Utility",
+                "Obfuscating"
+            ]
+        },
+        {
+            "name": "Capo",
+            "description": "While alive, all non-meeting Mafia-aligned players attend a night meeting with Capo\n\nDoes not attend the Mafia night meeting",
+            "id": 1664318705,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Non-Meeting Mafia",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Cat",
+            "description": "Each night, may choose one player (including themselves) to hush for the following day\n\nHushed players will be unable to quote and may only send 12 messages that decrease in character limit per message\n\nCannot choose the same target two nights in a row",
+            "id": 1609987970,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Clown",
+            "description": "Upon being condemned, will also kill the last player to vote them",
+            "id": 1554252534,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Con Man",
+            "description": "Appears as \"NOT sided with the Mafia\" on investigations\n\nUpon death, will reveal as @{role:Villager}",
+            "id": 60,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Confused Cop",
+            "description": "Sees self as @{role:Cop} and appears as @{role:Cop} upon death\n\nEach night, may choose a player to visit and investigate\n\nReceives a report the next day detailing if the player is sided with the Mafia\n\nReports will randomly appear as sided or not, regardless of the player’s actual alignment",
+            "id": 6,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Liar",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Consigliere",
+            "description": "Once per game, may choose during the day to convert to a @{role:Mafia}\n\nConversion occurs immediately after choosing \n\nDoes not attend the Mafia night meeting until converted\n\nAppears as \"NOT sided with the Mafia\" on investigations until converted",
+            "id": 61,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Day Power",
+                "Liar",
+                "Meeting",
+                "Non-Meeting Mafia",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Contingency Planner",
+            "description": "Once per game, receives a @{item:Gun} at day start if the Mafia night meeting chooses not to kill\n\nGun will reveal the shooter\n\n‌",
+            "id": 1547802152,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Cop",
+            "description": "Each night, may choose a player to visit and investigate\n\nReceives a report the next day detailing if the player is sided with the Mafia",
+            "id": 7,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Coroner",
+            "description": "Each night, may visit and learn the role of a dead player",
+            "id": 1550785710,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Corruptor",
+            "description": "Once per game, may choose a player to visit and convert to a @{role:Traitor}\n\nIf the converted Traitor dies, the Corruptor dies as well\n\nIf the Corruptor dies, the converted Traitor dies as well",
+            "id": 1567787886,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Negative Utility",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Counterfeiter",
+            "description": "Each night, may visit a player and give them a broken item",
+            "id": 1623799794,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Crier",
+            "description": "Each day, may shout anonymous messages that all players see during the day",
+            "id": 51,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power"
+            ]
+        },
+        {
+            "name": "Crook",
+            "description": "Once per game, may overturn the condemning vote and choose a new player to condemn instead\n\nOverturns have priority over a @{role:Governor}\n\nCannot overturn when the majority is No One or the condemned player is from their faction",
+            "id": 5639273,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Cult",
+            "description": "Each night, meets with all Cult members and vote on a player to visit and convert to a Cult\n\nCult members at the start of the game are Cult leaders\n\nIf a Cult leader dies, all Cult members (except other leaders) die as well\n\nWins when Cult are majority",
+            "id": 93,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Dark Templar",
+            "description": "Each night, meets with all Dark Templars\n\nDoes not attend the Mafia night meeting",
+            "id": 1616290531,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Non-Meeting Mafia"
+            ]
+        },
+        {
+            "name": "Deathcaller",
+            "description": "Once per game during the day, if the Deathcaller is not the current majority vote and they are voting for a player to condemn, they may mark that player for death\n\nTargeted players will be announced as marked and die at the end of the day\n\nThe targeted player will remain marked even if the Deathcaller changes their condemn vote",
+            "id": 1643942425,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Decoy",
+            "description": "Sees self as @{role:Villager}\n\nAppears as @{role:Cop} on death",
+            "id": 12340007,
+            "alignment": "town",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Defector",
+            "description": "Once per game, may convert to a @{role:Mafia} on Night 4",
+            "id": 1644117932,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Negative Utility",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Defense Attorney",
+            "description": "During the day and before Limited Period begins, may choose to defend another player\n\nAll votes for the defended player will be removed and they cannot be voted for the rest of that day\n\nDoes not affect votes that are frozen by the @{role:Freezer}\n\nIf the two targets chosen by a @{role:Pollster} become defended, the poll ends and regular voting resumes\n\nPower refreshes two days after each use",
+            "id": 1609649171,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power"
+            ]
+        },
+        {
+            "name": "Delinquent",
+            "description": "Appears as “sided with Mafia\" on investigations",
+            "id": 1596417104,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar"
+            ]
+        },
+        {
+            "name": "Dentist",
+            "description": "Each night, may protect and learn the role of a player\n\nDoes not attend the Mafia night meeting",
+            "id": 12340008,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Detective",
+            "description": "Each night, may visit a player and learn their role",
+            "id": 11,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Detonator",
+            "description": "Once per game, may visit a player at night and plant @{item:TNT} on them\n\nMay detonate the TNT during the day to kill the holder\n\nIf the TNT target is killed before detonation, the TNT will be recovered the following night\n\nDoes not attend the Mafia night meeting",
+            "id": 1539825403,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Item Interaction",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Diva",
+            "description": "Each night, may visit a player from another faction and learn their role\n\nUpon death, reveals as the role of the last player visited",
+            "id": 59,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Revealing",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Doctor",
+            "description": "Each night, may visit and protect a player from a night kill",
+            "id": 12,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Dog",
+            "description": "Revealed to all players at the start of the game",
+            "id": 22,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Don",
+            "description": "While alive, counts as 2 towards the Mafia's majority",
+            "id": 1599674667,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "VIP"
+            ]
+        },
+        {
+            "name": "Drunk",
+            "description": "Each night, may visit and block a player from performing night actions that require a visit",
+            "id": 14,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Eavesdropper",
+            "description": "Each night, may visit a player and learn if they met with at least one other player that night",
+            "id": 133133138,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Electrician",
+            "description": "Each night, may visit a player and give them a @{item:Taser}",
+            "id": 1597889202,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Emcee",
+            "description": "Each day, announces the names of all players who visited them the night before\n\nIf visited by a group (e.g. the Mafia), only one member’s name will be announced",
+            "id": 1583467528,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power"
+            ]
+        },
+        {
+            "name": "Executioner",
+            "description": "At the start of the game, receives a target they must get condemned\n\nTarget cannot be Mafia-aligned, @{role:Liaison}, @{role:Bounty Hunter}, @{role:Cult}, @{role:Jester}, @{role:Selfish Fool}, @{role:Zombie}, or @{role:Killer}\n\nWins when target is condemned\n\nIf target is killed before they can be condemned, wins with Town",
+            "id": 100,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Extrovert",
+            "description": "Starts the game with a @{item:Dreamcatcher}",
+            "id": 1625356264,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Fall Guy",
+            "description": "Sees self as @{role:Villager}\n\nRevealed to all Mafia-aligned and @{role:Liaison} players at the start of the game\n\nAppears as \"sided with the Mafia\" on investigations\n\nUpon being condemned, revealed as a @{role:Mafia}",
+            "id": 1611988688,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Negative Utility",
+                "Revealing",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Fixer",
+            "description": "Each night, may visit a player from their faction and make them appear as \"NOT sided with the Mafia\" for investigations that night\n\nCannot visit themselves",
+            "id": 73,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Fool",
+            "description": "Each night, may choose a player to visit (without any other effect)\n\nWins upon being condemned",
+            "id": 95,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Fortune Teller",
+            "description": "Once per game, may visit a player and give them a @{item:Crystal Ball}",
+            "id": 15,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Revealing",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Framer",
+            "description": "Each night, may visit and frame a player from another faction to appear as \"sided with the Mafia\" for investigations that night",
+            "id": 64,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Freeloader",
+            "description": "While alive, the Mafia cannot perform night meeting kills\n\n‌",
+            "id": 1623810832,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Negative Utility"
+            ]
+        },
+        {
+            "name": "Freezer",
+            "description": "Once per game, may choose to freeze all condemn votes\n\nCan only freeze during the day before the Limited Period begins\n\nFreezing is instantaneous\n\nFreezing prevents players from changing their condemn vote, but players who haven't voted may still vote",
+            "id": 80,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Fruit Vendor",
+            "description": "Each night, may choose one player to visit and give a piece of @{item:Fruit}",
+            "id": 324,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Genie",
+            "description": "Each night, may visit a player and grant them a @{item:Wish}\n\nCan only hand out a maximum of 3 wishes",
+            "id": 64942425,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Ghost",
+            "description": "Sees self as @{role:Villager}\n\nUpon death, may send one anonymous message per day and one message per night to any living player\n\nDoes not join spectator chat when it dies",
+            "id": 1611035758,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Night Power",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Godfather",
+            "description": "Appears as “NOT sided with the Mafia” on investigations",
+            "id": 65,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Goof",
+            "description": "Will not receive any items",
+            "id": 1565222419,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Negative Utility"
+            ]
+        },
+        {
+            "name": "Gossip",
+            "description": "Each day, may choose a player\n\nThe following night, the chosen player is taken from any night meeting they attend and instead meets with the Gossip",
+            "id": 133133132,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Meeting",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Governor",
+            "description": "Once per game, may overturn the condemning vote and choose a new player to condemn instead \n\nCannot overturn when the majority vote is No One",
+            "id": 17,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Grandma",
+            "description": "Can only be killed by being condemned\n\nKills all players that visit her",
+            "id": 18,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP"
+            ]
+        },
+        {
+            "name": "Grandpa",
+            "description": "Can only be killed by being condemned\n\nLearns the name and role of any player that visits him",
+            "id": 66,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Grandparent",
+            "description": "Can only be killed by being condemned\n\nLearns the name and role of any player that visits them\n\nDoes not attend the Mafia night meeting",
+            "id": 12340006,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Non-Meeting Mafia"
+            ]
+        },
+        {
+            "name": "Graverobber",
+            "description": "Each night, may visit a dead player and steal any unused items they had when they died",
+            "id": 1559319559,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Greedy Executioner",
+            "description": "At the start of the game, receives a target they must get condemned\n\nTarget cannot be Mafia-aligned, @{role:Liaison}, @{role:Bounty Hunter}, @{role:Cult}, @{role:Jester}, @{role:Selfish Fool}, @{role:Zombie}, or @{role:Killer}\n\nWins when target is condemned\n\nIf target is killed before they can be condemned, a new target will be assigned",
+            "id": 96,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Groundhog",
+            "description": "Each night, may choose a player\n\nIf the chosen player is not town-aligned, the next day will be 1 minute long, have no lock period, and force all players to vote\n\nThe Groundhog will only shorten the day once per game",
+            "id": 999993,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "Groundhog Day",
+            "tags": [
+                "Info Power",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Guardian",
+            "description": "Each night, may visit and protect a player from a night kill\n\nIf an attempt is made to night kill the player, the Guardian will be killed in their place\n\nIf multiple attempts are made, both the player and the Guardian will be killed",
+            "id": 1559001189,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Guilty Conscience",
+            "description": "Once per game during the day, may choose to learn whether the current majority vote is town-aligned",
+            "id": 133769420,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Info Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Handyman",
+            "description": "Each night, may visit a player and fix any broken or sabotaged items they have\n\nVisiting the same target as @{role:Saboteur} will protect items from being sabotaged",
+            "id": 1558467454,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Hangman",
+            "description": "Once per game, can attempt to spare a condemned player\n\nIf the condemned is Town-aligned, the vote is cancelled and no one dies\n\nIf the condemned is not Town-aligned, both the target and the Hangman will die\n\nCannot spare themselves from being condemned",
+            "id": 1540783473,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Headhunter",
+            "description": "Each night, may select a role from the setup and visit a player\n\nThe following day, learns if the visited player is the chosen role",
+            "id": 1610841973,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Hitman",
+            "description": "Starts with a @{item:Gun}\n\nGun will not reveal the shooter",
+            "id": 1538276587,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Hooker",
+            "description": "Each night, may visit and block a player from another faction from performing night actions that require a visit",
+            "id": 69,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Hunter",
+            "description": "Upon being condemned, may kill another player as well\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), the Hunter will kill their target but also keep their power",
+            "id": 20,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Hustler",
+            "description": "Once per game during the night, may shorten the following day\n\nThe next day will be 1 minute long, have no lock period, and force all players to vote",
+            "id": 1575667373,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Hypnotist",
+            "description": "Once per game, may visit and hypnotize a player at night\n\nThe hypnotized player’s first message of the following day will be changed to \"I am [the role they see themselves as]\" once sent\n\nIf the hypnotized player does not speak within the first 25 messages of the day, a message will be generated for them",
+            "id": 21,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Iatrophobe",
+            "description": "Cannot be protected from night kills\n\nKills anyone who tries to protect them",
+            "id": 123450001,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Idol Hunter",
+            "description": "Finds an @{item:Immunity Idol} at the beginning of days 3 and 5",
+            "id": 1609825209,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction"
+            ]
+        },
+        {
+            "name": "Impostor",
+            "description": "Each night, must choose a role included in the setup to appear as\n\nAny time the Impostor's role would be seen or revealed, the chosen role will be shown instead\n\nCannot choose to appear as @{role:Villager}, @{role:Bozoman}, @{role:Soloman}, or Impostor",
+            "id": 1596337363,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Impulsive",
+            "description": "Sees self as @{role:Villager}\n\nReceives a @{item:Knife} on day 5 and will lose it if not used by the end of the day\n\nIf they lose their knife, gains the ability to visit and investigate a player once",
+            "id": 1646594368,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Investigative",
+                "Item Interaction",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Indignant",
+            "description": "Sees self as @{role:Villager}\n\nReceives a @{item:Knife} at the start of day 4",
+            "id": 1617657618,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Item Interaction",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Informant",
+            "description": "Each day, learns which players from their faction have been investigated by @{role:Cop} and Cop variants",
+            "id": 1588457214,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Insane Cop",
+            "description": "Sees self as @{role:Cop} and appears as @{role:Cop} upon death\n\nEach night, may choose a player to visit and investigate \n\nReceives a report the next day detailing if the player is sided with the Mafia\n\nReports will appear as the opposite of the player’s actual alignment",
+            "id": 23,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Liar",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Interceptor",
+            "description": "Each night, may visit a player and intercept other visits to them\n\nWill kill one visitor who is not from their faction who visits their target\n\nIf the intercepted player has multiple visitors, one will be killed at random and the identity of the Interceptor will be revealed to all other visitors",
+            "id": 71,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Jack",
+            "description": "Each night, may visit a player and perform one of three actions\n\nMay protect them from a night kill\n\nMay investigate them and receive a report the following day detailing whether the player is sided with the Mafia\n\nMay kill them\n\nEach action can only be used once",
+            "id": 1577500425,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Investigative",
+                "Night Power",
+                "Protective",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Jailer",
+            "description": "If no one is condemned during the day, may choose to jail a player\n\nThe following night, the jailed player is taken from any night meeting they attend and instead meets with the Jailer\n\nIdentity is hidden from the jailed player during their meeting\n\nEnds the meeting by deciding whether to visit and kill the jailed player or not\n\nWhile jailed, players cannot receive items, perform new actions, or be killed by players other than the Jailer",
+            "id": 24,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "On-Condemn Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Janitor",
+            "description": "Once per game, may visit the Mafia’s night kill target and hide the player’s role to all but the Janitor\n\nPower is only consumed if the targeted player dies that night",
+            "id": 72,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Obfuscating",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Jaywalker",
+            "description": "Each night, must choose a player to visit\n\nVisits do nothing",
+            "id": 1598154575,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Negative Utility",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Jekyll",
+            "description": "Each night, may visit and protect a player from a night kill",
+            "id": 83,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Jester",
+            "description": "Wins upon death\n\nIf multiple Jesters exist, the identities of two players who are not Jesters will be announced when one Jester dies\n\nIf multiple Jesters exist, a Jester can win alongside anyone who wins afterwards, regardless of their joint win rules\n\nGame will end upon the death of all Jesters\n\nFactions may not joint win with any Jester whose death ended the game",
+            "id": 97,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Killer",
+            "description": "Each night, must visit and kill a player\n\nConverted to a @{role:Villager} if visited by a @{role:Psychiatrist}\n\nConverted to a @{role:Traitor} if visited by a @{role:Quack}\n\nWins when among final two alive\n\nTown cannot win while Killer is alive",
+            "id": 98,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP",
+                "Night Power",
+                "Non-Faction Scum",
+                "Visits"
+            ]
+        },
+        {
+            "name": "King",
+            "description": "Once per game, may choose at night to become King\n\nThe following day, the King's status will be declared to all players\n\nWhile in power, the King cannot be shot\n\nWhile in power, the King's vote will count for 1000 votes\n\nWhen the day ends, the King will lose all power and revert to normal",
+            "id": 26,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Kingmaker",
+            "description": "Once per game, may choose at night to visit a player from another faction and convert them to @{role:Regent}\n\nThe @{role:Regent} will be forced to use their power at the start of the following day",
+            "id": 1643419817,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Kingpin",
+            "description": "While alive, counts as 3x towards the Mafia's majority",
+            "id": 1611986711,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "VIP"
+            ]
+        },
+        {
+            "name": "Klutz",
+            "description": "Will not receive any items",
+            "id": 1565223000,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting",
+                "Negative Utility"
+            ]
+        },
+        {
+            "name": "Lamb",
+            "description": "Once per game, may sacrifice themselves during the day to reveal another player’s role",
+            "id": 1539915457,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Revealing",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Lazy Tracker",
+            "description": "Each night, may visit a player and learn if they visited anyone\n\nDoes not see who the player visited",
+            "id": 1603688758,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Liaison",
+            "description": "Upon game start, all non-meeting Mafia-aligned players are recruited to Liaison's faction\n\nLiaison's faction wins when majority\n\nWhile alive, all Liaison faction members attend a night meeting together\n\nOnce per game, may choose a player to visit and kill at night",
+            "id": 1664437581,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP",
+                "Meeting",
+                "Non-Meeting Mafia",
+                "Single-Use",
+                "VIP"
+            ]
+        },
+        {
+            "name": "Librarian",
+            "description": "Once per game, may choose at night to prevent everyone from speaking the next day\n\nIf the Librarian dies before the silent period is over, the silence will end and players may resume speaking again",
+            "id": 1553337595,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Obfuscating",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Linchpin",
+            "description": "Revealed to all Mafia faction players and any @{role:Traitor} at the start of the game",
+            "id": 1623980546,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Non-Meeting Mafia",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Lookout",
+            "description": "Each night, may choose a player to watch\n\nWill watch that night and the following day for any kills involving that player\n\nIf the player kills someone, the Lookout will learn their target's role\n\nIf the player is killed, the Lookout will learn the murderer's name",
+            "id": 1541790284,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Loser",
+            "description": "Identity is revealed to other Losers at the start of the game\n\nIf one Loser dies, all Losers die",
+            "id": 1599572963,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Negative Utility",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Lover",
+            "description": "On the first night, must visit and fall in love with a player\n\nLoved players will learn the Lover’s identity and that they have fallen in love with them\n\nIf either player dies at any point during the game, the other will die as well\n\nWins if alive and in love with someone at the end of the game",
+            "id": 99,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Luckyguard",
+            "description": "Each night, may visit and protect a player from a night kill\n\nIf the player is protected successfully, either the Luckyguard or the killer is killed",
+            "id": 3,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Lurker",
+            "description": "Each night, may visit a player (including themselves) and watch for other visitors\n\nReceives a report the next day detailing who visited that player\n\nIf a night meeting visits the watched player, Lurker will see only one party member at random",
+            "id": 74,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Mad Bomber",
+            "description": "Once per game during the day, may choose to explode both themselves and another player\n\nBoth the Mad Bomber and their target's roles are hidden upon explosion\n\nDoes not attend the Mafia night meeting",
+            "id": 1557626901,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Non-Meeting Mafia",
+                "Obfuscating",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Mafia",
+            "description": "Basic Mafia-aligned role",
+            "id": 75,
+            "alignment": "mafia",
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Magician",
+            "description": "Starts the game with a @{item:Gun}\n\nEach night, may choose a player to be revealed as the shooter when the Magician’s gun is fired",
+            "id": 70,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Obfuscating",
+                "Revealing",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Mailman",
+            "description": "Each night, may visit a player from another faction and take any item given to them that same night",
+            "id": 1556837816,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Item Interaction",
+                "Meeting",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Manipulator",
+            "description": "At the start of the game, learns the identities of current members of the Mafia faction\n\nAppears as @{role:Villager} upon death\n\nWins instead of the Mafia faction if alive when they would win",
+            "id": 1547078335,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Marksman",
+            "description": "Starts with a @{item:Gun}\n\nGun will not reveal the shooter\n\nDoes not attend the Mafia night meeting",
+            "id": 86,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Non-Meeting Mafia",
+                "Single-Use",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Martyr",
+            "description": "Sees self as @{role:Villager}\n\nUpon being condemned, may kill another player as well\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), Martyr will learn their identity and retain their power",
+            "id": 1572486115,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "On-Condemn Power",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Mason",
+            "description": "Each night, meets with other Masons to vote on a player to visit and convert to a Mason\n\nIf the visited player is Mafia-aligned or @{role:Liaison}, visiting Masons will die\n\nIf the visited player is a @{role:Cult}, the player will die",
+            "id": 29,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Medic",
+            "description": "Each night, may visit and protect a player from a night kill\n\nCannot choose the same player two nights in a row",
+            "id": 31,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Medium",
+            "description": "Each day, may ask a yes or no question to a dead player at night \n\nAnswers will be received the following day\n\nPlayers who die while this role is alive do not join spectator chat",
+            "id": 1610228810,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power"
+            ]
+        },
+        {
+            "name": "Merlin",
+            "description": "At the start of the game, learns the identities of current Mafia-aligned players and any @{role:Liaison}\n\nLearns the identity of any @{role:King} and is also revealed to them\n\nCannot be killed on Night 1\n\nUpon death, all Town-aligned players die as well",
+            "id": 1600386374,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Revealing",
+                "VIP"
+            ]
+        },
+        {
+            "name": "Mesmer",
+            "description": "Once per game, may visit and hypnotize a player at night\n\nThe mesmerized player’s first message of the following day will be changed to \"I am [the role they see themselves as]\" once sent\n\nIf the mesmerized player does not speak within the first 25 messages of the day, a message will be generated for them",
+            "id": 76,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting",
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Miller",
+            "description": "Sees self as @{role:Villager}\n\nAppears as “sided with the Mafia” on investigations\n\nUpon being condemned, appears as @{role:Mafia}",
+            "id": 32,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Moderator",
+            "description": "Once per game, may choose to advance the current day timer to Limited Period\n\nIf the Limited Period setting is disabled, the timer will be set to 1:30 remaining",
+            "id": 1623812683,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Moko",
+            "description": "Once per game, during either the day or at night, may kill a player\n\nIf the power is used during the day, kills immediately\n\nIf the power is used at night, Moko visits, and the kill is strengthened and pierces through protections\n\nIf another Moko, a @{role:Bolthus} or a @{role:Tapioca} are killed with this power, the Moko dies",
+            "id": 12340001,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "Mafia Anniversary",
+            "tags": [
+                "Extra KP",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Mole",
+            "description": "Each day, receives a report detailing who was investigated by @{role:Cop} and Cop variants\n\nIf there are multiple Cops, one is randomly chosen to share their report",
+            "id": 1581354568,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Mudslinger",
+            "description": "At the start of the game, receives a target they must get condemned\n\nWhen their target is condemned, gains the power to visit and kill a player at night\n\nWhen their target dies, a new target will be acquired\n\nTarget cannot be Mafia-aligned, @{role:Liaison}, @{role:Fool}, @{role:Jester}, or @{role:Selfish Fool}\n\nDoes not attend the Mafia night meeting",
+            "id": 1665623260,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Info Power",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Naive Cop",
+            "description": "Sees self as @{role:Cop} and appears as @{role:Cop} upon death\n\nEach night, may choose a player to visit and investigate \n\nReceives a report the next day detailing if the player is sided with the Mafia\n\nReports will always appear “NOT sided with the Mafia”, regardless of the target’s actual alignment",
+            "id": 33,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Liar",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Nervous Sleeper",
+            "description": "If killed at night, the Nervous Sleeper will explode a bomb and kill the player that targeted them as well \n\nIf killed by a night meeting (e.g. the Mafia), one member will be chosen at random to explode\n\nIf targeted by multiple night kills, the explosion will kill one player from each group",
+            "id": 1572568017,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP"
+            ]
+        },
+        {
+            "name": "Ninja",
+            "description": "Disarms any @{role:Bomb} or @{role:Nervous Sleeper} targeted\n\nDoes not appear on any visit reports \n\nIf targeted player is a @{role:Shogun}, the Ninja will die instead",
+            "id": 77,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Obfuscating"
+            ]
+        },
+        {
+            "name": "Nurse",
+            "description": "Each night, may visit and protect a player from a night kill\n\nVisits will block the protected player from performing any night actions",
+            "id": 35,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Oracle",
+            "description": "Starts the game with a @{item:Crystal Ball}",
+            "id": 36,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Revealing",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Overlord",
+            "description": "Wins instead of Town if alive when they win",
+            "id": 92,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Pacifist",
+            "description": "Each night, may visit and shield a player from violence \n\nShielded players are protected from one kill that night and one kill or condemnation the following day\n\nWins if they successfully prevent two kills or condemnations",
+            "id": 101,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Painter",
+            "description": "Each night, may visit and paint a player from another faction\n\nPainted players will appear as “sided with the Mafia” on investigations for that night and the following night",
+            "id": 78,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Paparazzo",
+            "description": "Upon being condemned, may reveal another player to all Mafia faction players\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), the Paparazzo will reveal their target but also keep their power",
+            "id": 79,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "On-Condemn Power",
+                "Revealing",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Paranoiac",
+            "description": "When visited, will learn the name of the visitor and receive a @{item:Gun}\n\nCannot receive a Gun from the same visitor more than once\n\nGuns received from visitors will not reveal the shooter",
+            "id": 1552856661,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Info Power",
+                "Item Interaction"
+            ]
+        },
+        {
+            "name": "Paranoid Cop",
+            "description": "Sees self as @{role:Cop} and appears as @{role:Cop} upon death\n\nEach night, may choose a player to visit and investigate\n\nReceives a report the next day detailing if the target is sided with the Mafia\n\nReports will always appear “sided with the Mafia”, regardless of the player’s actual alignment",
+            "id": 37,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Liar",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Parity Cop",
+            "description": "Each night, may choose a player to visit and investigate \n\nReceives a report the next day detailing whether that player and the last player investigated share an alignment",
+            "id": 38,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Party Host",
+            "description": "Once per game, may choose during the day to throw a party the following night\n\nThat night, all players are brought to a night meeting party\n\nIndividual night actions can still be performed, but other night meetings will not meet or perform their group actions",
+            "id": 1573101280,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Party Planner",
+            "description": "Once per game, may choose during the day to throw a party the following night\n\nThat night, all players are brought to a night meeting party\n\nIndividual night actions can still be performed, but other night meetings will not meet or perform their group actions\n\nVisits all players who attended the meeting and gives them a @{item:Party Popper}",
+            "id": 821013751,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "New Year",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Item Interaction",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Patroller",
+            "description": "Each night, may visit a player (including themselves) and watch for other visitors\n\nReceives a report the next day detailing who visited that player\n\nIf a night meeting visits the watched player, Patroller will see only one party member at random",
+            "id": 39,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Patsy",
+            "description": "Sees self as @{role:Villager}\n\nRevealed to all Mafia-aligned and @{role:Liaison} players at the start of the game\n\nAppears as \"sided with the Mafia\" on investigations",
+            "id": 1596417444,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Negative Utility",
+                "Revealing",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Phantom",
+            "description": "Each night, must choose a player to haunt\n\nThe first time they are targeted by a night kill, Phantom will kill the haunted player instead\n\nPower can only be used at night and redirect a kill once",
+            "id": 16,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Photographer",
+            "description": "Once per game, may choose during the day to take a photo of a player\n\nThe following day, will receive a photograph detailing the player’s role\n\nThe name of the player photographed will be announced when the picture is taken",
+            "id": 1580766301,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Info Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Poacher",
+            "description": "Upon being condemned, may kill another player as well\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), the Poacher will kill their target but also keep their power",
+            "id": 1596416287,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Pollster",
+            "description": "Once per game, may force all players to unvote and restrict the condemn votes between two players of their choice\n\nOnly one Pollster may use their power per day",
+            "id": 1576088848,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Polygraph",
+            "description": "Each night, may choose a player to visit and test for lying\n\nReceives a report the next day detailing if the player is a Liar\n\nLying roles will either reveal incorrectly or create false alignment readings for themselves or others",
+            "id": 1565630670,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Liar",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "President",
+            "description": "Revealed to all Town-aligned players at the start of the game\n\nUpon death, all Town-aligned players die as well",
+            "id": 40,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Revealing",
+                "VIP"
+            ]
+        },
+        {
+            "name": "Profiler",
+            "description": "Each night, may select a role from the setup and visit a player\n\nThe following day, learns if the visited player is the chosen role",
+            "id": 1610848791,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Prosecutor",
+            "description": "Once per game, may choose a player to prosecute\n\nThe following night, all players are brought to a night meeting in which only the Prosecutor and the prosecuted player may speak\n\nOther players will act as the jury and anonymously vote whether the prosecuted player is innocent or guilty\n\nInnocent players will return the following day, but guilty players will be visited and killed by the Prosecutor\n\nWhile on trial, the prosecuted player cannot receive items, perform actions, or be protected or killed by players other than the Prosecutor\n\nIndividual night actions of other players can still be performed, but night meetings (like the Mafia’s) will not meet or perform group actions",
+            "id": 1609898885,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "On-Condemn Power",
+                "Roleblocker",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Psychiatrist",
+            "description": "Each night, may visit and prevent a player (or themselves) from conversions",
+            "id": 44,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Puppy",
+            "description": "Revealed to all players at the start of the game\n\nDoes not count towards Town's majority",
+            "id": 999992,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Pyromaniac",
+            "description": "Each night, may visit a player and douse them in gasoline\n\nOnce per game, may light a match during the day and kill all doused players \n\nDoes not attend the Mafia night meeting",
+            "id": 1573568724,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Quack",
+            "description": "Each night, may visit and prevent a player (or themselves) from conversions",
+            "id": 62,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Radio Operator",
+            "description": "Upon death, the Mafia will be unable to speak with one another at the following night's meeting\n\nVotes will also be hidden from one another for that night",
+            "id": 1546127461,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Negative Utility"
+            ]
+        },
+        {
+            "name": "Reaper",
+            "description": "Once per game during the day, may mark a player for death\n\nThe following night, the marked player will discover they are doomed to die and receive a @{item:Will}\n\nThe Reaper will visit and kill their marked at the end of the night",
+            "id": 1676008595,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Extra KP",
+                "Item Interaction",
+                "Meeting",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Regent",
+            "description": "Upon their first day, will ascend the throne\n\nWhile in power, the Regent's status will be declared to all players\n\nWhile in power, the Regent cannot be shot\n\nWhile in power, the Regent's vote will count for 1000 votes\n\nWhen the day ends, the Regent will lose all power",
+            "id": 1643511585,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Remorseful",
+            "description": "Sees self as @{role:Mafia}\n\nAt the start of day 2, converts to @{role:Freeloader}",
+            "id": 133133136,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Negative Utility"
+            ]
+        },
+        {
+            "name": "Representative",
+            "description": "Condemn vote counts as two votes",
+            "id": 25,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power"
+            ]
+        },
+        {
+            "name": "Revenant",
+            "description": "If attempted to be killed, will bleed for a day before dying",
+            "id": 2,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Rifleman",
+            "description": "Starts with a @{item:Gun}\n\nGun will not reveal shooter",
+            "id": 10,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Robot Santa",
+            "description": "Upon being condemned, will also kill the first and last player to vote them\n\nUpon being condemned, will kill all players still voting for a Town-aligned player\n\nDoes not die. Instead, will return when you least expect it: next Winter Holidays!",
+            "id": 15582324,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "Winter Holidays",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Rogue",
+            "description": "Sees self as @{role:Villager}\n\nIf killed by a Mafia faction player, the Rogue will survive and be converted to a @{role:Traitor}\n\nIf the conversion is blocked, the Rogue will die\n\nIf converted to another role the same night they are killed, the Rogue will die as the new role",
+            "id": 54,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Runner",
+            "description": "Once per game, may choose to visit all other living players that night",
+            "id": 1625357559,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Saboteur",
+            "description": "Each night, may visit a player from another faction and break any item they have currently and receive that night",
+            "id": 1553863028,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Saint",
+            "description": "Sees self as @{role:Villager}\n\nUpon being condemned, may protect another player from a kill for the following night\n\nIdentity and power will be revealed to the Saint but not used if the vote is interrupted (e.g. overturned by @{role:Governor})",
+            "id": 1588642540,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Protective",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Scout",
+            "description": "Each night, may visit and track a player from another faction at night\n\nReceives a report the next day detailing who that player visited",
+            "id": 84,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Scumbag",
+            "description": "Wins if alive when Town loses",
+            "id": 103,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Secret Service",
+            "description": "Each day, may choose a player to shield \n\nIf the shielded player is shot at, the Secret Service will be shot instead\n\nMay change which player they are shielding freely",
+            "id": 1541480746,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Item Interaction"
+            ]
+        },
+        {
+            "name": "Security Guard",
+            "description": "Each night, may visit a player and block all others that would visit them from performing night actions\n\nDoes not block night meeting actions from targeting the visited player",
+            "id": 1661814887,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Roleblocker",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Seer",
+            "description": "Each day, receives the names of 3 living players\n\nAt least one of those players is Mafia-aligned or a @{role:Liaison}\n\nIf visited at night, no message will be received\n\nIf no Mafia remain or if 3 or fewer players are left, receives a message with no names",
+            "id": 13,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power"
+            ]
+        },
+        {
+            "name": "Selfish Fool",
+            "description": "Each night, may choose a player to visit (without any other effect)\n\nWins upon being condemned\n\nFactions may not joint win with Selfish Fool",
+            "id": 104,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Sergeant",
+            "description": "Once per game, may choose a player to visit and kill",
+            "id": 34,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Shaman",
+            "description": "Each night, must predict a player that will be condemned the following day\n\nWins after making two correct predictions",
+            "id": 107,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Sharpshooter",
+            "description": "Starts with a @{item:Gun} that will not reveal the shooter\n\nDies the night after they fire their gun\n\nWins if the game ends the day their gun is fired, preventing anyone else from winning\n\nMay win with other Sharpshooters if more than one meets their win condition the same day",
+            "id": 133133137,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Item Interaction",
+                "Single-Use",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Sheriff",
+            "description": "Starts with a @{item:Gun}\n\nGun will reveal shooter",
+            "id": 43,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Revealing",
+                "Single-Use",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Shogun",
+            "description": "Cannot be converted and will kill any player who attempts to convert them \n\nWill kill any @{role:Ninja} that attempts to kill them",
+            "id": 42,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP"
+            ]
+        },
+        {
+            "name": "Siren",
+            "description": "Can only be killed by being condemned\n\nEach night, may choose a player who they believe will visit them\n\nIf that player visits the Siren that night, the Siren will kill them\n\nWins if they kill two players",
+            "id": 105,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Sleepwalker",
+            "description": "Sees self as @{role:Villager}\n\nEach night, will sleepwalk and randomly visit another player (with no other effect)",
+            "id": 45,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Negative Utility",
+                "Villager",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Snoop",
+            "description": "Once per game, may choose during the day to reveal their role and the role of another player",
+            "id": 1577132908,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Revealing",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Soloman",
+            "description": "Each night, must choose a role included in the setup to appear as\n\nCannot appear as @{role:Villager}, @{role:Bozoman}, @{role:Impostor}, or Soloman\n\nThis role was requested by Soloman.",
+            "id": 47,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Night Power",
+                "Revealing"
+            ]
+        },
+        {
+            "name": "Speaker",
+            "description": "Upon death, all other deaths will not reveal roles for the remainder of the game",
+            "id": 1580879842,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Negative Utility",
+                "Obfuscating"
+            ]
+        },
+        {
+            "name": "Spy",
+            "description": "Each day, may send anonymous messages to any role during the day \n\nAnonymous messages look identical to @{role:Agent}",
+            "id": 323,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Stooge",
+            "description": "Sees self as @{role:Villager}\n\nRevealed to all Mafia-aligned and @{role:Liaison} players at the start of the game",
+            "id": 1611988621,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Negative Utility",
+                "Revealing",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Stray Kitten",
+            "description": "Each night, must choose a player to visit\n\nCannot choose the same player two nights in a row\n\nWins with the last player visited\n\nCannot win with @{role:Bounty Hunter}, @{role:Executioner}, @{role:Greedy Executioner}, or @{role:Jester}\n\nDoes not count towards any faction's majority",
+            "id": 12340009,
+            "alignment": "third",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Strongman",
+            "description": "Once per game, may visit and strengthen the Mafia's night kill to pierce through protections",
+            "id": 1558930946,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Succubus",
+            "description": "Once per game, may choose a player from another faction to visit and seduce\n\nSeduced player learns that they have fallen in love, but not with whom\n\nIf Succubus dies, the charmed player also dies\n\n\"First you succ, then you bus.\"",
+            "id": 67,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Meeting",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Surveyor",
+            "description": "Once per game, may choose to learn which roles are still alive \n\nIf visited by another player on the same night Surveyor uses their power, no information will be given and the power will not be used",
+            "id": 1558240320,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Survivor",
+            "description": "Wins if alive when the game ends",
+            "id": 1580690992,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Suspect",
+            "description": "Sees self as @{role:Villager}\n\nAppears as \"sided with the Mafia\" on investigations",
+            "id": 49,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Suspect Governor",
+            "description": "Once per game, may overturn the condemning vote and choose a new player to condemn instead\n\nIf they condemn a Mafia-aligned player or @{role:Liaison}, the Suspect Governor’s power renews\n\nIf they condemn a Town-aligned player, the Suspect Governor also dies\n\nIf they condemn a Third-party player, the Suspect Governor neither dies nor renews their power",
+            "id": 1597815390,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power"
+            ]
+        },
+        {
+            "name": "Suspect Mind",
+            "description": "Starts with a @{item:Gun} that will reveal shooter\n\nIf they shoot a Mafia-aligned player or a @{role:Liaison}, the Suspect Mind receives another gun the next day\n\nIf they shoot a Town-aligned player, the Suspect Mind also dies\n\nIf they shoot a Third-party player, the Suspect Mind neither dies nor receives a new gun",
+            "id": 1540344996,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Item Interaction",
+                "Revealing",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Sweeper",
+            "description": "Once per game, may choose to hide the condemned player’s role to all but the Sweeper\n\nCannot hide themselves\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), power will not be used",
+            "id": 1541806737,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Obfuscating",
+                "On-Condemn Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Tactician",
+            "description": "On Day 3, must choose between receiving a @{item:Vest} or a @{item:Crystal Ball}\n\nWill receive items at the end of that day",
+            "id": 1644316289,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction"
+            ]
+        },
+        {
+            "name": "Tagger",
+            "description": "Each night, may choose a player from another faction to visit and tag\n\nReceives a report the next day detailing the role of that player",
+            "id": 87,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Tailor",
+            "description": "Twice per game, may visit a player at night and give them a @{item:Suit}",
+            "id": 1595571568,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Liar",
+                "Meeting",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Tank",
+            "description": "Starts with a @{item:Vest}\n\nEach night, may choose a player from another faction\n\nIf the chosen player attempts to visit anyone that night, they will visit the Tank instead",
+            "id": 88,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Starting Item"
+            ]
+        },
+        {
+            "name": "Tapioca",
+            "description": "Sees self as @{role:Miller}\n\nAppears as “sided with the Mafia” on investigations\n\nUpon being killed, appears as @{role:Miller}\n\nUpon being condemned, appears as @{role:Mafia}",
+            "id": 50,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Liar"
+            ]
+        },
+        {
+            "name": "Tax Collector",
+            "description": "Each night, may visit a player and collect overdue taxes\n\nWill learn the taxed player’s alignment and convert upon visiting \n\nIf the player is Town-aligned, they are converted to a @{role:Villager}\n\nIf the player is Mafia-aligned, they are converted to a @{role:Mafia}\n\nIf the player is Third Party, they are converted to a @{role:Scumbag}\n\nWins if alive when Town loses",
+            "id": 201,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Templar",
+            "description": "Each night, meets with all Templars",
+            "id": 1573416236,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting"
+            ]
+        },
+        {
+            "name": "Thief",
+            "description": "Each night, may visit a player and steal any items they have\n\nDoes not attend the Mafia night meeting",
+            "id": 1556390101,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Thorne",
+            "description": "Each night, may choose a player to visit and kill\n\nUpon a successful kill, will convert to the targeted player’s role\n\nThe killed player’s role will be hidden upon death, and instead reveal as their alignment (e.g. Town-aligned, Mafia-aligned, or Third Party)",
+            "id": 1596390851,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP",
+                "Night Power",
+                "Obfuscating",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Ticketmaster",
+            "description": "Once per game, may learn the role of the player who voted first on the condemned vote",
+            "id": 1676679526,
+            "alignment": "mafia",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Info Power",
+                "Meeting",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Tourist",
+            "description": "Each night, must choose a player to visit\n\nVisits, while annoying, do nothing",
+            "id": 1596418665,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Tracker",
+            "description": "Each night, may visit a player and track through the night\n\nReceives a report the next day detailing who that player visited",
+            "id": 52,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Traitor",
+            "description": "Wins with the Mafia",
+            "id": 106,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": []
+        },
+        {
+            "name": "Trancer",
+            "description": "Each night, may entrance a player\n\nIf a player attempts to visit the Trancer, they will be redirected to the entranced player instead",
+            "id": 89,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Trapper",
+            "description": "Each night, may visit a player and watch for other visitors \n\nIf other players visit their target that night, will kill one other visitor \n\nWill prioritize killing based on alignment, targeting a Mafia-aligned visitor first and only killing a Town-aligned visitor if no Mafia-aligned or Third Party player visited",
+            "id": 53,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Trickster",
+            "description": "Sees self as @{role:Villager}\n\nUpon being condemned, may give out a @{item:Gun}\n\nMay choose whether the gun fires as normal or is broken\n\nGun will reveal the shooter\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), Trickster will learn their identity and retain their power",
+            "id": 1618178898,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "On-Condemn Power",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Understudy",
+            "description": "Once per game, may convert into a Mafia-aligned role that has died",
+            "id": 1587533794,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Meeting",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Unknown",
+            "description": "The host has chosen to hide what roles are in the setup.",
+            "id": 1589145477,
+            "alignment": "none",
+            "new": false,
+            "disabled": false,
+            "holiday": "none"
+        },
+        {
+            "name": "Vanilla Cop",
+            "description": "Each night, may choose a player to visit and learn about their role\n\nReceives a report the next day detailing if the player is a Vanilla role (@{role:Villager}, @{role:Mafia}, or @{role:Scumbag}) or not",
+            "id": 1565316812,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Info Power",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Vash",
+            "description": "Each night, may choose to visit a player\n\nIf the player has one or more @{item:Gun}s, the Vash will randomly choose one and remove its bullets",
+            "id": 200,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Veteran",
+            "description": "Three times per game, may choose to stay alert at night\n\nWhile alert, the Veteran cannot be killed and will instead kill their visitors\n\nIf visited by a group while alert, a random party member will die",
+            "id": 55,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power"
+            ]
+        },
+        {
+            "name": "Veterinarian",
+            "description": "Each night, may visit and protect a player from a night kill\n\nIf the player is targeted but protected, converts them to a @{role:Puppy}\n\nIf the player is not Town-aligned, the Veterinarian will neither protect nor convert them",
+            "id": 1676354787,
+            "alignment": "town",
+            "new": true,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Night Power",
+                "Protective",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Vigilante",
+            "description": "Each night, may visit and kill a player\n\nIf the Vigilante and the Mafia night meeting target the same player, both the visited player and the Vigilante will die",
+            "id": 56,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Extra KP",
+                "Night Power",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Villager",
+            "description": "Basic Town-aligned role.",
+            "id": 57,
+            "alignment": "town",
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Villager"
+            ]
+        },
+        {
+            "name": "Virgin",
+            "description": "Upon being condemned, all players will be protected from kills by Mafia-aligned roles and any @{role:Killer} for the following night\n\nConverts to a @{role:Villager} when blocked by @{role:Hooker}",
+            "id": 58,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "On-Condemn Power",
+                "Protective",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Wanderer",
+            "description": "Does not attend the Mafia night meeting at the start of the game\n\nEach night, may visit a player and check if they attend the Mafia night meeting\n\nIf the player is attending, will join the meeting for the rest of the game\n\nIf the player is not attending (e.g. temporarily removed by @{role:Jailer}) on the night the Wanderer visits, will not join the meeting\n\nIf recruited by another faction, joining the Mafia night meeting will cause the Wanderer to be recruited back into the Mafia\n\n‌",
+            "id": 1624739756,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Meeting",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Wannabe",
+            "description": "Each night, may choose a player to visit and investigate\n\nReceives a report the next day detailing if the player is sided with the Mafia\n\nDoes not attend the Mafia night meeting",
+            "id": 1580928590,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Investigative",
+                "Night Power",
+                "Non-Meeting Mafia",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Weaver",
+            "description": "Once per game, may visit a player and give them a @{item:Dreamcatcher}",
+            "id": 1568391955,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Item Interaction",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Wiretapper",
+            "description": "Once per game, may wiretap a player during the day \n\nWill hear all messages from that player's night meeting the following night, though the identities of the speakers will be hidden",
+            "id": 1553924852,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Day Power",
+                "Info Power",
+                "Single-Use"
+            ]
+        },
+        {
+            "name": "Witness",
+            "description": "Sees self as @{role:Villager}\n\nUpon being condemned, may choose to privately reveal the role of a player to another player of their choice\n\nIf the vote is altered (e.g. overturned by @{role:Governor}), Witness will learn their identity and retain their power",
+            "id": 1611085230,
+            "alignment": "town",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "On-Condemn Power",
+                "Revealing",
+                "Single-Use",
+                "Villager"
+            ]
+        },
+        {
+            "name": "Yakuza",
+            "description": "Once per game, may visit at night and convert a player from another faction to a @{role:Mafia}\n\nDies if conversion is successful",
+            "id": 90,
+            "alignment": "mafia",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP",
+                "Meeting",
+                "Night Power",
+                "Single-Use",
+                "Visits"
+            ]
+        },
+        {
+            "name": "Zombie",
+            "description": "Each night, must visit and convert another player to a Zombie\n\nDies if conversion is successful\n\nIf any Zombie is alive in final 2, all Zombies win\n\nTown cannot win while Zombie is alive",
+            "id": 1558372324,
+            "alignment": "third",
+            "new": false,
+            "disabled": false,
+            "holiday": "none",
+            "tags": [
+                "Conversions",
+                "Extra KP",
+                "Night Power",
+                "Non-Faction Scum",
+                "Visits"
+            ]
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-from bot.mafia import Mafia
+from utils.mafia import Mafia
 from sys import exit
 
 m = Mafia()
