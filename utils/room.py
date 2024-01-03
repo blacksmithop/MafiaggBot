@@ -1,19 +1,25 @@
 from requests import Session
 from json import loads
+from utils.auth import Cookie
+from utils.models.models import Room
 
 
-class Room:
+class GetRooms:
     URL = "https://mafia.gg/api/rooms"
 
-    def __init__(self, payload):
-        self.payload = payload
-
-    def list_rooms(self):
+    def __init__(self):
+        cookie_gen = Cookie()
+        self.cookie = cookie_gen.getCookieData()
+        self.rooms = []
+        
+    def getRooms(self):
         with Session() as s:
-            self.json = loads(s.get(self.URL, cookies=self.payload).content)
-        rooms = self.json["rooms"]
-        num = len(rooms)
-        lobbies = []
-        if num > 0:
-            lobbies = [r["name"] for r in rooms]
-        return num, lobbies
+            resp = s.get(self.URL, cookies=self.cookie)
+            data = resp.json()
+        rooms = data["rooms"]
+        self.rooms = [Room(**item) for item in rooms]
+        return self.rooms
+    
+if __name__ == "__main__":
+    r = GetRooms()
+    print(r.getRooms())
