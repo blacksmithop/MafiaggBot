@@ -50,3 +50,4 @@ and store it in `bot/data/` folder.
 - [x] Reworked Decks
 - [x] Reworked Roles
 - [ ] Rework bot logic
+- [ ] Only read cookie once, refresh if needed
