@@ -1,31 +1,17 @@
 from json import loads
 
 # from utils.decks import Deck
-from utils.roles import GetRole
-
 # from utils.setups import Setup
+from utils.roles import GetRole
 from utils.settings import Setting
+from utils.helper import ignore_bot_message
 from typing import Union, Dict
 from requests import Session
 from inspect import getmembers, isfunction
-from functools import wraps
 
 
 def commandNotFound():
     return None
-
-
-def ignore_bot_message(func):
-    @wraps(func)
-    def wrapper(self, payload: Dict):
-        if payload["type"] == "chat":
-            if "from" in payload:
-                if payload["from"]["userId"] == self.id:
-                    return
-        res = func(self, payload)
-        return res
-
-    return wrapper
 
 
 class UserCache:
@@ -39,7 +25,6 @@ class Bot:
     def __init__(self, user, _id):
         self.prefix = "$"
         # self._deck = Deck(user)
-        # self._role = Role()
         # self._setup = Setup() # Get setups from API / Scrap with new wiki format
         self._setting = Setting()
         self.id = _id
@@ -104,14 +89,11 @@ class Bot:
     #         self.response["message"] = f"✅ The ID for {args} deck is {_id}"
     #     return self.response
 
-    # def role(self, args) -> dict:
-    #     """Search for a role (name)"""
-    #     _id = self._role.get_role(args)
-    #     if _id is None:
-    #         self.response["message"] = f"⛔ Could not find a role by the name {args}"
-    #     else:
-    #         self.response["message"] = f"✅ The ID for {args} is {_id}"
-    #     return self.response
+    def role(self, args) -> dict:
+        """Search for a role (name)"""
+        roleData = role.getRole(name=args)
+        self.response["message"] = roleData
+        return self.response
 
     # def setup(self, args) -> dict:
     #     """Search for a setup (name)"""
