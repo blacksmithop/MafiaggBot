@@ -5,13 +5,14 @@ from pathlib import Path
 from utils.auth import Cookie
 from utils.helper import similar
 from time import sleep
-from utils.models.models import DeckData
+from utils.models.models import DeckData, Deck
+from typing import Optional
 
 # https://mafia.gg/api/decks-random-key
 # random decks key
 
 
-class GenerateDeck:
+class GetDeck:
     URL = "https://mafia.gg/api/decks"
     RANDOM_URL = "https://mafia.gg/api/decks-random-key"
     DECK_DIR = "./data/decks"
@@ -73,13 +74,15 @@ class GenerateDeck:
             dump(data, f, indent=4, sort_keys=True, default=str)
             print("Saved deck data to file")
 
-    def search(self, name: str) -> [bool, str]:
+    def getDeck(self, name: str) -> [bool, str]:
         gen = (
             item
             for item in self.dataset
             if similar(item.name.lower(), name.lower()) > 0.6
         )
-        return next(gen, None)
+        response = next(gen, None)
+        deckData = self.formatDeckData(name=name, response=response)
+        return deckData
 
     def getRandomDeck(self) -> str:
         with Session() as sess:
@@ -88,7 +91,13 @@ class GenerateDeck:
                 return
             return resp.json()["key"]
 
+    def formatDeckData(self, name: str, response: Optional[Deck]):
+        if response == None:
+            text = f"❌ Could not find a deck by the name: {name}"
+        else:
+            text = f"✅ Deck: {response.name} | Size: {response.deckSize} | Version: {response.version}"
+        return text
 
 if __name__ == "__main__":
-    deck = GenerateDeck()
+    deck = GetDeck()
     print(deck.search(name="Phighting!"))

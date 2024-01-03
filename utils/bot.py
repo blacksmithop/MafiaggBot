@@ -3,6 +3,7 @@ from json import loads
 # from utils.decks import Deck
 # from utils.setups import Setup
 from utils.roles import GetRole
+from utils.decks import GetDeck
 from utils.settings import Setting
 from utils.helper import ignore_bot_message
 from typing import Union, Dict
@@ -19,7 +20,7 @@ class UserCache:
 
 
 role = GetRole()
-
+deck = GetDeck()
 
 class Bot:
     def __init__(self, user, _id):
@@ -80,15 +81,12 @@ class Bot:
         fn = getattr(self, cmd_name, commandNotFound())
         return fn
 
-    # def deck(self, args) -> dict:
-    #     """Search for a deck (name)"""
-    #     _id = self._deck.search_deck(args)
-    #     if _id is None:
-    #         self.response["message"] = f"⛔ Could not find a deck by the name {args}"
-    #     else:
-    #         self.response["message"] = f"✅ The ID for {args} deck is {_id}"
-    #     return self.response
-
+    def deck(self, args) -> dict:
+        """Search for a deck (name)"""
+        deckData = deck.getDeck(args)
+        self.response["message"] = deckData
+        return self.response
+    
     def role(self, args) -> dict:
         """Search for a role (name)"""
         roleData = role.getRole(name=args)

@@ -12,11 +12,13 @@ roles = [Role(**item) for item in roles]
 
 class GetRole:
     def getRole(self, name: str):
+        name = name.title()
         response = None
         if name in roles:
             response = roles[name]
         for role in roles:
-            if similar(role.name, name) > 0.8:
+            score = similar(role.name, name)
+            if  score > 0.6:
                 response = role
         description = self.formatRoleData(name=name, response=response)
         return description
