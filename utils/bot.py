@@ -215,7 +215,14 @@ class Bot:
         """Become a spectator"""
         self.response["message"] = "👀 Became a spectator"
         return [{"type": "presence", "isPlayer": False}, self.response]
-
+    
+    def rooms(self) -> Dict:
+        """List other rooms"""
+        roomData = room.getRooms()
+        message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
+        self.response["message"] = message
+        return self.response
+    
     # def player(self) -> list:
     #     """Become a player"""
     #     self.response["message"] = "🎮 Became a player"
