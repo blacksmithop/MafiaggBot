@@ -3,14 +3,25 @@ from json import loads
 # from utils.roles import GetRole
 # from utils.setups import Setup
 from utils.settings import Setting
-from typing import Union
+from typing import Union, Dict
 from requests import Session
 from inspect import getmembers, isfunction
+from functools import wraps
 
 
-def not_found():
+def commandNotFound():
     return None
 
+def ignore_bot_message(func):
+    @wraps(func)
+    def wrapper(self, payload: Dict):
+        if payload["type"] == "chat":
+            if "from" in payload:
+                if payload["from"]["userId"] == self.id:
+                    return
+        res = func(self, payload)
+        return res
+    return wrapper
 
 class UserCache:
     data = dict()
@@ -32,11 +43,9 @@ class Bot:
     def reset_cache(self):
         self.cache.data = dict()
 
-    def parse(self, payload: dict) -> Union[dict, None]:
+    @ignore_bot_message
+    def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
-            if "from" in payload:
-                if payload["from"]["userId"] == self.id:
-                    return
             msg = payload["message"]
             if msg[0] != self.prefix:
                 return
@@ -75,7 +84,7 @@ class Bot:
         return [cmd, args]
 
     def get_command(self, cmd_name: str):
-        fn = getattr(self, cmd_name, not_found())
+        fn = getattr(self, cmd_name, commandNotFound())
         return fn
 
     # def deck(self, args) -> dict:
