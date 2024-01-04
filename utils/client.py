@@ -7,14 +7,11 @@ from utils.decks import GetDeck
 from utils.user import GetUser
 from utils.room import GetRooms
 from utils.settings import Setting
-from utils.helper import ignore_bot_message
+from utils.helper import ignore_bot_message, register_command, convertSetup
 from utils.auth import Cookie
+from utils.bot.botbase import BotBase
 from typing import Union, Dict
 from inspect import getmembers, isfunction
-
-
-def commandNotFound():
-    return None
 
 
 class UserCache:
@@ -29,7 +26,7 @@ user = GetUser()
 room = GetRooms(cookie=cookieData)
 
 
-class Bot:
+class Bot(BotBase):
     def __init__(self):
         self.prefix = "$"
         # self._setup = Setup() # Get setups from API / Scrap with new wiki format
@@ -40,9 +37,7 @@ class Bot:
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.unlisted = None, None
         self.cache = UserCache()
-
-    def reset_cache(self):
-        self.cache.data = dict()
+        self.registerBotCommands()
 
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
@@ -51,7 +46,7 @@ class Bot:
             if msg[0] != self.prefix:
                 return
             cmd, args = self.parseCommand(msg[1:])
-            cmd = self.get_command(cmd)
+            # cmd = self.getCommand(cmd)
             if callable(cmd) and cmd.__doc__:
                 if args is not None:
                     data = cmd(args)
@@ -71,28 +66,15 @@ class Bot:
         else:
             return
 
-    @staticmethod
-    def parseCommand(msg: str) -> list:
-        msg = msg.split(" ")
-        if len(msg) == 2:
-            cmd, args = msg
-        elif len(msg) >= 3:
-            cmd, args = msg[0], msg[1:]
-            args = " ".join(args)
-        else:
-            cmd, args = msg[0], None
-        return [cmd, args]
 
-    def get_command(self, cmd_name: str):
-        fn = getattr(self, cmd_name, commandNotFound())
-        return fn
-
+    @register_command("deck")
     def deck(self, args) -> dict:
         """Search for a deck (name)"""
         deckData = deck.getDeck(args)
         self.response["message"] = deckData
         return self.response
 
+    @register_command("use deck")
     def usedeck(self, args) -> [dict, list]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
@@ -199,6 +181,7 @@ class Bot:
     #             return self.response
     #         return [{"type": "options", "roles": self.roles}, self.response]
 
+    @register_command("list room")
     def relist(self) -> list:
         """List the room"""
         self.unlisted = False
@@ -211,11 +194,13 @@ class Bot:
     #     self.response["message"] = "🕵️‍♀ Unlisted the room"
     #     return [{"type": "options", "unlisted": self.unlisted}, self.response]
 
+    @register_command("spectate")
     def spectate(self) -> list:
         """Become a spectator"""
         self.response["message"] = "👀 Became a spectator"
         return [{"type": "presence", "isPlayer": False}, self.response]
     
+    @register_command("show rooms")
     def rooms(self) -> Dict:
         """List other rooms"""
         roomData = room.getRooms()
@@ -223,11 +208,13 @@ class Bot:
         self.response["message"] = message
         return self.response
     
+    @register_command("become player")
     def player(self) -> list:
         """Become a player"""
         self.response["message"] = "🎮 Became a player"
         return [{"type": "presence", "isPlayer": True}, self.response]
 
+    @register_command("rename room")
     def rename(self, name) -> list:
         """Change room name"""
         self.rname = name
@@ -255,6 +242,7 @@ class Bot:
         self.cache.data[userID] = userData
         return self.response
 
+    @register_command("afk check")
     def afk(self) -> list:
         """Do an AFK check"""
         self.response["message"] = f"🔁 Doing an AFK Check"
@@ -263,35 +251,20 @@ class Bot:
             {"type": "presence", "isPlayer": False},
             self.response,
         ]
-
+    @register_command("start game")
     def start(self) -> list:
         """Start the game"""
         self.response["message"] = f"▶ Starting the game"
         return [{"type": "startGame"}, self.response]
 
+    @register_command("new room")
     @staticmethod
     def new() -> dict:
         """Creates a new room"""
         return {"type": "newGame", "roomId": None}
 
-    def help(self, args=None) -> dict:
-        """Shows the help command"""
-        fn = getmembers(Bot, isfunction)
-        if args is None:
-            fn = list(filter(lambda x: x[1].__doc__, fn))
-            fn[:] = (i[0] for i in fn)
-            fn: list
-            self.response[
-                "message"
-            ] = f"Commands are {', '.join(fn)} GitHub: https://github.com/blacksmithop/mafiaggbot"
-            return self.response
-        fn = list(filter(lambda x: x[0] == args, fn))
-        if not fn:
-            self.response["message"] = f"⛔ No command named [{args}]"
-        else:
-            self.response["message"] = f"✅ Command [{fn[0][0]}] : {fn[0][1].__doc__}"
-        return self.response
 
+    @register_command("ping")
     def ping(self) -> list:
         """Sends a ping"""
         self.response["message"] = "Pong! 🏓"
@@ -351,11 +324,3 @@ class Bot:
     #             return self.response
     #     self.response["message"] = f"✅ Set {opt} to {new}"
     #     return [self.response, setting]
-
-
-def convertSetup(roles: str) -> dict:
-    try:
-        # noinspection PyTypeChecker
-        return dict(map(lambda x: str.split(x, "a"), str.split(roles, "b")))
-    except ValueError:
-        pass

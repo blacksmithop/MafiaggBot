@@ -1,7 +1,7 @@
 from websockets import connect
 from requests import Session
 from json import loads, dumps
-from utils.bot import Bot
+from utils.client import Bot
 import asyncio
 from utils.auth import Cookie
 

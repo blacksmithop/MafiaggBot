@@ -55,3 +55,7 @@ and store it in `bot/data/` folder.
 - [ ] Lock certain commmands as host only
 - [ ] Don't create new commands unless game end
 - [ ] Return character info (for decks in next message)
+- [ ] Better commands (sub-commands!)
+- [ ] Better doc strings using decorators
+- [x] Move functional commands to bot base
+- [ ] Run `registerBotCommands` automatically
