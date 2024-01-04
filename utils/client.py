@@ -251,6 +251,15 @@ class Bot(BotBase):
             {"type": "presence", "isPlayer": False},
             self.response,
         ]
+        
+    @register_command("ready check")
+    def ready(self) -> list:
+        """Do an ready check"""
+        self.response["message"] = f"🔁 Doing an Ready Check"
+        return [
+            {"type":"readyCheck"},
+            self.response,
+        ]
     @register_command("start game")
     def start(self) -> list:
         """Start the game"""
