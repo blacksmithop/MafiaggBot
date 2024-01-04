@@ -13,7 +13,6 @@ class BotBase:
         self.commands = commandMapping
         
     def getCommand(self, commandName: str):
-        print(f"Command: {commandName}")
         command = self.commands.get(commandName, None)
         return command
 

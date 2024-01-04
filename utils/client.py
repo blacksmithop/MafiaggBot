@@ -67,7 +67,7 @@ class Bot(BotBase):
             return
 
 
-    @register_command("deck")
+    @register_command("get deck")
     def deck(self, args) -> dict:
         """Search for a deck (name)"""
         deckData = deck.getDeck(args)
@@ -93,6 +93,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Set deck to {deckName}"
         return [{"type": "options", "deck": deckID}, self.response]
 
+    @register_command("get role")
     def role(self, args) -> dict:
         """Search for a role (name)"""
         roleData = role.getRole(name=args)
@@ -181,18 +182,19 @@ class Bot(BotBase):
     #             return self.response
     #         return [{"type": "options", "roles": self.roles}, self.response]
 
-    @register_command("list room")
+    @register_command("public")
     def relist(self) -> list:
         """List the room"""
         self.unlisted = False
-        self.response["message"] = "🦸‍♂ Relisted the room"
+        self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
-    # def unlist(self) -> list:
-    #     """Unlist the room"""
-    #     self.unlisted = True
-    #     self.response["message"] = "🕵️‍♀ Unlisted the room"
-    #     return [{"type": "options", "unlisted": self.unlisted}, self.response]
+    @register_command("private")
+    def unlist(self) -> list:
+        """Unlist the room"""
+        self.unlisted = True
+        self.response["message"] = "🕵️‍♀ Made the room private"
+        return [{"type": "options", "unlisted": self.unlisted}, self.response]
 
     @register_command("spectate")
     def spectate(self) -> list:
