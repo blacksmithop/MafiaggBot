@@ -2,16 +2,19 @@ from utils.helper import similar
 from json import load
 from utils.models.models import Role
 from typing import Optional
+from collections import OrderedDict
+
 
 with open("./data/roles/roles.json", "r") as f:
     data = load(f)
     roles = data["roles"]
 
-roles = [Role(**item) for item in roles]
-
+rawRoles = [Role(**item) for item in roles]
+roles = sorted(rawRoles, key=lambda x: x.name)
 
 class GetRole:
     def getRole(self, name: str):
+        matches = {}
         name = name.title()
         response = None
         if name in roles:
@@ -19,7 +22,10 @@ class GetRole:
         for role in roles:
             score = similar(role.name, name)
             if score > 0.7:
-                response = role
+                matches[score] = role
+        if matches != {}:
+            matches = OrderedDict(sorted(matches.items()))
+            response = next(reversed(matches.items()))[1]
         description = self.formatRoleData(name=name, response=response)
         return description
 
