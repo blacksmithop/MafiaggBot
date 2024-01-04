@@ -59,6 +59,7 @@ and store it in `bot/data/` folder.
     - [x] Use random deck
 - [x] Roles
     - [x] Get role by name
+    - [ ] Cleanup role descriptions with validator
 - [x] Commands
     - [x] Custom command names
     - [x] Command docs
