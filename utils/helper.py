@@ -20,6 +20,18 @@ def ignore_bot_message(func):
     return wrapper
 
 
+def is_owner_only(func):
+    @wraps(func)
+    def wrapper(self, payload: Dict):
+        if payload["type"] == "chat":
+            if "from" in payload:
+                if payload["from"]["userId"] not in self.ALLOWED:
+                    return
+        res = func(self, payload)
+        return res
+
+    return wrapper
+
 def register_command(v):
     def _(f):
         if not hasattr(f, "_commandName"):
