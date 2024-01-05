@@ -57,6 +57,11 @@ and store it in `bot/data/` folder.
     - [x] Get deck by name
     - [x] Set deck by name
     - [x] Use random deck
+- [x] Setups
+    - [x] Get setup by name
+    - [x] Set setup by code
+    - [x] Set setup by name
+    - [ ] Get current setup code
 - [x] Roles
     - [x] Get role by name
     - [ ] Cleanup role descriptions with validator
@@ -73,6 +78,7 @@ and store it in `bot/data/` folder.
 ### Tasklist
 
 - [ ] Don't create new room unless game end
+- [ ] Understand role object -> setup code creation
 - [ ] Return character info (for decks in next message)
 - [ ] Better commands (sub-commands!)
 - [ ] Better doc strings using decorators
