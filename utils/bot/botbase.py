@@ -1,5 +1,6 @@
 from inspect import getmembers, ismethod
 from utils.helper import isBotCommand, register_command
+from typing import Dict
 
 
 class BotBase:
@@ -12,6 +13,9 @@ class BotBase:
     def getCommand(self, commandName: str):
         command = self.commands.get(commandName, None)
         return command
+    
+    def send(self, message: str) -> Dict:
+        return {"type": "chat", "message": message}
 
     def parseCommand(self, msg: str) -> list:
         ctx = msg.split(" ")
