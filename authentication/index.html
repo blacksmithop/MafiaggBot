@@ -373,17 +373,15 @@
 
 
 <h1 id="authentication">Authentication</h1>
-<p>User authentication is done as POST request, we can simulate one in order to get the cookies.
-The cookies are then used to authenticate the rest of our requests.
-<em>Almost</em> every requests to the mafia gg api needs to be authenticated.</p>
-<p>Make a POST request to <code>https://mafia.gg/api/user-session</code></p>
-<p>with the payload</p>
-<pre><code>{
+<p>User authentication is done as POST request. We can simulate one in order to get the cookies. 
+They can then be used to authenticate our requests.</p>
+<p>Make a POST request to <code>https://mafia.gg/api/user-session</code> with your login credentials</p>
+<pre><code class="language-json">{
     &quot;login&quot;: &quot;Mafia.gg Username&quot;,
     &quot;password&quot;: &quot;Mafia.gg password&quot;
 }
 </code></pre>
-<p>From this response save it's cookies</p>
+<p>Save the cookies included with this response</p>
 
 
 
