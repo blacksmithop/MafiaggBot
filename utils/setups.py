@@ -11,10 +11,10 @@ from os import path
 class GetSetup:
     BASE = "https://mafiagg.fandom.com/"
     SETUP_DIR = "./data/setups"
-    
+
     def __init__(self):
-       self.getSetupData()
-       
+        self.getSetupData()
+
     def getSetup(self, name: str):
         matches = {}
         name = name.title()
@@ -35,14 +35,14 @@ class GetSetup:
             return match[0].name
         else:
             return None
-    
+
     def formatSetupData(self, name: str, response: Optional[Setup]):
         if response == None:
             text = f"❌ Could not find a setup by the name: {name}"
         else:
             text = f"✅ Role: {response.name} | Code: {response.code}"
         return text
-        
+
     def getSetupData(self):
         file_path = f"{self.SETUP_DIR}/setups.json"
         if path.isfile(file_path):
@@ -55,7 +55,6 @@ class GetSetup:
         else:
             self.getTables()
             self.saveSetups()
-            
 
     def saveSetups(self):
         print("Saving setups to file")

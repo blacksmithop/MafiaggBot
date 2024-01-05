@@ -26,6 +26,7 @@ user = GetUser()
 room = GetRooms(cookie=cookieData)
 setup = GetSetup()
 
+
 class Bot(BotBase):
     def __init__(self):
         self.prefix = "$"
@@ -66,7 +67,6 @@ class Bot(BotBase):
         else:
             return
 
-
     @register_command("get deck")
     def deck(self, args) -> dict:
         """Search for a deck (name)"""
@@ -99,7 +99,7 @@ class Bot(BotBase):
         roleData, _ = role.getRole(name=args)
         self.response["message"] = roleData
         return self.response
-    
+
     @register_command("get setup")
     def setup(self, args) -> dict:
         """Search for a setup (name)"""
@@ -112,7 +112,7 @@ class Bot(BotBase):
         """Change the current setup (give name)"""
         # infer whether setup code or name
         try:
-            assert int(args[:2]) and " " not in args # codes usually start with an int
+            assert int(args[:2]) and " " not in args  # codes usually start with an int
             setupName = setup.getSetupByCode(code=args)
             if setupName == None:
                 setupName = "Unknown Setup"
@@ -125,12 +125,11 @@ class Bot(BotBase):
             setupName = setupObj.name
             roles = convertSetup(code)
             self.response["message"] = f"✅ Changed setup to {setupName}"
-            
+
         if roles is None:
             self.response["message"] = f"⛔ Could not find/identify the setup"
             return self.response
         return [{"type": "options", "roles": roles}, self.response]
-
 
     # def addrole(self, args) -> [dict, list]:
     #     """Add a role to the setup : name, amount(default=1)"""
@@ -202,7 +201,7 @@ class Bot(BotBase):
         """Become a spectator"""
         self.response["message"] = "👀 Became a spectator"
         return [{"type": "presence", "isPlayer": False}, self.response]
-    
+
     @register_command("show rooms")
     def rooms(self) -> Dict:
         """List other rooms"""
@@ -210,7 +209,7 @@ class Bot(BotBase):
         message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
         self.response["message"] = message
         return self.response
-    
+
     @register_command("become player")
     def player(self) -> list:
         """Become a player"""
@@ -254,15 +253,16 @@ class Bot(BotBase):
             {"type": "presence", "isPlayer": False},
             self.response,
         ]
-        
+
     @register_command("ready check")
     def ready(self) -> list:
         """Do an ready check"""
         self.response["message"] = f"🔁 Doing an Ready Check"
         return [
-            {"type":"readyCheck"},
+            {"type": "readyCheck"},
             self.response,
         ]
+
     @register_command("start game")
     def start(self) -> list:
         """Start the game"""
@@ -274,7 +274,6 @@ class Bot(BotBase):
     def new() -> dict:
         """Creates a new room"""
         return {"type": "newGame", "roomId": None}
-
 
     @register_command("ping")
     def ping(self) -> list:

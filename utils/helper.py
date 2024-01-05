@@ -22,11 +22,13 @@ def ignore_bot_message(func):
 
 def register_command(v):
     def _(f):
-        if not hasattr(f, '_commandName'):
+        if not hasattr(f, "_commandName"):
             f._commandName = v
             f.isCommand = True
         return f
+
     return _
+
 
 def isBotCommand(data):
     name, cmd = data
@@ -39,6 +41,7 @@ def convertSetup(roles: str) -> dict:
         return dict(map(lambda x: str.split(x, "a"), str.split(roles, "b")))
     except ValueError:
         pass
+
 
 def commandNotFound():
     return None

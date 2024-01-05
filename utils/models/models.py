@@ -79,6 +79,7 @@ class DeckData(BaseModel):
     pagination: Optional[Pagination]
     decks: List[Deck]
 
+
 # Setup
 class Setup(BaseModel):
     name: str

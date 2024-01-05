@@ -12,6 +12,7 @@ with open("./data/roles/roles.json", "r") as f:
 rawRoles = [Role(**item) for item in roles]
 roles = sorted(rawRoles, key=lambda x: x.name)
 
+
 class GetRole:
     def getRole(self, name: str):
         matches = {}
