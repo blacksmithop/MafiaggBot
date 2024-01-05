@@ -17,8 +17,6 @@ class GetRole:
         matches = {}
         name = name.title()
         response = None
-        if name in roles:
-            response = roles[name]
         for role in roles:
             score = similar(role.name, name)
             if score > 0.7:
@@ -27,7 +25,7 @@ class GetRole:
             matches = OrderedDict(sorted(matches.items()))
             response = next(reversed(matches.items()))[1]
         description = self.formatRoleData(name=name, response=response)
-        return description
+        return description, response
 
     def formatRoleData(self, name: str, response: Optional[Role]):
         if response == None:
