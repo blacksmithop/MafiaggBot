@@ -39,6 +39,7 @@ class Bot(BotBase):
         self.rname, self.unlisted = None, None
         self.cache = UserCache()
         self.registerBotCommands()
+        self.roleCache = {} # TODO: Improve
 
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
@@ -130,57 +131,66 @@ class Bot(BotBase):
             self.response["message"] = f"⛔ Could not find/identify the setup"
             return self.response
         return [{"type": "options", "roles": roles}, self.response]
+    
+    @register_command("add role")
+    def addrole(self, args) -> [dict, list]:
+        """Add a role to the setup : name, amount (default 1)"""
+        args = args.split()
+        if len(args) == 1:
+            num, roleName = 1, args[0]
+        else:
+            try:
+                roleName, num = args[0], int(args[1])
+            except ValueError:
+                self.response["message"] = f"⛔ {args[1]} is not a valid number"
+                return self.response
+        _, roleObj = role.getRole(name=roleName)
+        roleID = roleObj.id
+        
+        if roleObj is None:
+            self.response["message"] = f"⛔ Could not find a role by the name {args}"
+            return self.response
+        
+        roleName = roleObj.name
+        if roleID in self.roleCache:
+            self.roleCache[roleID] += num
+        else:
+            self.roleCache[roleID] = num
+        self.response["message"] = f"✅ Added {num} {roleName} to setup"
+        return [{"type": "options", "roles": self.roleCache}, self.response]
 
-    # def addrole(self, args) -> [dict, list]:
-    #     """Add a role to the setup : name, amount(default=1)"""
-    #     args = args.split()
-    #     if len(args) == 1:
-    #         num, role = 1, args[0]
-    #     else:
-    #         try:
-    #             role, num = args[0], int(args[1])
-    #         except ValueError:
-    #             self.response["message"] = f"⛔ {args[1]} is not a valid number"
-    #             return self.response
-    #     _id = self._role.get_role(role.lower())
-    #     if _id is None:
-    #         self.response["message"] = f"⛔ Could not find a role by the name {args}"
-    #         return self.response
-    #     if _id in self.roles:
-    #         self.roles[_id] += num
-    #     else:
-    #         self.roles[_id] = num
-    #     self.response["message"] = f"✅ Added {num} {role} to setup"
-    #     return [{"type": "options", "roles": self.roles}, self.response]
-
-    # def removerole(self, args) -> [dict, list]:
-    #     """Removes a role from the setup : name, amount(default=1)"""
-    #     args = args.split()
-    #     if len(args) == 1:
-    #         num, role = 1, args[0]
-    #     else:
-    #         try:
-    #             role, num = args[0], int(args[1])
-    #         except ValueError:
-    #             self.response["message"] = f"⛔ {args[1]} is not a valid number"
-    #             return self.response
-    #     _id = self._role.get_role(role.lower())
-    #     if _id is None:
-    #         self.response["message"] = f"⛔ Could not find a role by the name {args}"
-    #         return self.response
-    #     if _id in self.roles:
-    #         if num < self.roles[_id]:
-    #             self.roles[_id] -= num
-    #             self.response["message"] = f"✅ Removed {num} {role} from setup"
-    #         elif num == self.roles[_id]:
-    #             del self.roles[_id]
-    #             self.response["message"] = f"✅ Removed {role} from setup"
-    #         elif num > self.roles[_id]:
-    #             self.response[
-    #                 "message"
-    #             ] = f"⛔ Cannot remove {num} {role}, there are only {self.roles[_id]}"
-    #             return self.response
-    #         return [{"type": "options", "roles": self.roles}, self.response]
+    @register_command("remove role")
+    def removerole(self, args) -> [dict, list]:
+        """Removes a role from the setup : name, amount (default 1)"""
+        args = args.split()
+        if len(args) == 1:
+            num, roleName = 1, args[0]
+        else:
+            try:
+                roleName, num = args[0], int(args[1])
+            except ValueError:
+                self.response["message"] = f"⛔ {args[1]} is not a valid number"
+                return self.response
+        _, roleObj = role.getRole(name=roleName)
+        roleName = roleObj.name
+        roleID = roleObj.id
+        if roleObj is None:
+            self.response["message"] = f"⛔ Could not find a role by the name {args}"
+            return self.response
+        
+        if roleID in self.roleCache:
+            if num < self.roleCache[roleID]:
+                self.roleCache[roleID] -= num
+                self.response["message"] = f"✅ Removed {num} {roleName} from setup"
+            elif num == self.roleCache[roleID]:
+                del self.roleCache[roleID]
+                self.response["message"] = f"✅ Removed {roleName} from setup"
+            elif num > self.roleCache[roleID]:
+                self.response[
+                    "message"
+                ] = f"⛔ Cannot remove {num} {roleName}, there are only {self.roleCache[roleID]}"
+                return self.response
+        return [{"type": "options", "roles": self.roleCache}, self.response]
 
     @register_command("public")
     def relist(self) -> list:
