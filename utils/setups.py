@@ -1,14 +1,61 @@
 from requests import get
 from bs4 import BeautifulSoup
-from json import dump
+from json import dump, load
+from utils.models.models import Setup
+from utils.helper import similar
+from collections import OrderedDict
+from typing import Optional
+from os import path
 
 
-class GenerateSetup:
+class GetSetup:
     BASE = "https://mafiagg.fandom.com/"
-
+    SETUP_DIR = "./data/setups"
+    
     def __init__(self):
-        self.getTables()
-        self.saveSetups()
+       self.getSetupData()
+       
+    def getSetup(self, name: str):
+        matches = {}
+        name = name.title()
+        response = None
+        for setup in self.setups:
+            score = similar(setup.name, name)
+            if score > 0.7:
+                matches[score] = setup
+        if matches != {}:
+            matches = OrderedDict(sorted(matches.items()))
+            response = next(reversed(matches.items()))[1]
+        description = self.formatSetupData(name=name, response=response)
+        return description, response
+
+    def getSetupByCode(self, code: str):
+        match = [setup for setup in self.setups if setup.code == code]
+        if len(match) > 0:
+            return match[0].name
+        else:
+            return None
+    
+    def formatSetupData(self, name: str, response: Optional[Setup]):
+        if response == None:
+            text = f"❌ Could not find a setup by the name: {name}"
+        else:
+            text = f"✅ Role: {response.name} | Code: {response.code}"
+        return text
+        
+    def getSetupData(self):
+        file_path = f"{self.SETUP_DIR}/setups.json"
+        if path.isfile(file_path):
+            print("Loading setups from file")
+            with open(file_path, "r") as f:
+                data = load(f)
+            setups = [Setup(**item) for item in data]
+            setups = sorted(setups, key=lambda x: x.name)
+            self.setups = setups
+        else:
+            self.getTables()
+            self.saveSetups()
+            
 
     def saveSetups(self):
         print("Saving setups to file")

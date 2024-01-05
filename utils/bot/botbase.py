@@ -1,5 +1,5 @@
 from inspect import getmembers, ismethod
-from utils.helper import isBotCommand, commandNotFound, register_command
+from utils.helper import isBotCommand, register_command
 
 
 class BotBase:

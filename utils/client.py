@@ -6,12 +6,12 @@ from utils.roles import GetRole
 from utils.decks import GetDeck
 from utils.user import GetUser
 from utils.room import GetRooms
+from utils.setups import GetSetup
 from utils.settings import Setting
 from utils.helper import ignore_bot_message, register_command, convertSetup
 from utils.auth import Cookie
 from utils.bot.botbase import BotBase
 from typing import Union, Dict
-from inspect import getmembers, isfunction
 
 
 class UserCache:
@@ -24,7 +24,7 @@ role = GetRole()
 deck = GetDeck(cookie=cookieData)
 user = GetUser()
 room = GetRooms(cookie=cookieData)
-
+setup = GetSetup()
 
 class Bot(BotBase):
     def __init__(self):
@@ -96,40 +96,41 @@ class Bot(BotBase):
     @register_command("get role")
     def role(self, args) -> dict:
         """Search for a role (name)"""
-        roleData = role.getRole(name=args)
+        roleData, _ = role.getRole(name=args)
         self.response["message"] = roleData
         return self.response
+    
+    @register_command("get setup")
+    def setup(self, args) -> dict:
+        """Search for a setup (name)"""
+        setupData, _ = setup.getSetup(args)
+        self.response["message"] = setupData
+        return self.response
 
-    # def setup(self, args) -> dict:
-    #     """Search for a setup (name)"""
+    @register_command("use setup")
+    def usesetup(self, args) -> [dict, list]:
+        """Change the current setup (give name)"""
+        # infer whether setup code or name
+        try:
+            assert int(args[:2]) and " " not in args # codes usually start with an int
+            setupName = setup.getSetupByCode(code=args)
+            if setupName == None:
+                setupName = "Unknown Setup"
+            roles = convertSetup(args)
+            self.response["message"] = f"✅ Changed setup to {setupName}"
+        except Exception as e:
+            print(e)
+            _, setupObj = setup.getSetup(args)
+            code = setupObj.code
+            setupName = setupObj.name
+            roles = convertSetup(code)
+            self.response["message"] = f"✅ Changed setup to {setupName}"
+            
+        if roles is None:
+            self.response["message"] = f"⛔ Could not find/identify the setup"
+            return self.response
+        return [{"type": "options", "roles": roles}, self.response]
 
-    #     res = self._setup.search_setup(args)
-    #     if res is None:
-    #         self.response["message"] = f"⛔ Could not find a setup by the name {args}"
-    #     else:
-    #         url, size, code = res
-    #         args = f"""
-    #                 ID: {code}
-    #                 Players: {size}
-    #                 Wiki: {url}
-    #                 """
-    #         self.response["message"] = args
-    #     return self.response
-
-    # def usesetup(self, args) -> [dict, list]:
-    #     """Change the current setup (give name)"""
-    #     res = self._setup.search_setup(args.lower())
-    #     if res is None:
-    #         self.response["message"] = f"⛔ Could not find a setup by the name {args}"
-    #         return self.response
-    #     self.response["message"] = f"✅ Set setup to {args}"
-    #     url, cnt, _id = res
-    #     roles = convertSetup(_id)
-    #     self.roles = roles
-    #     if roles is None:
-    #         self.response["message"] = f"⛔ Could not convert {_id} to roles"
-    #         return self.response
-    #     return [{"type": "options", "roles": roles}, self.response]
 
     # def addrole(self, args) -> [dict, list]:
     #     """Add a role to the setup : name, amount(default=1)"""
