@@ -1,0 +1,38 @@
+site_name: Mafia.gg API Docs
+
+theme:
+  language: en
+  name: material
+  logo: assets/images/logo.png
+  icon:
+    repo: fontawesome/brands/github-alt
+  favicon: assets/images/favicon.png
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - search.suggest
+    - header.autohide
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
+
+
+repo_url: https://github.com/blacksmithop/mafiaggbot
+repo_name: Mafia.gg Bot
+edit_uri: ""
+
+copyright: Copyright &copy; 2023 Abhinav
