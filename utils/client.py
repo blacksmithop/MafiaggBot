@@ -8,7 +8,7 @@ from utils.user import GetUser
 from utils.room import GetRooms
 from utils.setups import GetSetup
 from utils.settings import Setting
-from utils.helper import ignore_bot_message, register_command, convertSetup
+from utils.helper import ignore_bot_message, register_command, convertSetup, getRoleCount
 from utils.auth import Cookie
 from utils.bot.botbase import BotBase
 from typing import Union, Dict
@@ -140,7 +140,7 @@ class Bot(BotBase):
             num, roleName = 1, args[0]
         else:
             try:
-                roleName, num = args[0], int(args[1])
+                roleName, num = getRoleCount(args=args)
             except ValueError:
                 self.response["message"] = f"⛔ {args[1]} is not a valid number"
                 return self.response
@@ -167,7 +167,7 @@ class Bot(BotBase):
             num, roleName = 1, args[0]
         else:
             try:
-                roleName, num = args[0], int(args[1])
+                roleName, num = getRoleCount(args=args)
             except ValueError:
                 self.response["message"] = f"⛔ {args[1]} is not a valid number"
                 return self.response

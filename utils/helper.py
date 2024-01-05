@@ -1,6 +1,6 @@
 from difflib import SequenceMatcher
 from functools import wraps
-from typing import Dict
+from typing import Dict, List
 
 
 def similar(a, b):
@@ -45,3 +45,17 @@ def convertSetup(roles: str) -> dict:
 
 def commandNotFound():
     return None
+
+def getRoleCount(args: List):
+    if len(args) == 2:
+        try:
+            roleName, num = args[0], int(args[1])
+        except ValueError:
+            roleName, num = args, 1
+    else:
+        try:
+            roleName, num = args[:-1], int(args[-1])
+        except ValueError:
+            roleName, num = args, 1
+    roleName = " ".join(roleName)
+    return roleName, num
