@@ -1,11 +1,19 @@
 options = {
-    "daylength": {"true": "dayLength", "minmax": [3, 20], "allowed": "int"},
-    "nightlength": {"true": "nightLength", "minmax": [3, 20], "allowed": "int"},
+    "daylength": {
+        "true": "dayLength",
+        "minmax": [3, 20],
+        "allowed": "int",
+    },  # day length
     "daystart": {
         "true": "dayStart",
         "allowed": "str",
-        "options": ["informed", "uninformed", "off"],
-        "translate": {"uninformed": "dayStart", "off": "off", "informed": "dawnStart"},
+        "options": ["informed", "uninformed", "off", "nokill"],
+        "translate": {
+            "uninformed": "dayStart",
+            "off": "off",
+            "informed": "dawnStart",
+            "nokill": "mafiaNKn1",
+        },
     },
     "deadlock": {
         "true": "deadlockPreventionLimit",
@@ -13,15 +21,29 @@ options = {
         "allowed": "str",
         "options": ["random", "initiator", "responder", "meteor"],
     },
-    "votelock": {
+    "votelock": {  # toggle vote lock
         "true": "disableVoteLock",
         "allowed": "bool",
     },
-    "hidesetup": {"true": "hideSetup", "allowed": "bool"},
-    "hostrole": {"true": "hostRoleSelection", "allowed": "bool"},
-    "mustvote": {"true": "mustVote", "allowed": "bool"},
-    "nonighttalk": {"true": "noNightTalk", "allowed": "bool"},
-    "scaletimer": {"true": "scaleTimer", "allowed": "bool"},
+    "scaletimer": {  # auto-scale timer
+        "true": "scaleTimer",
+        "allowed": "bool",
+    },
+    "nightlength": {
+        "true": "nightLength",
+        "minmax": [1, 9],
+        "allowed": "int",
+    },  # night length
+    "nighttalk": {  # toggle night talk
+        "true": "noNightTalk",
+        "allowed": "bool",
+    },
+    "hidesetup": {"true": "hideSetup", "allowed": "bool"},  # hide setups
+    "hostrole": {
+        "true": "hostRoleSelection",
+        "allowed": "bool",
+    },  # allow host to select role
+    "mustvote": {"true": "mustVote", "allowed": "bool"},  # must vote
     "reveal": {
         "true": "revealSetting",
         "allowed": "str",
@@ -35,8 +57,17 @@ options = {
     "killpower": {
         "true": "twoKp",
         "allowed": "str",
-        "options": ["yes", "no"],
-        "translate": {"yes": "1", "no": "0"},
+        "options": ["yes", "no", "2", "3", "5", "6", "7"],
+        "translate": {
+            "yes": "1",
+            "no": "0",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+        },
     },
     "majority": {
         "true": "majorityRule",
