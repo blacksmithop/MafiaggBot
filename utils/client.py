@@ -233,15 +233,6 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Renamed room to {self.rname}"
         return [{"type": "options", "roomName": self.rname}, self.response]
 
-    # def setcode(self, args) -> [dict, list]:
-    #     """Change the current setup (give ID)"""
-    #     roles = convertSetup(args.strip())
-    #     if roles is None:
-    #         self.response["message"] = f"⛔ Couldn't convert {args} to roles"
-    #         return self.response
-    #     self.response["message"] = f"✅ Set setup to {args}"
-    #     return [{"type": "options", "roles": roles}, self.response]
-
     def _welcome(self, userID: int) -> [None, dict]:
         if userID in self.cache.data:
             return

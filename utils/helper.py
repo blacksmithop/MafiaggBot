@@ -37,7 +37,6 @@ def isBotCommand(data):
 
 def convertSetup(roles: str) -> dict:
     try:
-        # noinspection PyTypeChecker
         return dict(map(lambda x: str.split(x, "a"), str.split(roles, "b")))
     except ValueError:
         pass
