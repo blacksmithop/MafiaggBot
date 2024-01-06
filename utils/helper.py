@@ -32,6 +32,7 @@ def is_owner_only(func):
 
     return wrapper
 
+
 def register_command(v):
     def _(f):
         if not hasattr(f, "_commandName"):
@@ -56,6 +57,7 @@ def convertSetup(roles: str) -> dict:
 
 def commandNotFound():
     return None
+
 
 def getRoleCount(args: List):
     if len(args) == 2:

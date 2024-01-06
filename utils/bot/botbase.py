@@ -13,7 +13,7 @@ class BotBase:
     def getCommand(self, commandName: str):
         command = self.commands.get(commandName, None)
         return command
-    
+
     def send(self, message: str) -> Dict:
         return {"type": "chat", "message": message}
 

@@ -75,16 +75,16 @@ options = {
         "translate": {"simple": "51", "off": "-1", "2/3": "66", "3/4": "75"},
         "options": ["simple", "off", "2/3", "3/4"],
     },
-    "townlosesafter": { # town loses after 
+    "townlosesafter": {  # town loses after
         "true": "killAllTownAfterTooManyMiscondemns",
         "minmax": [0, 20],
         "allowed": "int",
-    },  
-    "mafialosesafter": { # mafia loses after 
+    },
+    "mafialosesafter": {  # mafia loses after
         "true": "killAllMafiaAfterSomeDie",
         "minmax": [0, 10],
         "allowed": "int",
-    },  
+    },
 }
 
 str2bool = {"True": True, "False": False}
