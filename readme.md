@@ -5,10 +5,14 @@
 ---
 
 ```shell
-pip install -U mafiagg python-dotenv
+pip install -U mafiagg
 ```
 
-`python-dotenv` lets you pass a `.env file` with your credentials
+``shell
+pip install -U python-dotenv
+```
+
+`python-dotenv` lets you pass a `.env` file with your mafia.gg credentials
 
 ```
 MAFIA_USERNAME=username
