@@ -8,7 +8,8 @@
 pip install -U mafiagg
 ```
 
-``shell
+
+```shell
 pip install -U python-dotenv
 ```
 
