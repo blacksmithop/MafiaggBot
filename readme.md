@@ -1,5 +1,9 @@
 # MafiaggBot
 
+![PyPI - Version](https://img.shields.io/pypi/v/mafiagg)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F&up_message=%E2%9C%85&up_color=%E2%9D%8C&logo=github&label=Docs&link=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F)
+
+
 ## Usage
 
 ---
