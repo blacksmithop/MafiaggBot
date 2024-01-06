@@ -1,20 +1,19 @@
 from websockets import connect
 from requests import Session
 from json import loads, dumps
-from utils.client import Bot
+from utils.mafiabot import Bot
 import asyncio
-from utils.auth import Cookie
 
 
-class Mafia:
+class Client:
     def __init__(self):
         self.bot = Bot()
         self.ws = None
         self.room = None
         self.engine, self.auth = None, None
 
-    def load(self):
-        options = {"name": "Bot Lobby", "unlisted": True}
+    def establishConnection(self):
+        options = {"name": "Bot Lobby", "unlisted": True} # Create a private lobby
         with Session() as s:
             resp = s.post(
                 "https://mafia.gg/api/rooms/",
@@ -51,7 +50,7 @@ class Mafia:
         await self.ws.send(dumps({"type": "presence", "isPlayer": False}))
 
     def run(self):
-        self.load()
+        self.establishConnection()
         asyncio.get_event_loop().run_until_complete(
             self.ws_send(self.engine, self.auth)
         )

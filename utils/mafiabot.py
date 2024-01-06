@@ -8,9 +8,11 @@ from utils.user import GetUser
 from utils.room import GetRooms
 from utils.setups import GetSetup
 from utils.settings import Setting
-from utils.helper import (
-    ignore_bot_message,
-    register_command,
+from utils.helper.decorators import (
+    ignoreBotMessage,
+    registerCommand,
+)
+from utils.helper.tools import (
     convertSetup,
     getRoleCount,
 )
@@ -46,7 +48,7 @@ class Bot(BotBase):
         self.registerBotCommands()
         self.roleCache = {}  # TODO: Improve
 
-    @ignore_bot_message
+    @ignoreBotMessage
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
             msg = payload["message"]
@@ -70,14 +72,14 @@ class Bot(BotBase):
         else:
             return
 
-    @register_command("get deck")
+    @registerCommand("get deck")
     def deck(self, args) -> dict:
         """Search for a deck (name)"""
         deckData = deck.getDeck(args)
         self.response["message"] = deckData
         return self.response
 
-    @register_command("use deck")
+    @registerCommand("use deck")
     def usedeck(self, args) -> [dict, list]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
@@ -94,21 +96,21 @@ class Bot(BotBase):
         response = self.send(f"✅ Set deck to {deckName}")
         return [{"type": "options", "deck": deckID}, response]
 
-    @register_command("get role")
+    @registerCommand("get role")
     def role(self, args) -> dict:
         """Search for a role (name)"""
         roleData, _ = role.getRole(name=args)
         self.response["message"] = roleData
         return self.response
 
-    @register_command("get setup")
+    @registerCommand("get setup")
     def setup(self, args) -> dict:
         """Search for a setup (name)"""
         setupData, _ = setup.getSetup(args)
         self.response["message"] = setupData
         return self.response
 
-    @register_command("use setup")
+    @registerCommand("use setup")
     def usesetup(self, args) -> [dict, list]:
         """Change the current setup (give name)"""
         # infer whether setup code or name
@@ -132,7 +134,7 @@ class Bot(BotBase):
             return self.response
         return [{"type": "options", "roles": roles}, response]
 
-    @register_command("add role")
+    @registerCommand("add role")
     def addrole(self, args) -> [dict, list]:
         """Add a role to the setup : name, amount (default 1)"""
         args = args.split()
@@ -157,7 +159,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Added {num} {roleName} to setup"
         return [{"type": "options", "roles": self.roleCache}, self.response]
 
-    @register_command("remove role")
+    @registerCommand("remove role")
     def removerole(self, args) -> [dict, list]:
         """Removes a role from the setup : name, amount (default 1)"""
         args = args.split()
@@ -190,21 +192,21 @@ class Bot(BotBase):
                 return self.response
         return [{"type": "options", "roles": self.roleCache}, response]
 
-    @register_command("public")
+    @registerCommand("public")
     def relist(self) -> list:
         """List the room"""
         self.unlisted = False
         self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
-    @register_command("private")
+    @registerCommand("private")
     def unlist(self) -> list:
         """Unlist the room"""
         self.unlisted = True
         self.response["message"] = "🕵️‍♀ Made the room private"
         return [{"type": "options", "unlisted": self.unlisted}, self.response]
 
-    @register_command("spectate")
+    @registerCommand("spectate")
     def spectate(self) -> list:
         """Become a spectator"""
         return [
@@ -212,19 +214,19 @@ class Bot(BotBase):
             self.send("👀 Became a spectator"),
         ]
 
-    @register_command("show rooms")
+    @registerCommand("show rooms")
     def rooms(self) -> Dict:
         """List other rooms"""
         roomData = room.getRooms()
         message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
         return self.send(message)
 
-    @register_command("become player")
+    @registerCommand("become player")
     def player(self) -> list:
         """Become a player"""
         return [{"type": "presence", "isPlayer": True}, self.send("🎮 Became a player")]
 
-    @register_command("rename room")
+    @registerCommand("rename room")
     def rename(self, name) -> list:
         """Change room name"""
         self.rname = name
@@ -242,7 +244,7 @@ class Bot(BotBase):
         self.cache.data[userID] = userData
         return self.send(message)
 
-    @register_command("afk check")
+    @registerCommand("afk check")
     def afk(self) -> list:
         """Do an AFK check"""
         return [
@@ -251,7 +253,7 @@ class Bot(BotBase):
             self.send("🔁 Doing an AFK Check"),
         ]
 
-    @register_command("ready check")
+    @registerCommand("ready check")
     def ready(self) -> list:
         """Do an ready check"""
         return [
@@ -259,17 +261,17 @@ class Bot(BotBase):
             self.send("🔁 Doing an Ready Check"),
         ]
 
-    @register_command("start game")
+    @registerCommand("start game")
     def start(self) -> list:
         """Start the game"""
         return [self.send("▶ Starting the game"), {"type": "startGame"}]
 
-    @register_command("new room")
+    @registerCommand("new room")
     def new(self) -> dict:
         """Creates a new room"""
         return [self.send("Created new room"), {"type": "newGame", "roomId": None}]
 
-    @register_command("ping")
+    @registerCommand("ping")
     def ping(self) -> list:
         """Sends a ping"""
         return [{"type": "ping"}, self.send("Pong! 🏓")]

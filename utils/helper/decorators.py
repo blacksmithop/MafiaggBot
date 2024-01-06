@@ -1,13 +1,13 @@
 from difflib import SequenceMatcher
 from functools import wraps
-from typing import Dict, List
+from typing import Dict
 
 
-def similar(a, b):
+def getSimilarity(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-
-def ignore_bot_message(func):
+# ignore messages from itself
+def ignoreBotMessage(func):
     @wraps(func)
     def wrapper(self, payload: Dict):
         if payload["type"] == "chat":
@@ -19,8 +19,8 @@ def ignore_bot_message(func):
 
     return wrapper
 
-
-def is_owner_only(func):
+# owner only commands
+def isOwnerOnly(func):
     @wraps(func)
     def wrapper(self, payload: Dict):
         if payload["type"] == "chat":
@@ -32,8 +32,8 @@ def is_owner_only(func):
 
     return wrapper
 
-
-def register_command(v):
+# register a command
+def registerCommand(v):
     def _(f):
         if not hasattr(f, "_commandName"):
             f._commandName = v
@@ -42,33 +42,3 @@ def register_command(v):
 
     return _
 
-
-def isBotCommand(data):
-    name, cmd = data
-    return name[:2] != "__" and hasattr(cmd, "isCommand")
-
-
-def convertSetup(roles: str) -> dict:
-    try:
-        return dict(map(lambda x: str.split(x, "a"), str.split(roles, "b")))
-    except ValueError:
-        pass
-
-
-def commandNotFound():
-    return None
-
-
-def getRoleCount(args: List):
-    if len(args) == 2:
-        try:
-            roleName, num = args[0], int(args[1])
-        except ValueError:
-            roleName, num = args, 1
-    else:
-        try:
-            roleName, num = args[:-1], int(args[-1])
-        except ValueError:
-            roleName, num = args, 1
-    roleName = " ".join(roleName)
-    return roleName, num

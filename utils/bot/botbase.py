@@ -1,5 +1,5 @@
 from inspect import getmembers, ismethod
-from utils.helper import isBotCommand, register_command
+from utils.helper.decorators import isBotCommand, registerCommand
 from typing import Dict
 
 
@@ -42,7 +42,7 @@ class BotBase:
             cmd = self.getCommand(cmd)
         return [cmd, args]
 
-    @register_command("help")
+    @registerCommand("help")
     def help(self, args=None) -> dict:
         """Shows the help command"""
         if args is None:

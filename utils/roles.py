@@ -1,4 +1,4 @@
-from utils.helper import similar
+from utils.helper.decorators import getSimilarity
 from json import load
 from utils.models.models import Role
 from typing import Optional
@@ -19,7 +19,7 @@ class GetRole:
         name = name.title()
         response = None
         for role in roles:
-            score = similar(role.name, name)
+            score = getSimilarity(role.name, name)
             if score > 0.7:
                 matches[score] = role
         if matches != {}:

@@ -2,7 +2,7 @@ from requests import get
 from bs4 import BeautifulSoup
 from json import dump, load
 from utils.models.models import Setup
-from utils.helper import similar
+from utils.helper.decorators import getSimilarity
 from collections import OrderedDict
 from typing import Optional
 from os import path
@@ -20,7 +20,7 @@ class GetSetup:
         name = name.title()
         response = None
         for setup in self.setups:
-            score = similar(setup.name, name)
+            score = getSimilarity(setup.name, name)
             if score > 0.7:
                 matches[score] = setup
         if matches != {}:

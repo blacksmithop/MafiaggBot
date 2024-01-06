@@ -2,7 +2,7 @@ from requests import Session
 from json import dump, load
 from os import path
 from pathlib import Path
-from utils.helper import similar
+from utils.helper.decorators import getSimilarity
 from time import sleep
 from utils.models.models import DeckData, Deck
 from typing import Optional
@@ -76,7 +76,7 @@ class GetDeck:
         gen = (
             item
             for item in self.dataset
-            if similar(item.name.lower(), name.lower()) > 0.6
+            if getSimilarity(item.name.lower(), name.lower()) > 0.6
         )
         response = next(gen, None)
         if format:
