@@ -13,7 +13,7 @@ class Client:
         self.engine, self.auth = None, None
 
     def establishConnection(self):
-        options = {"name": "Bot Lobby", "unlisted": True} # Create a private lobby
+        options = {"name": "Bot Lobby", "unlisted": True}  # Create a private lobby
         with Session() as s:
             resp = s.post(
                 "https://mafia.gg/api/rooms/",
@@ -22,18 +22,16 @@ class Client:
             ).json()
         self.room = resp["id"]
         print(f"Created room at https://mafia.gg/game/{self.room}")
-        self.get_ws()
+        self.getWebsocket()
 
-    def get_ws(self):
+    def getWebsocket(self):
         with Session() as s:
-            resp = loads(
-                s.get(
-                    f"https://mafia.gg/api/rooms/{self.room}", cookies=self.bot.cookie
-                ).content
-            )
+            resp = s.get(
+                f"https://mafia.gg/api/rooms/{self.room}", cookies=self.bot.cookie
+            ).json()
             self.engine, self.auth = resp["engineUrl"], resp["auth"]
 
-    async def ws_send(self, engine, auth):
+    async def sendToWebsocket(self, engine, auth):
         print("Establishing connection")
         self.ws = await connect(engine, ssl=True)
         output = dumps(
@@ -45,22 +43,20 @@ class Client:
             }
         )
         await self.ws.send(output)
-        info = loads(await self.ws.recv())
-        self.bot.roles = info["events"][2]["roles"]
         await self.ws.send(dumps({"type": "presence", "isPlayer": False}))
 
     def run(self):
         self.establishConnection()
         asyncio.get_event_loop().run_until_complete(
-            self.ws_send(self.engine, self.auth)
+            self.sendToWebsocket(self.engine, self.auth)
         )
         print("Bot has started listening to commands")
-        asyncio.get_event_loop().run_until_complete(self._run())
+        asyncio.get_event_loop().run_until_complete(self.sendAndReceive())
 
     def __del__(self):
         print("Bot stopped, shutting down")
 
-    async def _run(self):
+    async def sendAndReceive(self):
         while True:
             info = loads(await self.ws.recv())
             resp = self.bot.parse(info)
@@ -69,15 +65,15 @@ class Client:
                     for i in resp:
                         await self.ws.send(dumps(i))
                 elif resp["type"] == "newGame":
-                    self.load()
-                    self.get_ws()
+                    self.establishConnection()
+                    self.getWebsocket()
                     chat = {
                         "type": "chat",
                         "message": f"I moved to https://mafia.gg/game/{self.room}",
                     }
                     await self.ws.send(dumps(chat))
                     await self.ws.send(dumps({"type": "newGame", "roomId": self.room}))
-                    await self.ws_send(self.engine, self.auth)
+                    await self.sendToWebsocket(self.engine, self.auth)
                     print("New game, clearing the cache(user)")
                     self.bot.reset_cache()
                 else:

@@ -1,4 +1,3 @@
-
 from typing import List
 
 
@@ -6,6 +5,7 @@ from typing import List
 def isBotCommand(data):
     name, cmd = data
     return name[:2] != "__" and hasattr(cmd, "isCommand")
+
 
 # convert setup code to roles dict
 def convertSetup(roles: str) -> dict:

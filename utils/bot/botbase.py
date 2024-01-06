@@ -1,5 +1,6 @@
 from inspect import getmembers, ismethod
-from utils.helper.decorators import isBotCommand, registerCommand
+from utils.helper.decorators import registerCommand
+from utils.helper.tools import isBotCommand
 from typing import Dict
 
 

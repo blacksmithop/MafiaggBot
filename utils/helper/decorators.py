@@ -6,6 +6,7 @@ from typing import Dict
 def getSimilarity(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
+
 # ignore messages from itself
 def ignoreBotMessage(func):
     @wraps(func)
@@ -18,6 +19,7 @@ def ignoreBotMessage(func):
         return res
 
     return wrapper
+
 
 # owner only commands
 def isOwnerOnly(func):
@@ -32,6 +34,7 @@ def isOwnerOnly(func):
 
     return wrapper
 
+
 # register a command
 def registerCommand(v):
     def _(f):
@@ -41,4 +44,3 @@ def registerCommand(v):
         return f
 
     return _
-
