@@ -2,12 +2,14 @@ from websockets import connect
 from requests import Session
 from json import loads, dumps
 from utils.mafiabot import Bot
+from utils.credential_manager import CredentialManager
 import asyncio
 
 
 class Client:
-    def __init__(self):
-        self.bot = Bot()
+    def __init__(self, auth: CredentialManager):
+        self.auth = CredentialManager
+        self.bot = Bot(auth=auth)
         self.ws = None
         self.room = None
         self.engine, self.auth = None, None
@@ -52,9 +54,6 @@ class Client:
         )
         print("Bot has started listening to commands")
         asyncio.get_event_loop().run_until_complete(self.sendAndReceive())
-
-    def __del__(self):
-        print("Bot stopped, shutting down")
 
     async def sendAndReceive(self):
         while True:

@@ -16,7 +16,7 @@ from utils.helper.tools import (
     convertSetup,
     getRoleCount,
 )
-from utils.auth import Cookie
+from utils.credential_manager import CredentialManager
 from utils.bot.botbase import BotBase
 from typing import Union, Dict
 
@@ -25,7 +25,7 @@ class UserCache:
     data = dict()
 
 
-cookie = Cookie()
+cookie = CredentialManager()
 cookieData = cookie.getCookieData()
 role = GetRole()
 deck = GetDeck(cookie=cookieData)
@@ -35,7 +35,7 @@ setup = GetSetup()
 
 
 class Bot(BotBase):
-    def __init__(self):
+    def __init__(self, auth: CredentialManager):
         self.prefix = "$"
         # self._setup = Setup() # Get setups from API / Scrap with new wiki format
         self.user = cookie
@@ -43,7 +43,7 @@ class Bot(BotBase):
         self._setting = Setting()
         self.id = cookie.user.id
         self.response = {"type": "chat", "message": "Couldn't parse command"}
-        self.rname, self.unlisted = None, None
+        self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
         self.registerBotCommands()
         self.roleCache = {}  # TODO: Improve
@@ -195,16 +195,16 @@ class Bot(BotBase):
     @registerCommand("public")
     def relist(self) -> list:
         """List the room"""
-        self.unlisted = False
+        self.isUnlisted = False
         self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
     @registerCommand("private")
     def unlist(self) -> list:
         """Unlist the room"""
-        self.unlisted = True
+        self.isUnlisted = True
         self.response["message"] = "🕵️‍♀ Made the room private"
-        return [{"type": "options", "unlisted": self.unlisted}, self.response]
+        return [{"type": "options", "unlisted": self.isUnlisted}, self.response]
 
     @registerCommand("spectate")
     def spectate(self) -> list:
