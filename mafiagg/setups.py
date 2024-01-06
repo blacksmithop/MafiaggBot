@@ -89,7 +89,6 @@ class GetSetup:
             except Exception:
                 extracted = self.get_setup_from_table(items=table)
             setups.extend(extracted)
-        print(setups[0:5])
         self.setups = setups
 
     def get_tested_setup(self, items):
