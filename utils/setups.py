@@ -46,7 +46,7 @@ class GetSetup:
     def getSetupData(self):
         file_path = f"{self.SETUP_DIR}/setups.json"
         if path.isfile(file_path):
-            print("Loading setups from file")
+            print("Loaded setups")
             with open(file_path, "r") as f:
                 data = load(f)
             setups = [Setup(**item) for item in data]

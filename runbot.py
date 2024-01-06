@@ -1,8 +1,9 @@
-from utils.client import Mafia
+from utils.client import Client
 from sys import exit
 
-m = Mafia()
+bot = Client()
+
 try:
-    m.run()
+    bot.run()
 except KeyboardInterrupt:
-    exit(1)
+    exit(0)
