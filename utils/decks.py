@@ -2,7 +2,7 @@ from requests import Session
 from json import dump, load
 from os import path
 from pathlib import Path
-from utils.helper.decorators import getSimilarity
+from utils.helper.decorators import get_similar_score
 from time import sleep
 from utils.models.models import DeckData, Deck
 from typing import Optional
@@ -17,14 +17,14 @@ class GetDeck:
     DECK_DIR = "./data/decks"
 
     def __init__(self, cookie):
-        self.getDecks()
+        self.get_decks()
         self.cookie = cookie
 
-    def updateOrCreate(self):
-        self.createDeckDir()
-        self.generateDeckData()
+    def update_or_create(self):
+        self.create_deck_dir()
+        self.generate_deck_data()
 
-    def getDecks(self):
+    def get_decks(self):
         file_path = f"{self.DECK_DIR}/decks.json"
         if path.isfile(file_path):
             print("Loaded decks")
@@ -33,9 +33,9 @@ class GetDeck:
                 dataset = DeckData(**data)
                 self.dataset = dataset.decks
         else:
-            self.updateOrCreate()
+            self.update_or_create()
 
-    def generateDeckData(self):
+    def generate_deck_data(self):
         # First we need to get the pagination data
         with Session() as sess:
             resp = sess.get(self.URL, cookies=self.cookie)
@@ -60,44 +60,44 @@ class GetDeck:
 
         dataset.pagination.page = page
         self.dataset = dataset
-        self.storeDeck()
+        self.store_deck()
         self.dataset = dataset.decks
 
-    def createDeckDir(self) -> None:
+    def create_deck_dir(self) -> None:
         Path(self.DECK_DIR).mkdir(parents=True, exist_ok=True)
 
-    def storeDeck(self) -> None:
+    def store_deck(self) -> None:
         with open(f"{self.DECK_DIR}/decks.json", "w") as f:
             data = self.dataset.model_dump(mode="json")
             dump(data, f, indent=4, sort_keys=True, default=str)
             print("Saved deck data to file")
 
-    def getDeck(self, name: str, format=True) -> Optional[Deck]:
+    def get_deck(self, name: str, format=True) -> Optional[Deck]:
         gen = (
             item
             for item in self.dataset
-            if getSimilarity(item.name.lower(), name.lower()) > 0.6
+            if get_similar_score(item.name.lower(), name.lower()) > 0.6
         )
         response = next(gen, None)
         if format:
-            deckData = self.formatDeckData(name=name, response=response)
+            deckData = self.format_deck(name=name, response=response)
             return deckData
         else:
             return response
 
-    def getDeckbyId(self, id: str) -> Deck:
+    def get_deck_by_id(self, id: str) -> Deck:
         gen = (item for item in self.dataset if item.key == id)
         response = next(gen, None)
         return response
 
-    def getRandomDeck(self) -> str:
+    def get_random_deck(self) -> str:
         with Session() as sess:
             resp = sess.get(self.RANDOM_URL, cookies=self.cookie)
             if resp.status_code != 200:
                 return
             return resp.json()["key"]
 
-    def formatDeckData(self, name: str, response: Optional[Deck]):
+    def format_deck(self, name: str, response: Optional[Deck]):
         if response == None:
             text = f"❌ Could not find a deck by the name: {name}"
         else:
@@ -106,5 +106,5 @@ class GetDeck:
 
 
 if __name__ == "__main__":
-    deck = GetDeck()
+    deck = get_deck()
     print(deck.search(name="Phighting!"))

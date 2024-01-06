@@ -2,7 +2,7 @@ from requests import get
 from bs4 import BeautifulSoup
 from json import dump, load
 from utils.models.models import Setup
-from utils.helper.decorators import getSimilarity
+from utils.helper.decorators import get_similar_score
 from collections import OrderedDict
 from typing import Optional
 from os import path
@@ -13,37 +13,37 @@ class GetSetup:
     SETUP_DIR = "./data/setups"
 
     def __init__(self):
-        self.getSetupData()
+        self.load_setup()
 
-    def getSetup(self, name: str):
+    def get_setup(self, name: str):
         matches = {}
         name = name.title()
         response = None
         for setup in self.setups:
-            score = getSimilarity(setup.name, name)
+            score = get_similar_score(setup.name, name)
             if score > 0.7:
                 matches[score] = setup
         if matches != {}:
             matches = OrderedDict(sorted(matches.items()))
             response = next(reversed(matches.items()))[1]
-        description = self.formatSetupData(name=name, response=response)
+        description = self.format_setup(name=name, response=response)
         return description, response
 
-    def getSetupByCode(self, code: str):
+    def get_setup_from_Code(self, code: str):
         match = [setup for setup in self.setups if setup.code == code]
         if len(match) > 0:
             return match[0].name
         else:
             return None
 
-    def formatSetupData(self, name: str, response: Optional[Setup]):
+    def format_setup(self, name: str, response: Optional[Setup]):
         if response == None:
             text = f"❌ Could not find a setup by the name: {name}"
         else:
             text = f"✅ Role: {response.name} | Code: {response.code}"
         return text
 
-    def getSetupData(self):
+    def load_setup(self):
         file_path = f"{self.SETUP_DIR}/setups.json"
         if path.isfile(file_path):
             print("Loaded setups")
@@ -53,15 +53,15 @@ class GetSetup:
             setups = sorted(setups, key=lambda x: x.name)
             self.setups = setups
         else:
-            self.getTables()
-            self.saveSetups()
+            self.get_tables()
+            self.save_setup()
 
-    def saveSetups(self):
+    def save_setup(self):
         print("Saving setups to file")
         with open("./data/setups/setups.json", "w") as f:
             dump(self.setups, f)
 
-    def getTables(self):
+    def get_tables(self):
         print("Fetching setup metadata")
         data = get(f"{self.BASE}/Open_Setup_List")
         soup = BeautifulSoup(data.text, "html.parser")
@@ -72,32 +72,32 @@ class GetSetup:
         ]
         self.tables = soup.find_all("table")
         self.tables = [table for table in self.tables][:4]
-        self.getSetupCode()
+        self.get_setupCode()
 
-    def getSetupCode(self):
+    def get_setupCode(self):
         print("Fetching setup codes")
         setups = []
         for table in self.tables:
             try:
-                extracted = self.getTestedSetups(items=table)
+                extracted = self.get_tested_setup(items=table)
             except Exception:
-                extracted = self.getSetupFromTable(items=table)
+                extracted = self.get_setup_from_table(items=table)
             setups.extend(extracted)
         print(setups[0:5])
         self.setups = setups
 
-    def getTestedSetups(self, items):
+    def get_tested_setup(self, items):
         anchors = items.find_all("a")
         print("Fetching data from URLs")
         return [
             {
                 "name": anchor["title"],
-                "code": self.getSetupFromUrl(f"{self.BASE}{anchor['href']}"),
+                "code": self.get_setup_from_url(f"{self.BASE}{anchor['href']}"),
             }
             for anchor in anchors
         ]
 
-    def getSetupFromUrl(_, url):
+    def get_setup_from_url(_, url):
         data = get(url)
         soup = BeautifulSoup(data.text, "html.parser")
         print(f"Fetching data from {url}")
@@ -108,7 +108,7 @@ class GetSetup:
             print("FIX")
             return None
 
-    def getSetupFromTable(self, items):
+    def get_setup_from_table(self, items):
         print("Fetching data from table")
         setups = []
 

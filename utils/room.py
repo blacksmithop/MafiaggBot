@@ -2,14 +2,14 @@ from requests import Session
 from utils.models.models import Room
 
 
-class GetRooms:
+class GetRoom:
     URL = "https://mafia.gg/api/rooms"
 
     def __init__(self, cookie):
         self.cookie = cookie
         self.rooms = []
 
-    def getRooms(self):
+    def get_rooms(self):
         with Session() as s:
             resp = s.get(self.URL, cookies=self.cookie)
             data = resp.json()
@@ -19,5 +19,5 @@ class GetRooms:
 
 
 if __name__ == "__main__":
-    r = GetRooms()
-    print(r.getRooms())
+    r = get_rooms()
+    print(r.get_rooms())

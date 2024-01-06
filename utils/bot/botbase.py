@@ -1,14 +1,14 @@
 from inspect import getmembers, ismethod
-from utils.helper.decorators import registerCommand
-from utils.helper.tools import isBotCommand
+from utils.helper.decorators import register_command
+from utils.helper.tools import is_bot_command
 from utils.bot.wsbase import WebsocketBase
 from typing import Dict
 
 
 class BotBase(WebsocketBase):
-    def registerBotCommands(self):
+    def register_bot_commands(self):
         allCommands = getmembers(self, predicate=ismethod)
-        commands = [command for command in allCommands if isBotCommand(command)]
+        commands = [command for command in allCommands if is_bot_command(command)]
         commandMapping = {v._commandName: v for _, v in commands}
         self.commands = commandMapping
 
@@ -44,7 +44,7 @@ class BotBase(WebsocketBase):
             cmd = self.getCommand(cmd)
         return [cmd, args]
 
-    @registerCommand("help")
+    @register_command("help")
     def help(self, args=None) -> dict:
         """Shows the help command"""
         if args is None:

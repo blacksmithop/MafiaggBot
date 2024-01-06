@@ -3,7 +3,7 @@ from requests import Session
 
 
 class GetUser:
-    def getUser(self, id: str):
+    def get_user(self, id: str):
         with Session() as s:
             res = s.get(f"https://mafia.gg/api/users/{id}").json()
         if len(res) == 0:

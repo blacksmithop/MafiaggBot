@@ -18,17 +18,16 @@ class CredentialManager:
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     }
 
-    def __init__(self, username: Optional[str] = None, password: Optional[str] = None) -> None:
+    def __init__(
+        self, username: Optional[str] = None, password: Optional[str] = None
+    ) -> None:
         if username == None and password == None:
-            credentials = { # load from .env file
+            credentials = {  # load from .env file
                 "login": getenv("MAFIA_USERNAME"),
                 "password": getenv("MAFIA_PASSWORD"),
             }
         else:
-            credentials = {
-                "login": username,
-                "password": password
-            }
+            credentials = {"login": username, "password": password}
         with Session() as s:
             resp = s.post(
                 self.URL,
@@ -39,11 +38,11 @@ class CredentialManager:
 
         if resp.status_code == 401:
             raise WrongPassword("Provided username/password is incorrect")
-        
+
         self.cookies = resp.cookies.get_dict()
 
-    def getCookieData(self):
+    def get_cookie_data(self):
         return self.cookies
-    
-    def getUser(self):
+
+    def get_user(self):
         return self.user

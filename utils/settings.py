@@ -93,11 +93,11 @@ str2bool = {"True": True, "False": False}
 class Setting:
     edits = options
 
-    def isValid(self, option):
+    def is_valid(self, option):
         return self.edits.get(option)
 
-    def editOption(self, option, newvalue) -> [None, dict, bool]:
-        option = self.isValid(option)
+    def edit_options(self, option, newvalue) -> [None, dict, bool]:
+        option = self.is_valid(option)
         if option is None:
             return
         if option["allowed"] == "str":

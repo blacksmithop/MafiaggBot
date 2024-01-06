@@ -5,16 +5,16 @@ from json import loads
 from utils.roles import GetRole
 from utils.decks import GetDeck
 from utils.user import GetUser
-from utils.room import GetRooms
+from utils.room import GetRoom
 from utils.setups import GetSetup
 from utils.settings import Setting
 from utils.helper.decorators import (
-    ignoreBotMessage,
-    registerCommand,
+    ignore_bot_message,
+    register_command,
 )
 from utils.helper.tools import (
-    convertSetup,
-    getRoleCount,
+    convert_setup,
+    get_role_count,
 )
 from utils.credential_manager import CredentialManager
 from utils.bot.botbase import BotBase
@@ -25,30 +25,27 @@ class UserCache:
     data = dict()
 
 
-
-
 class Bot(BotBase):
-    def __init__(self, auth: CredentialManager, command_prefix: str= "$"):
+    def __init__(self, auth: CredentialManager, command_prefix: str = "$"):
         self.command_prefix = command_prefix
-        self.botUser = auth.getUser()
-        self.cookie = auth.getCookieData()
+        self.botUser = auth.get_user()
+        self.cookie = auth.get_cookie_data()
         self._setting = Setting()
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
-        self.registerBotCommands()
         self.roleCache = {}  # TODO: Improve
-        self.registerModules()
+        self.register_bot_commands()
+        self.register_modules()
 
-
-    def registerModules(self):
+    def register_modules(self):
         self.Role = GetRole()
         self.Deck = GetDeck(cookie=self.cookie)
         self.User = GetUser()
-        self.Room = GetRooms(cookie=self.cookie)
+        self.Room = GetRoom(cookie=self.cookie)
         self.Setup = GetSetup()
 
-    @ignoreBotMessage
+    @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
             msg = payload["message"]
@@ -72,22 +69,22 @@ class Bot(BotBase):
         else:
             return
 
-    @registerCommand("get deck")
+    @register_command("get deck")
     def deck(self, args) -> dict:
         """Search for a deck (name)"""
-        deckData = self.Deck.getDeck(args)
+        deckData = self.Deck.get_deck(args)
         self.response["message"] = deckData
         return self.response
 
-    @registerCommand("use deck")
+    @register_command("use deck")
     def usedeck(self, args) -> [dict, list]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
-            deckID = self.Deck.getRandomDeck()
-            match = self.Deck.getDeckbyId(id=deckID)
+            deckID = self.Deck.get_random_deck()
+            match = self.Deck.get_deck_by_id(id=deckID)
             deckName = match.name
         else:
-            match = self.Deck.getDeck(args, format=False)
+            match = self.Deck.get_deck(args, format=False)
             if not match:
                 response = self.send(f"⛔ Could not find a deck with the name {args}")
                 return self.response
@@ -96,37 +93,37 @@ class Bot(BotBase):
         response = self.send(f"✅ Set deck to {deckName}")
         return [{"type": "options", "deck": deckID}, response]
 
-    @registerCommand("get role")
+    @register_command("get role")
     def role(self, args) -> dict:
         """Search for a role (name)"""
-        roleData, _ = self.Role.getRole(name=args)
+        roleData, _ = self.Role.get_role(name=args)
         self.response["message"] = roleData
         return self.response
 
-    @registerCommand("get setup")
+    @register_command("get setup")
     def setup(self, args) -> dict:
         """Search for a setup (name)"""
-        setupData, _ = self.Setup.getSetup(args)
+        setupData, _ = self.Setup.get_setup(args)
         self.response["message"] = setupData
         return self.response
 
-    @registerCommand("use setup")
+    @register_command("use setup")
     def usesetup(self, args) -> [dict, list]:
         """Change the current setup (give name)"""
         # infer whether setup code or name
         try:
             assert int(args[:2]) and " " not in args  # codes usually start with an int
-            setupName = self.Setup.getSetupByCode(code=args)
+            setupName = self.Setup.get_setup_from_Code(code=args)
             if setupName == None:
                 setupName = "Unknown Setup"
-            roles = convertSetup(args)
+            roles = convert_setup(args)
             response = self.send(f"✅ Changed setup to {setupName}")
         except Exception as e:
             print(e)
-            _, setupObj = self.Setup.getSetup(args)
+            _, setupObj = self.Setup.get_setup(args)
             code = setupObj.code
             setupName = setupObj.name
-            roles = convertSetup(code)
+            roles = convert_setup(code)
             response = self.send(f"✅ Changed setup to {setupName}")
 
         if roles is None:
@@ -134,7 +131,7 @@ class Bot(BotBase):
             return self.response
         return [{"type": "options", "roles": roles}, response]
 
-    @registerCommand("add role")
+    @register_command("add role")
     def addrole(self, args) -> [dict, list]:
         """Add a role to the setup : name, amount (default 1)"""
         args = args.split()
@@ -142,10 +139,10 @@ class Bot(BotBase):
             num, roleName = 1, args[0]
         else:
             try:
-                roleName, num = getRoleCount(args=args)
+                roleName, num = get_role_count(args=args)
             except ValueError:
                 return self.send(f"⛔ {args[1]} is not a valid number")
-        _, roleObj = self.Role.getRole(name=roleName)
+        _, roleObj = self.Role.get_role(name=roleName)
         roleID = roleObj.id
 
         if roleObj is None:
@@ -159,7 +156,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Added {num} {roleName} to setup"
         return [{"type": "options", "roles": self.roleCache}, self.response]
 
-    @registerCommand("remove role")
+    @register_command("remove role")
     def removerole(self, args) -> [dict, list]:
         """Removes a role from the setup : name, amount (default 1)"""
         args = args.split()
@@ -167,11 +164,11 @@ class Bot(BotBase):
             num, roleName = 1, args[0]
         else:
             try:
-                roleName, num = getRoleCount(args=args)
+                roleName, num = get_role_count(args=args)
             except ValueError:
                 response = self.send(f"⛔ {args[1]} is not a valid number")
                 return self.response
-        _, roleObj = self.Role.getRole(name=roleName)
+        _, roleObj = self.Role.get_role(name=roleName)
         roleName = roleObj.name
         roleID = roleObj.id
         if roleObj is None:
@@ -192,21 +189,21 @@ class Bot(BotBase):
                 return self.response
         return [{"type": "options", "roles": self.roleCache}, response]
 
-    @registerCommand("public")
+    @register_command("public")
     def relist(self) -> list:
         """List the room"""
         self.isUnlisted = False
         self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
-    @registerCommand("private")
+    @register_command("private")
     def unlist(self) -> list:
         """Unlist the room"""
         self.isUnlisted = True
         self.response["message"] = "🕵️‍♀ Made the room private"
         return [{"type": "options", "unlisted": self.isUnlisted}, self.response]
 
-    @registerCommand("spectate")
+    @register_command("spectate")
     def spectate(self) -> list:
         """Become a spectator"""
         return [
@@ -214,19 +211,19 @@ class Bot(BotBase):
             self.send("👀 Became a spectator"),
         ]
 
-    @registerCommand("show rooms")
+    @register_command("show rooms")
     def rooms(self) -> Dict:
         """List other rooms"""
-        roomData = self.Room.getRooms()
+        roomData = self.Room.get_rooms()
         message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
         return self.send(message)
 
-    @registerCommand("become player")
+    @register_command("become player")
     def player(self) -> list:
         """Become a player"""
         return [{"type": "presence", "isPlayer": True}, self.send("🎮 Became a player")]
 
-    @registerCommand("rename room")
+    @register_command("rename room")
     def rename(self, name) -> list:
         """Change room name"""
         self.rname = name
@@ -237,14 +234,14 @@ class Bot(BotBase):
         if userID in self.cache.data:
             return
         # If present in cache no welcome, use lru instead
-        userData = self.User.getUser(userID)
+        userData = self.User.get_user(userID)
         userName = userData.username
         message = f"👋 Welcome {userName}, my command_prefix is {self.command_prefix}"
         print(f"User joined {userName}")
         self.cache.data[userID] = userData
         return self.send(message)
 
-    @registerCommand("afk check")
+    @register_command("afk check")
     def afk(self) -> list:
         """Do an AFK check"""
         return [
@@ -253,7 +250,7 @@ class Bot(BotBase):
             self.send("🔁 Doing an AFK Check"),
         ]
 
-    @registerCommand("ready check")
+    @register_command("ready check")
     def ready(self) -> list:
         """Do an ready check"""
         return [
@@ -261,17 +258,17 @@ class Bot(BotBase):
             self.send("🔁 Doing an Ready Check"),
         ]
 
-    @registerCommand("start game")
+    @register_command("start game")
     def start(self) -> list:
         """Start the game"""
         return [self.send("▶ Starting the game"), {"type": "startGame"}]
 
-    @registerCommand("new room")
+    @register_command("new room")
     def new(self) -> dict:
         """Creates a new room"""
         return [self.send("Created new room"), {"type": "newGame", "roomId": None}]
 
-    @registerCommand("ping")
+    @register_command("ping")
     def ping(self) -> list:
         """Sends a ping"""
         return [{"type": "ping"}, self.send("Pong! 🏓")]

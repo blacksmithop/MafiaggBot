@@ -3,12 +3,12 @@ from functools import wraps
 from typing import Dict
 
 
-def getSimilarity(a, b):
+def get_similar_score(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
 
 # ignore messages from itself
-def ignoreBotMessage(func):
+def ignore_bot_message(func):
     @wraps(func)
     def wrapper(self, payload: Dict):
         if payload["type"] == "chat":
@@ -36,7 +36,7 @@ def isOwnerOnly(func):
 
 
 # register a command
-def registerCommand(v):
+def register_command(v):
     def _(f):
         if not hasattr(f, "_commandName"):
             f._commandName = v
