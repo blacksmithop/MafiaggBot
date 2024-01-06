@@ -13,7 +13,7 @@ def ignoreBotMessage(func):
     def wrapper(self, payload: Dict):
         if payload["type"] == "chat":
             if "from" in payload:
-                if payload["from"]["userId"] == self.id:
+                if payload["from"]["userId"] == self.botUser.id:
                     return
         res = func(self, payload)
         return res

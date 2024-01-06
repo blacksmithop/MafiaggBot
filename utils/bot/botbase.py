@@ -1,10 +1,11 @@
 from inspect import getmembers, ismethod
 from utils.helper.decorators import registerCommand
 from utils.helper.tools import isBotCommand
+from utils.bot.wsbase import WebsocketBase
 from typing import Dict
 
 
-class BotBase:
+class BotBase(WebsocketBase):
     def registerBotCommands(self):
         allCommands = getmembers(self, predicate=ismethod)
         commands = [command for command in allCommands if isBotCommand(command)]

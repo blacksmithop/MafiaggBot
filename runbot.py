@@ -1,13 +1,13 @@
-from utils.client import Client
+from utils.client import Bot
 from utils.credential_manager import CredentialManager
 from sys import exit
 
 
 auth = CredentialManager()
 
-bot = Client(auth=auth)
+bot = Bot(auth=auth, command_prefix="$")
 
-# try:
-#     bot.run()
-# except KeyboardInterrupt:
-#     exit(0)
+try:
+    bot.run()
+except KeyboardInterrupt:
+    exit(0)
