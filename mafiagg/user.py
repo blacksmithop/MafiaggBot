@@ -1,4 +1,4 @@
-from utils.models.models import User
+from mafiagg.models.models import User
 from requests import Session
 
 

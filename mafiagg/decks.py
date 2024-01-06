@@ -2,13 +2,10 @@ from requests import Session
 from json import dump, load
 from os import path
 from pathlib import Path
-from utils.helper.decorators import get_similar_score
+from mafiagg.helper.decorators import get_similar_score
 from time import sleep
-from utils.models.models import DeckData, Deck
+from mafiagg.models.models import DeckData, Deck
 from typing import Optional
-
-# https://mafia.gg/api/decks-random-key
-# random decks key
 
 
 class GetDeck:
@@ -17,10 +14,10 @@ class GetDeck:
     DECK_DIR = "./data/decks"
 
     def __init__(self, cookie):
-        self.get_decks()
         self.cookie = cookie
-
-    def update_or_create(self):
+        self.get_decks()
+        
+    def download_deck(self):
         self.create_deck_dir()
         self.generate_deck_data()
 
@@ -33,10 +30,11 @@ class GetDeck:
                 dataset = DeckData(**data)
                 self.dataset = dataset.decks
         else:
-            self.update_or_create()
+            self.download_deck()
 
     def generate_deck_data(self):
         # First we need to get the pagination data
+        print("Fetching pagination data for deck")
         with Session() as sess:
             resp = sess.get(self.URL, cookies=self.cookie)
             if resp.status_code != 200:
@@ -44,10 +42,9 @@ class GetDeck:
 
             data = resp.json()
             dataset = DeckData(**data)
-
         page = dataset.pagination.page
         numPages = dataset.pagination.numPages
-        print(f"Page {page} of {numPages}")
+        print(f"Getting data page {page} of {numPages}")
 
         # Now iteratively append page data for decks
         for page in range(2, numPages + 1):
@@ -106,5 +103,5 @@ class GetDeck:
 
 
 if __name__ == "__main__":
-    deck = get_deck()
+    deck = GetDeck()
     print(deck.search(name="Phighting!"))

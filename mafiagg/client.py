@@ -2,22 +2,22 @@ from json import loads
 
 # from utils.decks import Deck
 # from utils.setups import Setup
-from utils.roles import GetRole
-from utils.decks import GetDeck
-from utils.user import GetUser
-from utils.room import GetRoom
-from utils.setups import GetSetup
-from utils.settings import Setting
-from utils.helper.decorators import (
+from mafiagg.roles import GetRole
+from mafiagg.decks import GetDeck
+from mafiagg.user import GetUser
+from mafiagg.room import GetRoom
+from mafiagg.setups import GetSetup
+from mafiagg.settings import Setting
+from mafiagg.helper.decorators import (
     ignore_bot_message,
     register_command,
 )
-from utils.helper.tools import (
+from mafiagg.helper.tools import (
     convert_setup,
     get_role_count,
 )
-from utils.credential_manager import CredentialManager
-from utils.bot.botbase import BotBase
+from mafiagg.credential_manager import CredentialManager
+from mafiagg.bot.botbase import BotBase
 from typing import Union, Dict
 
 

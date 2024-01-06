@@ -84,3 +84,4 @@ and store it in `bot/data/` folder.
 - [ ] Better doc strings using decorators
 - [ ] When exiting bot site calls DELETE on `user-session` (cookie invalidation?)
 - [ ] Join other rooms on request
+- [ ] Allow for `super().__init__` calls

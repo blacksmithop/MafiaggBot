@@ -1,5 +1,5 @@
 from requests import Session
-from utils.models.models import Room
+from mafiagg.models.models import Room
 
 
 class GetRoom:

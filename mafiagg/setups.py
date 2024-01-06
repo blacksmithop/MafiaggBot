@@ -1,11 +1,12 @@
 from requests import get
 from bs4 import BeautifulSoup
 from json import dump, load
-from utils.models.models import Setup
-from utils.helper.decorators import get_similar_score
+from mafiagg.models.models import Setup
+from mafiagg.helper.decorators import get_similar_score
 from collections import OrderedDict
 from typing import Optional
 from os import path
+from pathlib import Path
 
 
 class GetSetup:
@@ -14,6 +15,10 @@ class GetSetup:
 
     def __init__(self):
         self.load_setup()
+
+
+    def create_setup_dir(self) -> None:
+        Path(self.SETUP_DIR).mkdir(parents=True, exist_ok=True)
 
     def get_setup(self, name: str):
         matches = {}
@@ -58,6 +63,7 @@ class GetSetup:
 
     def save_setup(self):
         print("Saving setups to file")
+        self.create_setup_dir()
         with open("./data/setups/setups.json", "w") as f:
             dump(self.setups, f)
 
@@ -105,7 +111,7 @@ class GetSetup:
             code = soup.find_all("span", {"class": "copy-to-clipboard-text"})[0].text
             return code
         except:
-            print("FIX")
+            print("Missing")
             return None
 
     def get_setup_from_table(self, items):

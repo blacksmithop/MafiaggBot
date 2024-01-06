@@ -1,5 +1,5 @@
-from utils.client import Bot
-from utils.credential_manager import CredentialManager
+from mafiagg.client import Bot
+from mafiagg.credential_manager import CredentialManager
 from sys import exit
 
 

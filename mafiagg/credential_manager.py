@@ -2,8 +2,8 @@ from requests import Session
 from os import getenv
 from json import loads
 from dotenv import load_dotenv
-from utils.models.models import User
-from utils.helper.custom_exceptions import WrongPassword
+from mafiagg.models.models import User
+from mafiagg.helper.custom_exceptions import WrongPassword
 from typing import Optional
 
 

@@ -1,7 +1,7 @@
 from inspect import getmembers, ismethod
-from utils.helper.decorators import register_command
-from utils.helper.tools import is_bot_command
-from utils.bot.wsbase import WebsocketBase
+from mafiagg.helper.decorators import register_command
+from mafiagg.helper.tools import is_bot_command
+from mafiagg.bot.wsbase import WebsocketBase
 from typing import Dict
 
 
