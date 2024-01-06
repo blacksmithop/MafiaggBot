@@ -5,9 +5,11 @@ from typing import Optional
 from collections import OrderedDict
 
 
-with open("./data/roles/roles.json", "r") as f:
+with open("./data/roles/roles.json", "r", encoding="utf8") as f:
     data = load(f)
     roles = data["roles"]
+
+print("Loaded roles")
 
 rawRoles = [Role(**item) for item in roles]
 roles = sorted(rawRoles, key=lambda x: x.name)

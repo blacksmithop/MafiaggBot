@@ -25,8 +25,8 @@ python3 -m pip install -r requirements.txt
 Create a .env file with credentials
 
 ```
-MAFIA_GG_USERNAME=username
-MAFIA_GG_PASSWORD=password
+MAFIA_USERNAME=username
+MAFIA_PASSWORD=password
 ```
 
 ---
@@ -82,3 +82,4 @@ and store it in `bot/data/` folder.
 - [ ] Return character info (for decks in next message)
 - [ ] Better commands (sub-commands!)
 - [ ] Better doc strings using decorators
+- [ ] When exiting bot site calls DELETE on `user-session` (cookie invalidation?)

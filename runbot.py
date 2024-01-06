@@ -1,8 +1,13 @@
-from utils.client import Mafia
+from utils.client import Bot
+from utils.credential_manager import CredentialManager
 from sys import exit
 
-m = Mafia()
+
+auth = CredentialManager()
+
+bot = Bot(auth=auth, command_prefix="$")
+
 try:
-    m.run()
+    bot.run()
 except KeyboardInterrupt:
-    exit(1)
+    exit(0)

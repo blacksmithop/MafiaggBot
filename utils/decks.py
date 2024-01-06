@@ -27,7 +27,7 @@ class GetDeck:
     def getDecks(self):
         file_path = f"{self.DECK_DIR}/decks.json"
         if path.isfile(file_path):
-            print("Loading deck from file")
+            print("Loaded decks")
             with open(file_path, "r") as f:
                 data = load(f)
                 dataset = DeckData(**data)
