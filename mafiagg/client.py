@@ -5,7 +5,7 @@ from mafiagg.decks import GetDeck
 from mafiagg.user import GetUser
 from mafiagg.room import GetRoom
 from mafiagg.setups import GetSetup
-from mafiagg.settings import Setting
+from mafiagg.settings import EditSetting
 from mafiagg.helper.decorators import (
     ignore_bot_message,
     register_command,
@@ -34,7 +34,6 @@ class Bot(BotBase):
         self.admin_users = admin_users
         self.botUser = auth.get_user()
         self.cookie = auth.get_cookie_data()
-        self._setting = Setting()
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
@@ -48,6 +47,7 @@ class Bot(BotBase):
         self.User = GetUser()
         self.Room = GetRoom(cookie=self.cookie)
         self.Setup = GetSetup()
+        self.Setting = EditSetting()
 
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
@@ -58,7 +58,6 @@ class Bot(BotBase):
             if msg[0] != self.command_prefix:
                 return
             cmd, args = self.parseCommand(msg[1:])
-            print(cmd._commandName)
             if cmd.isAdmin and user not in self.admin_users:
                 return {
                     "type": "chat",
@@ -288,57 +287,58 @@ class Bot(BotBase):
         """Sends a ping"""
         return [{"type": "ping"}, self.send("Pong! 🏓")]
 
-    # def edit(self, args) -> [dict, list]: # edit room options
-    #     """Edits the room settings, See $edit list for all"""
-    #     args = args.split()
-    #     if len(args) == 1:
-    #         opt = args[0]
-    #         exist = self._setting.is_valid(opt)
-    #         if exist is None or opt == "list":
-    #             self.response["message"] = (
-    #                 f"📜 Valid options are"
-    #                 f" {', '.join(list(self._setting.edits.keys()))}"
-    #             )
-    #             return self.response
-    #         else:
-    #             if exist["allowed"] == "str":
-    #                 self.response["message"] = (
-    #                     f"📜 Valid options for {opt} are "
-    #                     f"{', '.join(exist['options'])}"
-    #                 )
-    #             elif exist["allowed"] == "bool":
-    #                 self.response[
-    #                     "message"
-    #                 ] = f"📜 Valid options for {opt} are True, False"
-    #             else:
-    #                 self.response[
-    #                     "message"
-    #                 ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
-    #             return self.response
-    #     else:
-    #         opt, new = args
-    #         setting = self._setting.edit_option(opt, new)
-    #         if setting is None:
-    #             self.response["message"] = (
-    #                 f"⛔ {opt} is not a valid setting, valid options are"
-    #                 f"{', '.join(list(self._setting.edits.keys()))}"
-    #             )
-    #             return self.response
-    #         elif setting is False:
-    #             exist = self._setting.is_valid(opt)
-    #             if exist["allowed"] == "str":
-    #                 self.response["message"] = (
-    #                     f"⛔ Valid options for {opt} are "
-    #                     f"{', '.join(exist['options'])}"
-    #                 )
-    #             elif exist["allowed"] == "bool":
-    #                 self.response[
-    #                     "message"
-    #                 ] = f"⛔ Valid options for {opt} are True, False"
-    #             else:
-    #                 self.response[
-    #                     "message"
-    #                 ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
-    #             return self.response
-    #     self.response["message"] = f"✅ Set {opt} to {new}"
-    #     return [self.response, setting]
+    @register_command("edit room", isAdmin=True)
+    def edit(self, args) -> [dict, list]: # edit room options
+        """Edits the room settings. Add options to see all options"""
+        args = args.split()
+        if len(args) == 1:
+            opt = args[0]
+            exist = self.Setting.is_valid(opt)
+            if exist is None or opt == "list":
+                self.response["message"] = (
+                    f"📜 Valid options are"
+                    f" {', '.join(self.Setting.allowed_values)}"
+                )
+                return self.response
+            else:
+                if exist["allowed"] == "str":
+                    self.response["message"] = (
+                        f"📜 Valid options for {opt} are "
+                        f"{', '.join(exist['options'])}"
+                    )
+                elif exist["allowed"] == "bool":
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are True, False"
+                else:
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                return self.response
+        else:
+            opt, new = args
+            setting = self.Setting.edit_options(opt, new)
+            if setting is None:
+                self.response["message"] = (
+                    f"⛔ {opt} is not a valid setting, valid options are"
+                    f"{', '.join(self.Setting.allowed_values)}"
+                )
+                return self.response
+            elif setting is False:
+                exist = self.Setting.is_valid(opt)
+                if exist["allowed"] == "str":
+                    self.response["message"] = (
+                        f"⛔ Valid options for {opt} are "
+                        f"{', '.join(exist['options'])}"
+                    )
+                elif exist["allowed"] == "bool":
+                    self.response[
+                        "message"
+                    ] = f"⛔ Valid options for {opt} are True, False"
+                else:
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                return self.response
+        self.response["message"] = f"✅ Set {opt} to {new}"
+        return [self.response, setting]
