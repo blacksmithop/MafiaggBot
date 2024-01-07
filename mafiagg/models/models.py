@@ -1,6 +1,22 @@
 from pydantic import BaseModel, field_validator
 from typing import Optional, List
 
+# case "third":
+#             return "Third-party";
+#         case "mafia":
+#             return "Mafia-aligned";
+#         case "town":
+#             return "Town-aligned";
+#         case "none":
+#             return "None";
+#         default:
+
+alignmentMapping = {
+    "third": "Third-party",
+    "town": "Mafia-aligned",
+    "town": "Town-aligned",
+    "none": "None"
+}
 
 # Role
 class Role(BaseModel):
@@ -21,8 +37,8 @@ class Role(BaseModel):
 
     @field_validator("alignment")
     @classmethod
-    def title_alignment(cls, v: str) -> str:
-        return v.title()
+    def title_alignment(cls, alignment: str) -> str:
+        return alignmentMapping[alignment]
 
 
 # User
