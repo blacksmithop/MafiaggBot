@@ -13,7 +13,7 @@ from typing import Optional, List
 
 alignmentMapping = {
     "third": "Third-party",
-    "town": "Mafia-aligned",
+    "mafia": "Mafia-aligned",
     "town": "Town-aligned",
     "none": "None"
 }
@@ -38,8 +38,8 @@ class Role(BaseModel):
     @field_validator("alignment")
     @classmethod
     def title_alignment(cls, alignment: str) -> str:
-        return alignmentMapping[alignment]
-
+        alignment = alignmentMapping.get(alignment, None)
+        return alignment
 
 # User
 class User(BaseModel):
