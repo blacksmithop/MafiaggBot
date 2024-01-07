@@ -21,8 +21,10 @@ class GetRole:
         file_path = f"{self.ROLES_DIR}/roles.json"
         if path.isfile(file_path):
             print("Loaded roles")
-            with open(file_path, "r") as f:
-                self.roles = load(f)
+            with open(file_path, "r", encoding="utf8") as f:
+                roles = load(f)["roles"]
+                self.roles = [Role(**item) for item in roles]
+
         else:
             self.download_roles()
 
@@ -54,6 +56,7 @@ class GetRole:
             if score > 0.7:
                 matches[score] = role
         if matches != {}:
+            print(matches)
             matches = OrderedDict(sorted(matches.items()))
             response = next(reversed(matches.items()))[1]
         description = self.format_role(name=name, response=response)
