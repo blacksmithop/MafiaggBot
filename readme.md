@@ -77,18 +77,21 @@ except KeyboardInterrupt:
 - [x] Authentication
 - [x] Help command
   - [ ] Formatted / multi-message help command
-- [ ] Host only commands
+- [x] Host only commands
+    - [ ] Host can add admins
 
 ### Tasklist
 
-- [ ] Don't create new room unless game end
-- [ ] Understand role object -> setup code creation
+- [ ] Do not allow creation of new room unless game is over
+- [ ] Implement conversion of role dictionary to setup codes
 - [ ] Return character info (for decks in next message)
 - [ ] Better commands (sub-commands!)
 - [ ] Better doc strings using decorators
-- [ ] When exiting bot site calls DELETE on `user-session` (cookie invalidation?)
 - [ ] Join other rooms on request
 - [ ] Allow for `super().__init__` calls
+- [ ] Gracefully end session (end event loops, close websocket connection)
+    - [ ] When exiting alls DELETE on `user-session` (cookie invalidation)
+
 
 ## Development
 
