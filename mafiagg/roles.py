@@ -64,7 +64,7 @@ class GetRole:
         if response == None:
             text = f"❌ Could not find a role by the name: {name}"
         else:
-            text = f"✅ Role: {response.name} | Alignment: {response.alignment} | Description: {response.description}"
+            text = f"✅ Role: {response.name} | Alignment: {response.alignment} | Description: {response.description} | Tags: {', '.join(response.tags)}"
         return text
 
 
