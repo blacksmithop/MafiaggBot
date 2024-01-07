@@ -55,9 +55,10 @@ except KeyboardInterrupt:
   - [x] Do afk check
     - [x] Do afk check
     - [x] Do ready check
+  - [ ] Edit room options
   - [x] Rename room
   - [x] Create new room
-    - [ ] Only create room when game end
+    - [x] Only create room when game end
 - [x] Decks
   - [x] Get deck by name
   - [x] Set deck by name
@@ -69,7 +70,7 @@ except KeyboardInterrupt:
   - [ ] Get current setup code
 - [x] Roles
   - [x] Get role by name
-  - [ ] Cleanup role descriptions with validator
+  - [x] Cleanup role descriptions, alignment with validator
 - [x] Commands
   - [x] Custom command names
   - [x] Command docs
@@ -83,6 +84,8 @@ except KeyboardInterrupt:
 ### Tasklist
 
 - [ ] Do not allow creation of new room unless game is over
+- [ ] Lookup in game Items
+- [x] Edit room options
 - [ ] Implement conversion of role dictionary to setup codes
 - [ ] Return character info (for decks in next message)
 - [ ] Better commands (sub-commands!)
