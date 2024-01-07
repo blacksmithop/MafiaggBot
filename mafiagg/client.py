@@ -251,7 +251,7 @@ class Bot(BotBase):
         # If present in cache no welcome, use lru instead
         userData = self.User.get_user(userID)
         userName = userData.username
-        message = f"👋 Welcome {userName}, my command_prefix is {self.command_prefix}"
+        message = f"👋 Welcome {userName}, my prefix is {self.command_prefix}"
         print(f"User joined {userName}")
         self.cache.data[userID] = userData
         return self.send(message)
