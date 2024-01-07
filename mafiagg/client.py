@@ -1,5 +1,3 @@
-from json import loads
-
 # from utils.decks import Deck
 # from utils.setups import Setup
 from mafiagg.roles import GetRole
@@ -18,7 +16,7 @@ from mafiagg.helper.tools import (
 )
 from mafiagg.credential_manager import CredentialManager
 from mafiagg.bot.botbase import BotBase
-from typing import Union, Dict
+from typing import Dict, List, Union
 
 
 class UserCache:
@@ -26,8 +24,14 @@ class UserCache:
 
 
 class Bot(BotBase):
-    def __init__(self, auth: CredentialManager, command_prefix: str = "$"):
+    def __init__(
+        self,
+        auth: CredentialManager,
+        command_prefix: str = "$",
+        admin_users: List[int] = [],
+    ):
         self.command_prefix = command_prefix
+        self.admin_users = admin_users
         self.botUser = auth.get_user()
         self.cookie = auth.get_cookie_data()
         self._setting = Setting()
@@ -49,9 +53,18 @@ class Bot(BotBase):
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
             msg = payload["message"]
+            user = payload["from"]["userId"]
+
             if msg[0] != self.command_prefix:
                 return
             cmd, args = self.parseCommand(msg[1:])
+            print(cmd._commandName)
+            if cmd.isAdmin and user not in self.admin_users:
+                return {
+                    "type": "chat",
+                    "message": "❌ You do not have permission to run this command",
+                }
+
             # cmd = self.getCommand(cmd)
             if callable(cmd) and cmd.__doc__:
                 if args is not None:
@@ -60,7 +73,7 @@ class Bot(BotBase):
                     try:
                         data = cmd()
                     except TypeError:
-                        return self.send(f"✅ Command [{cmd.__name__}] : {cmd.__doc__}")
+                        return self.send(f"✅ Command [{cmd._commandName}] : {cmd.__doc__}")
                 return data
             else:
                 return
@@ -76,7 +89,7 @@ class Bot(BotBase):
         self.response["message"] = deckData
         return self.response
 
-    @register_command("use deck")
+    @register_command("use deck", isAdmin=True)
     def usedeck(self, args) -> [dict, list]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
@@ -107,7 +120,7 @@ class Bot(BotBase):
         self.response["message"] = setupData
         return self.response
 
-    @register_command("use setup")
+    @register_command("use setup", isAdmin=True)
     def usesetup(self, args) -> [dict, list]:
         """Change the current setup (give name)"""
         # infer whether setup code or name
@@ -131,7 +144,7 @@ class Bot(BotBase):
             return self.response
         return [{"type": "options", "roles": roles}, response]
 
-    @register_command("add role")
+    @register_command("add role", isAdmin=True)
     def addrole(self, args) -> [dict, list]:
         """Add a role to the setup : name, amount (default 1)"""
         args = args.split()
@@ -156,7 +169,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Added {num} {roleName} to setup"
         return [{"type": "options", "roles": self.roleCache}, self.response]
 
-    @register_command("remove role")
+    @register_command("remove role", isAdmin=True)
     def removerole(self, args) -> [dict, list]:
         """Removes a role from the setup : name, amount (default 1)"""
         args = args.split()
@@ -189,21 +202,21 @@ class Bot(BotBase):
                 return self.response
         return [{"type": "options", "roles": self.roleCache}, response]
 
-    @register_command("public")
+    @register_command("public", isAdmin=True)
     def relist(self) -> list:
         """List the room"""
         self.isUnlisted = False
         self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
-    @register_command("private")
+    @register_command("private", isAdmin=True)
     def unlist(self) -> list:
         """Unlist the room"""
         self.isUnlisted = True
         self.response["message"] = "🕵️‍♀ Made the room private"
         return [{"type": "options", "unlisted": self.isUnlisted}, self.response]
 
-    @register_command("spectate")
+    @register_command("spectate", isAdmin=True)
     def spectate(self) -> list:
         """Become a spectator"""
         return [
@@ -218,12 +231,12 @@ class Bot(BotBase):
         message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
         return self.send(message)
 
-    @register_command("become player")
+    @register_command("become player", isAdmin=True)
     def player(self) -> list:
         """Become a player"""
         return [{"type": "presence", "isPlayer": True}, self.send("🎮 Became a player")]
 
-    @register_command("rename room")
+    @register_command("rename room", isAdmin=True)
     def rename(self, name) -> list:
         """Change room name"""
         self.rname = name
@@ -241,7 +254,7 @@ class Bot(BotBase):
         self.cache.data[userID] = userData
         return self.send(message)
 
-    @register_command("afk check")
+    @register_command("afk check", isAdmin=True)
     def afk(self) -> list:
         """Do an AFK check"""
         return [
@@ -250,7 +263,7 @@ class Bot(BotBase):
             self.send("🔁 Doing an AFK Check"),
         ]
 
-    @register_command("ready check")
+    @register_command("ready check", isAdmin=True)
     def ready(self) -> list:
         """Do an ready check"""
         return [
@@ -258,12 +271,12 @@ class Bot(BotBase):
             self.send("🔁 Doing an Ready Check"),
         ]
 
-    @register_command("start game")
+    @register_command("start game", isAdmin=True)
     def start(self) -> list:
-        """Start the game"""
+        """Starts the game"""
         return [self.send("▶ Starting the game"), {"type": "startGame"}]
 
-    @register_command("new room")
+    @register_command("new room", isAdmin=True)
     def new(self) -> dict:
         """Creates a new room"""
         return [self.send("Created new room"), {"type": "newGame", "roomId": None}]
