@@ -16,7 +16,6 @@ class GetSetup:
     def __init__(self):
         self.load_setup()
 
-
     def create_setup_dir(self) -> None:
         Path(self.SETUP_DIR).mkdir(parents=True, exist_ok=True)
 

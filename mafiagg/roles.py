@@ -10,10 +10,9 @@ from json import dump
 
 
 class GetRole:
-    
     def __init__(self) -> None:
         self.get_roles()
-        
+
     URL = "https://raw.githubusercontent.com/blacksmithop/MafiaggBot/main/data/roles/roles.json"
     ROLES_DIR = "./data/roles"
 
@@ -56,7 +55,6 @@ class GetRole:
             if score > 0.7:
                 matches[score] = role
         if matches != {}:
-            print(matches)
             matches = OrderedDict(sorted(matches.items()))
             response = next(reversed(matches.items()))[1]
         description = self.format_role(name=name, response=response)

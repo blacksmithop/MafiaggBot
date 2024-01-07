@@ -16,7 +16,7 @@ class GetDeck:
     def __init__(self, cookie):
         self.cookie = cookie
         self.get_decks()
-        
+
     def download_deck(self):
         self.create_deck_dir()
         self.generate_deck_data()

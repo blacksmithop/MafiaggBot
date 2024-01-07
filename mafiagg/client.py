@@ -73,7 +73,9 @@ class Bot(BotBase):
                     try:
                         data = cmd()
                     except TypeError:
-                        return self.send(f"✅ Command [{cmd._commandName}] : {cmd.__doc__}")
+                        return self.send(
+                            f"✅ Command [{cmd._commandName}] : {cmd.__doc__}"
+                        )
                 return data
             else:
                 return

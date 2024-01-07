@@ -22,16 +22,20 @@ class CredentialManager:
         self, username: Optional[str] = None, password: Optional[str] = None
     ) -> None:
         if username == None and password == None:
-            credentials = {  # load from .env file
+            self.credentials = {  # load from .env file
                 "login": getenv("MAFIA_USERNAME"),
                 "password": getenv("MAFIA_PASSWORD"),
             }
         else:
-            credentials = {"login": username, "password": password}
+            self.credentials = {"login": username, "password": password}
+
+        self.login()
+
+    def login(self):
         with Session() as s:
             resp = s.post(
                 self.URL,
-                json=credentials,
+                json=self.credentials,
                 headers=self.headers,
             )
             self.user = User(**resp.json())
@@ -40,6 +44,16 @@ class CredentialManager:
             raise WrongPassword("Provided username/password is incorrect")
 
         self.cookies = resp.cookies.get_dict()
+
+    def logout(self):
+        with Session() as s:
+            resp = s.delete(
+                self.URL,
+                json=self.credentials,
+                headers=self.headers,
+            )
+            self.user = User(**resp.json())
+            print("Logged out successfully")
 
     def get_cookie_data(self):
         return self.cookies
