@@ -13,7 +13,7 @@ __title__ = "mafiagg"
 __author__ = "blacksmithop"
 __license__ = "MIT"
 __copyright__ = "Copyright 2021-present blacksmithop"
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 __path__ = __import__("pkgutil").extend_path(__path__, __name__)
 

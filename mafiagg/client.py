@@ -58,6 +58,8 @@ class Bot(BotBase):
             if msg[0] != self.command_prefix:
                 return
             cmd, args = self.parseCommand(msg[1:])
+            if cmd == None:
+                pass
             if cmd.isAdmin and user not in self.admin_users:
                 return {
                     "type": "chat",
