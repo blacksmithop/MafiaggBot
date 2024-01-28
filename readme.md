@@ -91,9 +91,12 @@ except KeyboardInterrupt:
 - [ ] Better commands (sub-commands!)
 - [ ] Better doc strings using decorators
 - [ ] Join other rooms on request
+  - [ ] Check if bot can handle concurrent games, keep session!
+  - [ ] Keep role cache based on room id
 - [ ] Allow for `super().__init__` calls
-- [ ] Gracefully end session (end event loops, close websocket connection)
-    - [ ] When exiting alls DELETE on `user-session` (cookie invalidation)
+- [x] Gracefully end session
+    - [ ] End event loops, close websocket connection
+    - [x] When exiting call DELETE on `user-session` (cookie invalidation)
 
 
 ## Development
