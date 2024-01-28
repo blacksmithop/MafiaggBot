@@ -52,7 +52,6 @@ class CredentialManager:
                 json=self.credentials,
                 headers=self.headers,
             )
-            self.user = User(**resp.json())
             print("Logged out successfully")
 
     def get_cookie_data(self):
