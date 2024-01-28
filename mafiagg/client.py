@@ -1,5 +1,3 @@
-# from utils.decks import Deck
-# from utils.setups import Setup
 from mafiagg.roles import GetRole
 from mafiagg.decks import GetDeck
 from mafiagg.user import GetUser
@@ -32,13 +30,13 @@ class Bot(BotBase):
     ):
         self.command_prefix = command_prefix
         self.admin_users = admin_users
+        self.cred = auth
         self.botUser = auth.get_user()
         self.cookie = auth.get_cookie_data()
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
         self.roleCache = {}  # TODO: Improve
-        self.register_bot_commands()
         self.register_modules()
 
     def register_modules(self):
@@ -48,6 +46,9 @@ class Bot(BotBase):
         self.Room = GetRoom(cookie=self.cookie)
         self.Setup = GetSetup()
         self.Setting = EditSetting()
+
+    def stop(self):
+        self.cred.logout()
 
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
@@ -86,14 +87,14 @@ class Bot(BotBase):
             return
 
     @register_command("get deck")
-    def deck(self, args) -> dict:
+    def deck(self, args) -> Dict:
         """Search for a deck (name)"""
         deckData = self.Deck.get_deck(args)
         self.response["message"] = deckData
         return self.response
 
     @register_command("use deck", isAdmin=True)
-    def usedeck(self, args) -> [dict, list]:
+    def usedeck(self, args) -> Union[Dict, List]:
         """Change the current deck (give name)"""
         if args.lower() == "random":
             deckID = self.Deck.get_random_deck()
@@ -110,21 +111,21 @@ class Bot(BotBase):
         return [{"type": "options", "deck": deckID}, response]
 
     @register_command("get role")
-    def role(self, args) -> dict:
+    def role(self, args) -> Dict:
         """Search for a role (name)"""
         roleData, _ = self.Role.get_role(name=args)
         self.response["message"] = roleData
         return self.response
 
     @register_command("get setup")
-    def setup(self, args) -> dict:
+    def setup(self, args) -> Dict:
         """Search for a setup (name)"""
         setupData, _ = self.Setup.get_setup(args)
         self.response["message"] = setupData
         return self.response
 
     @register_command("use setup", isAdmin=True)
-    def usesetup(self, args) -> [dict, list]:
+    def usesetup(self, args) -> Union[Dict, List]:
         """Change the current setup (give name)"""
         # infer whether setup code or name
         try:
@@ -148,7 +149,7 @@ class Bot(BotBase):
         return [{"type": "options", "roles": roles}, response]
 
     @register_command("add role", isAdmin=True)
-    def addrole(self, args) -> [dict, list]:
+    def addrole(self, args) -> Union[Dict, List]:
         """Add a role to the setup : name, amount (default 1)"""
         args = args.split()
         if len(args) == 1:
@@ -173,7 +174,7 @@ class Bot(BotBase):
         return [{"type": "options", "roles": self.roleCache}, self.response]
 
     @register_command("remove role", isAdmin=True)
-    def removerole(self, args) -> [dict, list]:
+    def removerole(self, args) -> Union[Dict, List]:
         """Removes a role from the setup : name, amount (default 1)"""
         args = args.split()
         if len(args) == 1:
@@ -206,21 +207,21 @@ class Bot(BotBase):
         return [{"type": "options", "roles": self.roleCache}, response]
 
     @register_command("public", isAdmin=True)
-    def relist(self) -> list:
+    def relist(self) -> List:
         """List the room"""
         self.isUnlisted = False
         self.response["message"] = "🦸‍♂ Made the room public"
         return [{"type": "options", "unlisted": False}, self.response]
 
     @register_command("private", isAdmin=True)
-    def unlist(self) -> list:
+    def unlist(self) -> List:
         """Unlist the room"""
         self.isUnlisted = True
         self.response["message"] = "🕵️‍♀ Made the room private"
         return [{"type": "options", "unlisted": self.isUnlisted}, self.response]
 
     @register_command("spectate", isAdmin=True)
-    def spectate(self) -> list:
+    def spectate(self) -> List:
         """Become a spectator"""
         return [
             {"type": "presence", "isPlayer": False},
@@ -235,12 +236,12 @@ class Bot(BotBase):
         return self.send(message)
 
     @register_command("become player", isAdmin=True)
-    def player(self) -> list:
+    def player(self) -> List:
         """Become a player"""
         return [{"type": "presence", "isPlayer": True}, self.send("🎮 Became a player")]
 
     @register_command("rename room", isAdmin=True)
-    def rename(self, name) -> list:
+    def rename(self, name) -> List:
         """Change room name"""
         self.rname = name
         self.response["message"] = f"✅ Renamed room to {self.rname}"
@@ -258,7 +259,7 @@ class Bot(BotBase):
         return self.send(message)
 
     @register_command("afk check", isAdmin=True)
-    def afk(self) -> list:
+    def afk(self) -> List:
         """Do an AFK check"""
         return [
             {"type": "forceSpectate"},
@@ -267,7 +268,7 @@ class Bot(BotBase):
         ]
 
     @register_command("ready check", isAdmin=True)
-    def ready(self) -> list:
+    def ready(self) -> List:
         """Do an ready check"""
         return [
             {"type": "readyCheck"},
@@ -275,22 +276,22 @@ class Bot(BotBase):
         ]
 
     @register_command("start game", isAdmin=True)
-    def start(self) -> list:
+    def start(self) -> List:
         """Starts the game"""
         return [self.send("▶ Starting the game"), {"type": "startGame"}]
 
     @register_command("new room", isAdmin=True)
-    def new(self) -> dict:
+    def new(self) -> Dict:
         """Creates a new room"""
         return [self.send("Created new room"), {"type": "newGame", "roomId": None}]
 
     @register_command("ping")
-    def ping(self) -> list:
+    def ping(self) -> List:
         """Sends a ping"""
         return [{"type": "ping"}, self.send("Pong! 🏓")]
 
     @register_command("edit room", isAdmin=True)
-    def edit(self, args) -> [dict, list]: # edit room options
+    def edit(self, args) -> Union[Dict, List]: # edit room options
         """Edits the room settings. Add options to see all options"""
         args = args.split()
         if len(args) == 1:
