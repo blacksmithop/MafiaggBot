@@ -37,6 +37,7 @@ class Bot(BotBase):
         self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
         self.roleCache = {}  # TODO: Improve
+        self.register_bot_commands()
         self.register_modules()
 
     def register_modules(self):
@@ -50,6 +51,8 @@ class Bot(BotBase):
     def stop(self):
         self.cred.logout()
 
+    def reset_cache(self):
+        self.cache.data = dict()
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
