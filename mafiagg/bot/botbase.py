@@ -59,7 +59,7 @@ class BotBase(WebsocketBase):
         else:
             self.response[
                 "message"
-            ] = f"✅ Command [{func._commandName}] : {func.__doc__}"
+            ] = f"✅ Command <{func._commandName}> - {func.__doc__}".format(prefix=self.command_prefix, cmd=func._commandName)
         return self.response
 
     def reset_cache(self):
