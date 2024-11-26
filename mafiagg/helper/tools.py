@@ -16,16 +16,15 @@ def convert_setup(roles: str) -> dict:
 
 
 # calculate number of roles
-def get_role_count(args: List):
+def get_role_name_and_count(args: List):
     if len(args) == 2:
         try:
-            roleName, num = args[0], int(args[1])
+            role_name, role_count = args[0], int(args[1])
         except ValueError:
-            roleName, num = args, 1
+            role_name, role_count = args, 1
     else:
         try:
-            roleName, num = args[:-1], int(args[-1])
+            role_name, role_count = args[:-1], int(args[-1])
         except ValueError:
-            roleName, num = args, 1
-    roleName = " ".join(roleName)
-    return roleName, num
+            role_name, role_count = args, 1
+    return role_name, role_count
