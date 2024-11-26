@@ -238,7 +238,7 @@ class Bot(BotBase):
         message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
         return self.send(message)
 
-    @register_command("become player", isAdmin=True)
+    @register_command("join", isAdmin=True)
     def player(self) -> List:
         """Become a player"""
         return [{"type": "presence", "isPlayer": True}, self.send("🎮 Became a player")]
@@ -250,7 +250,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Renamed room to {self.rname}"
         return [{"type": "options", "roomName": self.rname}, self.response]
 
-    def _welcome(self, userID: int) -> [None, dict]:
+    def _welcome(self, userID: int) -> List[None, dict]:
         if userID in self.cache.data:
             return
         # If present in cache no welcome, use lru instead
