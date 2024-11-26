@@ -36,7 +36,7 @@ class Bot(BotBase):
         self.response = {"type": "chat", "message": "Couldn't parse command"}
         self.rname, self.isUnlisted = None, None
         self.cache = UserCache()
-        self.roleCache = {}  # TODO: Improve
+        self.role_cache = {}  # TODO: Improve
         self.register_bot_commands()
         self.register_modules()
 
@@ -129,7 +129,7 @@ class Bot(BotBase):
 
     @register_command("use setup", isAdmin=True)
     def usesetup(self, args) -> Union[Dict, List]:
-        """Change the current setup (give name)"""
+        """Change the current setup | {prefix}{cmd} setup-name"""
         # infer whether setup code or name
         try:
             assert int(args[:2]) and " " not in args  # codes usually start with an int
@@ -153,61 +153,63 @@ class Bot(BotBase):
 
     @register_command("add role", isAdmin=True)
     def addrole(self, args) -> Union[Dict, List]:
-        """Add a role to the setup : name, amount (default 1)"""
+        """Add a role to the setup | {prefix}{cmd} name, amount """
         args = args.split()
         if len(args) == 1:
-            num, roleName = 1, args[0]
+            role_count, role_name = 1, args[0]
         else:
             try:
-                roleName, num = get_role_count(args=args)
+                role_name, role_count = get_role_count(args=args)
+                if role_count < 1:
+                    return self.send(f"⛔ Role count {args[1]} should be greater than 0")
             except ValueError:
-                return self.send(f"⛔ {args[1]} is not a valid number")
-        _, roleObj = self.Role.get_role(name=roleName)
-        roleID = roleObj.id
+                return self.send(f"⛔ Role count cannot accept {args[1]}")
+        _, selected_role = self.Role.get_role(name=role_name)
+        role_id = selected_role.id
 
-        if roleObj is None:
-            return self.send(f"⛔ Could not find a role by the name {args}")
+        if selected_role is None:
+            return self.send(f"⛔ Could not find a role by the name {role_name}")
 
-        roleName = roleObj.name
-        if roleID in self.roleCache:
-            self.roleCache[roleID] += num
+        role_name = selected_role.name
+        if role_id in self.role_cache:
+            self.role_cache[role_id] += role_count
         else:
-            self.roleCache[roleID] = num
-        self.response["message"] = f"✅ Added {num} {roleName} to setup"
-        return [{"type": "options", "roles": self.roleCache}, self.response]
+            self.role_cache[role_id] = role_count
+        self.response["message"] = f"✅ Added {role_count} {role_name} to setup"
+        return [{"type": "options", "roles": self.role_cache}, self.response]
 
     @register_command("remove role", isAdmin=True)
     def removerole(self, args) -> Union[Dict, List]:
         """Removes a role from the setup : name, amount (default 1)"""
         args = args.split()
         if len(args) == 1:
-            num, roleName = 1, args[0]
+            role_count, role_name = 1, args[0]
         else:
             try:
-                roleName, num = get_role_count(args=args)
+                role_name, role_count = get_role_count(args=args)
             except ValueError:
                 response = self.send(f"⛔ {args[1]} is not a valid number")
                 return self.response
-        _, roleObj = self.Role.get_role(name=roleName)
-        roleName = roleObj.name
-        roleID = roleObj.id
-        if roleObj is None:
+        _, selected_role = self.Role.get_role(name=role_name)
+        role_name = selected_role.name
+        role_id = selected_role.id
+        if selected_role is None:
             response = self.send(f"⛔ Could not find a role by the name {args}")
             return self.response
 
-        if roleID in self.roleCache:
-            if num < self.roleCache[roleID]:
-                self.roleCache[roleID] -= num
-                response = self.send(f"✅ Removed {num} {roleName} from setup")
-            elif num == self.roleCache[roleID]:
-                del self.roleCache[roleID]
-                response = self.send(f"✅ Removed {roleName} from setup")
-            elif num > self.roleCache[roleID]:
+        if role_id in self.role_cache:
+            if role_count < self.role_cache[role_id]:
+                self.role_cache[role_id] -= role_count
+                response = self.send(f"✅ Removed {role_count} {role_name} from setup")
+            elif role_count == self.role_cache[role_id]:
+                del self.role_cache[role_id]
+                response = self.send(f"✅ Removed {role_name} from setup")
+            elif role_count > self.role_cache[role_id]:
                 response = self.send(
-                    f"⛔ Cannot remove {num} {roleName}, there are only {self.roleCache[roleID]}"
+                    f"⛔ Cannot remove {role_count} {role_name}, there are only {self.role_cache[role_id]}"
                 )
                 return self.response
-        return [{"type": "options", "roles": self.roleCache}, response]
+        return [{"type": "options", "roles": self.role_cache}, response]
 
     @register_command("public", isAdmin=True)
     def relist(self) -> List:
