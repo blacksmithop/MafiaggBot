@@ -10,12 +10,13 @@ from mafiagg.helper.decorators import (
 )
 from mafiagg.helper.tools import (
     convert_setup,
-    get_role_count,
+    get_role_name_and_count,
 )
 from mafiagg.credential_manager import CredentialManager
 from mafiagg.bot.botbase import BotBase
 from typing import Dict, List, Optional, Union
-
+from langchain_core.messages import HumanMessage
+from mafiagg.chatbot.graph import app
 
 class UserCache:
     data = dict()
@@ -57,14 +58,25 @@ class Bot(BotBase):
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
             msg = payload["message"]
-            user = payload["from"]["userId"]
+            user_id = payload["from"]["userId"]
 
             if msg[0] != self.command_prefix:
+                config = {"configurable": {"thread_id": user_id}}
+                user_message = [HumanMessage(msg)]
+                try:
+                    bot_response = app.invoke({"messages": user_message}, config)
+                    bot_message = bot_response["messages"][-1].content
+                    return {
+                        "type": "chat",
+                        "message": f"[AI] {bot_message}"
+                    }               
+                except Exception as e:
+                    print(f"Could not chat with user {user_id}, Error:\n{e}")
                 return
             cmd, args = self.parse_command(msg[1:])
             if cmd == None:
                 pass
-            if hasattr(cmd, 'isAdmin') and cmd.isAdmin and user not in self.admin_users:
+            if hasattr(cmd, 'isAdmin') and cmd.isAdmin and user_id not in self.admin_users: # TODO: Keep track of user (history)
                 return {
                     "type": "chat",
                     "message": "❌ You do not have permission to run this command",
@@ -116,7 +128,7 @@ class Bot(BotBase):
     @register_command("get role")
     def role(self, args) -> Dict:
         """Search for a role | {prefix}{cmd} role-name"""
-        roleData, _ = self.Role.get_role(name=args)
+        roleData, _ = self.Role.get_role(role_name=args)
         self.response["message"] = roleData
         return self.response
 
@@ -159,16 +171,17 @@ class Bot(BotBase):
             role_count, role_name = 1, args[0]
         else:
             try:
-                role_name, role_count = get_role_count(args=args)
+                role_name, role_count = get_role_name_and_count(args=args)
                 if role_count < 1:
                     return self.send(f"⛔ Role count {args[1]} should be greater than 0")
             except ValueError:
                 return self.send(f"⛔ Role count cannot accept {args[1]}")
-        _, selected_role = self.Role.get_role(name=role_name)
-        role_id = selected_role.id
+        _, selected_role = self.Role.get_role(role_name=role_name)
 
         if selected_role is None:
             return self.send(f"⛔ Could not find a role by the name {role_name}")
+
+        role_id = selected_role.id
 
         role_name = selected_role.name
         if role_id in self.role_cache:
@@ -186,16 +199,16 @@ class Bot(BotBase):
             role_count, role_name = 1, args[0]
         else:
             try:
-                role_name, role_count = get_role_count(args=args)
+                role_name, role_count = get_role_name_and_count(args=args)
             except ValueError:
-                response = self.send(f"⛔ {args[1]} is not a valid number")
-                return self.response
-        _, selected_role = self.Role.get_role(name=role_name)
+                return self.send(f"⛔ {args[1]} is not a valid number")
+        _, selected_role = self.Role.get_role(role_name=role_name)
         role_name = selected_role.name
-        role_id = selected_role.id
         if selected_role is None:
-            response = self.send(f"⛔ Could not find a role by the name {args}")
-            return self.response
+            return self.send(f"⛔ Could not find a role by the name {args}")
+
+        role_id = selected_role.id
+
 
         if role_id in self.role_cache:
             if role_count < self.role_cache[role_id]:
@@ -255,15 +268,28 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Renamed room to {self.rname}"
         return [{"type": "options", "roomName": self.rname}, self.response]
 
-    def _welcome(self, userID: int) -> Optional[dict]:
-        if userID in self.cache.data:
+    def _welcome(self, user_id: int) -> Optional[dict]:
+        if user_id in self.cache.data:
             return
         # If present in cache no welcome, use lru instead
-        userData = self.User.get_user(userID)
-        userName = userData.username
-        message = f"👋 Welcome {userName}, my prefix is {self.command_prefix}"
-        print(f"User joined {userName}")
-        self.cache.data[userID] = userData
+        userData = self.User.get_user(user_id)
+        user_name = userData.username
+        config = {"configurable": {"thread_id": user_id}}
+
+        greet_user_query = f"Say a witty greeting for a person named {user_name}. Keep it short and snappy"
+        user_message = [HumanMessage(greet_user_query)]
+        try:
+            bot_response = app.invoke({"messages": user_message}, config)
+            bot_message = bot_response["messages"][-1].content
+            return {
+                "type": "chat",
+                "message": f"[AI] {bot_message}. My prefix is {self.command_prefix}"
+            }
+        except Exception as e:              
+            message = f"Welcome {user_name}👋 .My prefix is {self.command_prefix}"
+
+        print(f"User joined: {user_name}")
+        self.cache.data[user_id] = userData
         return self.send(message)
 
     @register_command("afk check", isAdmin=True)

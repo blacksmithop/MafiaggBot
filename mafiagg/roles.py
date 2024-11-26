@@ -46,18 +46,18 @@ class GetRole:
     def create_roles_dir(self) -> None:
         Path(self.ROLES_DIR).mkdir(parents=True, exist_ok=True)
 
-    def get_role(self, name: str):
+    def get_role(self, role_name: str):
         matches = {}
-        name = name.title()
+        role_name = role_name.title()
         response = None
         for role in self.roles:
-            score = get_similar_score(role.name, name)
-            if score > 0.7:
+            score = get_similar_score(role.name, role_name)
+            if score > 0.7: # TODO: Use chunkee vector
                 matches[score] = role
         if matches != {}:
             matches = OrderedDict(sorted(matches.items()))
             response = next(reversed(matches.items()))[1]
-        description = self.format_role(name=name, response=response)
+        description = self.format_role(name=role_name, response=response)
         return description, response
 
     def format_role(self, name: str, response: Optional[Role]):
