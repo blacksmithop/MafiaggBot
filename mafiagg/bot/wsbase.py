@@ -1,4 +1,5 @@
 from websockets import connect
+from websockets.exceptions import ConnectionClosedOK
 from requests import Session
 from json import loads, dumps
 import asyncio
@@ -50,7 +51,11 @@ class WebsocketBase:
 
     async def listen_and_respond(self):
         while True:
-            info = loads(await self.ws.recv())
+            try:
+                info = loads(await self.ws.recv())
+            except ConnectionClosedOK:
+                print("Websocket connection closed")
+                exit(0)
             resp = self.parse(info)
             if resp is not None:
                 if type(resp) is list:
