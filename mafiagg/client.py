@@ -64,7 +64,7 @@ class Bot(BotBase):
             cmd, args = self.parse_command(msg[1:])
             if cmd == None:
                 pass
-            if cmd.isAdmin and user not in self.admin_users:
+            if hasattr(cmd, 'isAdmin') and cmd.isAdmin and user not in self.admin_users:
                 return {
                     "type": "chat",
                     "message": "❌ You do not have permission to run this command",
@@ -91,14 +91,14 @@ class Bot(BotBase):
 
     @register_command("get deck")
     def deck(self, args) -> Dict:
-        """Search for a deck (name)"""
+        """Search for a deck | {prefix}{cmd} deck-name"""
         deckData = self.Deck.get_deck(args)
         self.response["message"] = deckData
         return self.response
 
     @register_command("use deck", isAdmin=True)
     def usedeck(self, args) -> Union[Dict, List]:
-        """Change the current deck (give name)"""
+        """Change the current deck | {prefix}{cmd} deck-name"""
         if args.lower() == "random":
             deckID = self.Deck.get_random_deck()
             match = self.Deck.get_deck_by_id(id=deckID)
@@ -115,14 +115,14 @@ class Bot(BotBase):
 
     @register_command("get role")
     def role(self, args) -> Dict:
-        """Search for a role (name)"""
+        """Search for a role | {prefix}{cmd} role-name"""
         roleData, _ = self.Role.get_role(name=args)
         self.response["message"] = roleData
         return self.response
 
     @register_command("get setup")
     def setup(self, args) -> Dict:
-        """Search for a setup (name)"""
+        """Search for a setup | {prefix}{cmd} setup-name"""
         setupData, _ = self.Setup.get_setup(args)
         self.response["message"] = setupData
         return self.response
@@ -153,7 +153,7 @@ class Bot(BotBase):
 
     @register_command("add role", isAdmin=True)
     def addrole(self, args) -> Union[Dict, List]:
-        """Add a role to the setup | {prefix}{cmd} name, amount """
+        """Add a role to the setup | {prefix}{cmd} role-name amount(1)"""
         args = args.split()
         if len(args) == 1:
             role_count, role_name = 1, args[0]
@@ -180,7 +180,7 @@ class Bot(BotBase):
 
     @register_command("remove role", isAdmin=True)
     def removerole(self, args) -> Union[Dict, List]:
-        """Removes a role from the setup : name, amount (default 1)"""
+        """Removes a role from the setup | {prefix}{cmd} role-name amount(1)"""
         args = args.split()
         if len(args) == 1:
             role_count, role_name = 1, args[0]
@@ -236,8 +236,11 @@ class Bot(BotBase):
     @register_command("show rooms")
     def rooms(self) -> Dict:
         """List other rooms"""
-        roomData = self.Room.get_rooms()
-        message = f"There are {len(roomData)} rooms | {', '.join((room.name for room in roomData))}"
+        room_data = self.Room.get_rooms()
+        if len(room_data) == 0:
+            message = "There are no rooms"
+        else:
+            message = f"There are {len(room_data)} rooms | {', '.join((room.name for room in room_data))}"
         return self.send(message)
 
     @register_command("join", isAdmin=True)
