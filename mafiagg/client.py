@@ -14,7 +14,7 @@ from mafiagg.helper.tools import (
 )
 from mafiagg.credential_manager import CredentialManager
 from mafiagg.bot.botbase import BotBase
-from typing import Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 
 class UserCache:
@@ -250,7 +250,7 @@ class Bot(BotBase):
         self.response["message"] = f"✅ Renamed room to {self.rname}"
         return [{"type": "options", "roomName": self.rname}, self.response]
 
-    def _welcome(self, userID: int) -> List[None, dict]:
+    def _welcome(self, userID: int) -> Optional[dict]:
         if userID in self.cache.data:
             return
         # If present in cache no welcome, use lru instead
