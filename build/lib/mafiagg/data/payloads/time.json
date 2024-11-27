@@ -1,0 +1,21 @@
+{
+    "time": {
+        "phase": "night",
+        "ordinal": 1
+    },
+    "players": [
+        {
+            "playerId": "158",
+            "name": "JakeSully",
+            "backgroundColor": "#59738A"
+        },
+        {
+            "playerId": "110",
+            "name": "SheevPalpatine",
+            "backgroundColor": "#658188"
+        }
+    ],
+    "type": "startGame",
+    "timestamp": 1704443232,
+    "sid": 15
+}

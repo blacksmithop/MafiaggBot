@@ -2,7 +2,7 @@
   import { Search, Bell, LogOut, Settings, User } from 'lucide-svelte';
   import NotificationDropdown from './header/NotificationDropdown.svelte';
   import UserDropdown from './header/UserDropdown.svelte';
-  import SearchBar from './header/SearchBar.svelte';
+  // import SearchBar from './header/SearchBar.svelte';
   
   let showNotifications = false;
   let showUserMenu = false;
@@ -19,7 +19,7 @@
 <header class="header">
   <div class="header-content">
     <div class="header-left">
-      <SearchBar />
+      <!-- <SearchBar /> -->
     </div>
     <div class="header-actions">
       <div class="notification-wrapper">
