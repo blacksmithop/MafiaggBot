@@ -3,10 +3,6 @@
 </script>
 
 <div class="search-container">
-  <div class="search-bar">
-    <Search size={20} class="search-icon" />
-    <input type="text" placeholder="Search players..." />
-  </div>
 </div>
 
 <style>

@@ -3,9 +3,7 @@
     LayoutDashboard,
     Users,
     GamepadIcon,
-    TrendingUp,
-    Settings,
-    HelpCircle
+    Github
   } from 'lucide-svelte';
   import SidebarItem from './sidebar/SidebarItem.svelte';
   import ToggleButton from './sidebar/ToggleButton.svelte';
@@ -21,9 +19,12 @@
     { path: "/", icon: LayoutDashboard, text: "Dashboard" },
     { path: "/player-stats", icon: Users, text: "Player Stats" },
     { path: "/game-stats", icon: GamepadIcon, text: "Game Stats" },
-    { path: "/trends", icon: TrendingUp, text: "Trends" },
-    { path: "/settings", icon: Settings, text: "Settings" },
-    { path: "/help", icon: HelpCircle, text: "Help" }
+    { 
+      path: "https://github.com/blacksmithop/MafiaggBot",
+      icon: Github,
+      text: "GitHub",
+      external: true
+    }
   ];
 
   // Get current path for active state
@@ -35,14 +36,27 @@
 <aside class="sidebar" class:collapsed={!isExpanded}>
   <div class="sidebar-content">
     <nav class="sidebar-nav">
-      {#each navItems as { path, icon, text }}
-        <SidebarItem
-          {path}
-          {icon}
-          {text}
-          {isExpanded}
-          isActive={currentPath === path}
-        />
+      {#each navItems as { path, icon, text, external }}
+        {#if external}
+          <a href={path} target="_blank" rel="noopener noreferrer" class="nav-item-wrapper">
+            <div class="nav-item">
+              <div class="icon-wrapper">
+                <svelte:component this={icon} size={20} />
+              </div>
+              {#if isExpanded}
+                <span class="text">{text}</span>
+              {/if}
+            </div>
+          </a>
+        {:else}
+          <SidebarItem
+            {path}
+            {icon}
+            {text}
+            {isExpanded}
+            isActive={currentPath === path}
+          />
+        {/if}
       {/each}
     </nav>
   </div>
@@ -78,6 +92,45 @@
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.5rem 0;
+  }
+
+  .nav-item-wrapper {
+    margin: 0.125rem 0.75rem;
+    border-radius: 8px;
+    background-color: transparent;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .nav-item-wrapper:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.875rem 1rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .nav-item-wrapper:hover .nav-item {
+    color: var(--text-primary);
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+
+  .text {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    white-space: nowrap;
   }
 
   @media (max-width: 768px) {

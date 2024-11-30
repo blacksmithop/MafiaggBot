@@ -1,111 +1,150 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { mockFactionStats, mockRoleStats } from '../data/mockData';
-  import TrendChart from './TrendChart.svelte';
-
-  // Mock historical data
-  const generateHistoricalData = (days: number, baseValue: number) => {
-    const data = [];
-    const now = new Date();
-    for (let i = days; i >= 0; i--) {
-      data.push({
-        date: new Date(now.getTime() - i * 24 * 60 * 60 * 1000),
-        value: baseValue + Math.random() * 10 - 5
-      });
-    }
-    return data;
-  };
-
-  const townTrend = generateHistoricalData(30, 52);
-  const mafiaTrend = generateHistoricalData(30, 42);
-  const neutralTrend = generateHistoricalData(30, 6);
+  import { mockPlayerReport } from '../data/mockData';
+  
+  const { recentGames, statistics } = mockPlayerReport;
 </script>
 
-<div class="stats-layout">
-  <div class="card overview-stats">
-    <h2 class="section-title">Overview</h2>
-    <div class="stats-grid">
-      <div class="stat-card town">
-        <h3>Town</h3>
-        <div class="value">{mockFactionStats[0].winRate * 100}%</div>
-        <div class="label">Win Rate</div>
+<div class="stats-container">
+  <div class="card overview">
+    <h2 class="section-title">Player Report</h2>
+    <div class="stats-summary">
+      <div class="stat-item">
+        <span class="label">Total Games</span>
+        <span class="value">{statistics.totalGames}</span>
       </div>
-      <div class="stat-card mafia">
-        <h3>Mafia</h3>
-        <div class="value">{mockFactionStats[1].winRate * 100}%</div>
-        <div class="label">Win Rate</div>
+      <div class="stat-item">
+        <span class="label">Win Rate</span>
+        <span class="value">{(statistics.winRate * 100).toFixed(1)}%</span>
       </div>
-      <div class="stat-card neutral">
-        <h3>Neutral</h3>
-        <div class="value">{mockFactionStats[2].winRate * 100}%</div>
-        <div class="label">Win Rate</div>
+      <div class="stat-item">
+        <span class="label">Town Games</span>
+        <span class="value">{statistics.townGames}</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">Mafia Games</span>
+        <span class="value">{statistics.mafiaGames}</span>
+      </div>
+      <div class="stat-item">
+        <span class="label">Neutral Games</span>
+        <span class="value">{statistics.neutralGames}</span>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <h2 class="section-title">Win Rate Trends</h2>
-    <div class="trends-grid">
-      <TrendChart title="Town Win Rate" data={townTrend} color="var(--success)" />
-      <TrendChart title="Mafia Win Rate" data={mafiaTrend} color="var(--danger)" />
-      <TrendChart title="Neutral Win Rate" data={neutralTrend} color="var(--neutral)" />
+  <div class="card recent-games">
+    <h3>Recent Games</h3>
+    <div class="games-list">
+      {#each recentGames as game}
+        <div class="game-item" class:win={game.result === 'Win'} class:loss={game.result === 'Loss'}>
+          <div class="game-info">
+            <span class="role">{game.role}</span>
+            <span class="alignment">{game.alignment}</span>
+          </div>
+          <div class="game-result">
+            <span class="date">{game.date}</span>
+            <span class="result">{game.result}</span>
+          </div>
+        </div>
+      {/each}
     </div>
   </div>
 </div>
 
 <style>
-  .stats-layout {
+  .stats-container {
     display: grid;
-    gap: 2rem;
-  }
-
-  .overview-stats {
-    background-color: var(--bg-secondary);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
   }
 
-  .stat-card {
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
-    background-color: var(--bg-tertiary);
+  .stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
   }
 
-  .stat-card h3 {
-    font-size: 1.2rem;
+  .stat-item {
+    background-color: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
     margin-bottom: 0.5rem;
   }
 
-  .stat-card .value {
-    font-size: 2.5rem;
-    font-weight: 700;
+  .value {
+    font-size: 1.5rem;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif;
-    margin: 0.5rem 0;
   }
 
-  .stat-card .label {
+  .games-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .game-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 6px;
+    border-left: 4px solid transparent;
+  }
+
+  .game-item.win {
+    border-left-color: var(--success);
+  }
+
+  .game-item.loss {
+    border-left-color: var(--danger);
+  }
+
+  .game-info {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .role {
+    font-weight: 500;
+  }
+
+  .alignment {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
 
-  .town { border-left: 4px solid var(--success); }
-  .mafia { border-left: 4px solid var(--danger); }
-  .neutral { border-left: 4px solid var(--neutral); }
-
-  .trends-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  .game-result {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
   }
 
-  @media (max-width: 768px) {
-    .stats-grid {
-      grid-template-columns: 1fr;
-    }
+  .date {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .result {
+    font-weight: 500;
+  }
+
+  .win .result {
+    color: var(--success);
+  }
+
+  .loss .result {
+    color: var(--danger);
   }
 </style>

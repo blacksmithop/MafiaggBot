@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { navigate } from "svelte-routing";
   import { LogOut, Settings, User } from 'lucide-svelte';
 
   const menuItems = [
@@ -6,6 +7,14 @@
     { icon: Settings, label: 'Settings', href: '/settings' },
     { icon: LogOut, label: 'Logout', href: '/logout' }
   ];
+
+  function handleMenuClick(href: string) {
+    if (href === '/logout') {
+      // Handle logout logic
+      return;
+    }
+    navigate(href);
+  }
 </script>
 
 <div class="dropdown">
@@ -23,10 +32,10 @@
   
   <div class="menu-items">
     {#each menuItems as item}
-      <a href={item.href} class="menu-item">
+      <button class="menu-item" on:click={() => handleMenuClick(item.href)}>
         <svelte:component this={item.icon} size={18} />
         <span>{item.label}</span>
-      </a>
+      </button>
     {/each}
   </div>
 </div>
@@ -80,11 +89,15 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    width: 100%;
     padding: 0.75rem;
     color: var(--text-primary);
-    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
     border-radius: 6px;
     transition: all 0.2s ease;
+    text-align: left;
   }
 
   .menu-item:hover {

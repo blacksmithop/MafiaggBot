@@ -5,6 +5,9 @@
   import Footer from "./lib/components/Footer.svelte";
   import PlayerSearch from "./lib/components/PlayerSearch.svelte";
   import GameStats from "./lib/components/GameStats.svelte";
+  import Dashboard from "./lib/components/Dashboard.svelte";
+  import Settings from "./lib/components/Settings.svelte";
+  import Privacy from "./lib/components/Privacy.svelte";
 </script>
 
 <Router>
@@ -13,10 +16,11 @@
     <div class="main-content">
       <Header />
       <main class="container">
-        <Route path="/" component={GameStats} />
+        <Route path="/" component={Dashboard} />
         <Route path="/player-stats" component={PlayerSearch} />
         <Route path="/game-stats" component={GameStats} />
-        <Route path="/trends" component={GameStats} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/privacy" component={Privacy} />
       </main>
       <Footer />
     </div>

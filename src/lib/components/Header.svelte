@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { Search, Bell, LogOut, Settings, User } from 'lucide-svelte';
+  import { Bell, User } from 'lucide-svelte';
   import NotificationDropdown from './header/NotificationDropdown.svelte';
   import UserDropdown from './header/UserDropdown.svelte';
-  // import SearchBar from './header/SearchBar.svelte';
   
   let showNotifications = false;
   let showUserMenu = false;
@@ -19,7 +18,7 @@
 <header class="header">
   <div class="header-content">
     <div class="header-left">
-      <!-- <SearchBar /> -->
+      <h1 class="site-title">Mafia.gg Stats</h1>
     </div>
     <div class="header-actions">
       <div class="notification-wrapper">
@@ -78,10 +77,10 @@
     margin: 0 auto;
   }
 
-  .header-left {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
   }
 
   .header-actions {
