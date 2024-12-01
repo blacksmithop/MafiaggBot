@@ -3,20 +3,22 @@ from os import getenv
 
 PROVIDER = getenv("LLM_PROVIDER")
 
-if PROVIDER == "ollama":
+def get_ollama_models():
     try:
         from langchain_ollama.embeddings import OllamaEmbeddings
-        from langchain_ollama.llms import OllamaLLM
+        from langchain_ollama.chat_models import ChatOllama
     except ImportError:
         print("Please install the langchain-ollama package")
         exit(0)
 
     OLLAMA_URL = getenv("OLLAMA_URL")
 
-    llm = OllamaLLM(base_url=OLLAMA_URL, model="kristada673/solar-10.7b-instruct-v1.0-uncensored")
+    llm = ChatOllama(base_url=OLLAMA_URL, model="kristada673/solar-10.7b-instruct-v1.0-uncensored")
     embeddings = OllamaEmbeddings(base_url=OLLAMA_URL, model="nomic-embed-text")
+    return llm, embeddings
 
-elif PROVIDER == "gemini":
+
+def get_gemini_models():
     try:
         from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
     except ImportError:
@@ -32,8 +34,9 @@ elif PROVIDER == "gemini":
         max_retries=2,
     )
     embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+    return llm, embeddings
 
-elif PROVIDER == "openai":
+def get_openai_models():
     try:
         from langchain_openai import AzureChatOpenAI, AzureOpenAIEmbeddings
     except ImportError:
@@ -45,12 +48,9 @@ elif PROVIDER == "openai":
         temperature=0,
         max_tokens=500,
     )
-    underlying_embeddings = AzureOpenAIEmbeddings(
+    embeddings = AzureOpenAIEmbeddings(
         azure_deployment=getenv("EMBEDDINGS_DEPLOYMENT_NAME"),
     )
-# Use nodmodel2vece2vec and some AGI/Rasa?
-# TODO: Tool calling
+    return llm, embeddings
 
-if __name__ == "__main__":
-    print(len(embeddings.embed_query("Hi")))
-    print(llm.invoke("Hi"))
+# Use nodmodel2vec and some AGI/Rasa?

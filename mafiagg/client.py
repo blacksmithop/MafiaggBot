@@ -16,7 +16,7 @@ from mafiagg.credential_manager import CredentialManager
 from mafiagg.bot.botbase import BotBase
 from typing import Dict, List, Optional, Union
 from langchain_core.messages import HumanMessage
-from mafiagg.chatbot.graph import app
+from mafiagg.chatbot.agent import graph
 
 class UserCache:
     data = dict()
@@ -64,7 +64,7 @@ class Bot(BotBase):
                 config = {"configurable": {"thread_id": user_id}}
                 user_message = [HumanMessage(msg)]
                 try:
-                    bot_response = app.invoke({"messages": user_message}, config)
+                    bot_response = graph.invoke({"messages": user_message}, config)
                     bot_message = bot_response["messages"][-1].content
                     return {
                         "type": "chat",
@@ -276,10 +276,10 @@ class Bot(BotBase):
         user_name = userData.username
         config = {"configurable": {"thread_id": user_id}}
 
-        greet_user_query = f"Say a witty greeting for a person named {user_name}. Keep it short and snappy"
+        greet_user_query = f"Say a witty greeting for a person named {user_name}. Keep it short and sngraphy"
         user_message = [HumanMessage(greet_user_query)]
         try:
-            bot_response = app.invoke({"messages": user_message}, config)
+            bot_response = graph.invoke({"messages": user_message}, config)
             bot_message = bot_response["messages"][-1].content
             return {
                 "type": "chat",
