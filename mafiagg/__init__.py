@@ -27,7 +27,9 @@ from .room import *
 from .settings import *
 from .setups import *
 from .user import *
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class VersionInfo(NamedTuple):
     major: int
