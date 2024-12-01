@@ -1,13 +1,11 @@
 from requests import Session
 from os import getenv
 from json import loads
-from dotenv import load_dotenv
 from mafiagg.models.models import User
 from mafiagg.helper.custom_exceptions import WrongPassword
 from typing import Optional
 
 
-load_dotenv()
 
 
 class CredentialManager:

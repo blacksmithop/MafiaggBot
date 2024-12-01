@@ -1,6 +1,6 @@
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import START, MessagesState, StateGraph
-from mafiagg.chatbot.llm import chat_model
+from mafiagg.chatbot.llm import llm
 
 
 # Define a new graph
@@ -9,7 +9,7 @@ workflow = StateGraph(state_schema=MessagesState)
 
 # Define the function that calls the model
 def call_model(state: MessagesState):
-    response = chat_model.invoke(state["messages"])
+    response = llm.invoke(state["messages"])
     return {"messages": response}
 
 
