@@ -2,6 +2,9 @@
   import { createEventDispatcher } from 'svelte';
   import { X } from 'lucide-svelte';
   import type { BotRoom } from '../../types/Bot';
+  import RoomBasicSection from './sections/RoomBasicSection.svelte';
+  import RoomRolesSection from './sections/RoomRolesSection.svelte';
+  import RoomSettingsSection from './sections/RoomSettingsSection.svelte';
   
   const dispatch = createEventDispatcher();
   
@@ -9,15 +12,14 @@
   export let onSubmit: (room: BotRoom) => void;
   
   let name = '';
-  let deck = 'Ranked';
-  let playerCount = 15;
-  let selectedRoles: string[] = [];
-  
-  const availableDecks = ['Ranked', 'Custom', 'All Any', 'Rainbow'];
-  const availableRoles = [
-    'Cop', 'Doctor', 'Vigilante', 'Jailor',
-    'Godfather', 'Mafioso', 'Consigliere', 'Janitor',
-    'Jester', 'Serial Killer', 'Arsonist', 'Witch'
+  let deck = '';
+  let selectedRoles: { [key: string]: number } = {};
+  let currentSection = 'basic';
+
+  const sections = [
+    { id: 'basic', label: 'Room Details' },
+    { id: 'roles', label: 'Role Setup' },
+    { id: 'settings', label: 'Settings' }
   ];
   
   function handleSubmit() {
@@ -27,8 +29,11 @@
       id: '',
       name,
       deck,
-      playerCount,
-      roles: selectedRoles,
+      playerCount: 15,
+      roles: Object.entries(selectedRoles).map(([roleId, count]) => ({
+        id: parseInt(roleId),
+        count
+      })),
       status: 'active',
       uptime: '0m'
     });
@@ -44,53 +49,30 @@
       </button>
     </div>
 
+    <div class="sections-nav">
+      {#each sections as section}
+        <button
+          class="section-btn"
+          class:active={currentSection === section.id}
+          on:click={() => currentSection = section.id}
+        >
+          {section.label}
+        </button>
+      {/each}
+    </div>
+
     <div class="modal-content">
-      <div class="form-group">
-        <label for="name">Room Name</label>
-        <input
-          type="text"
-          id="name"
-          bind:value={name}
-          placeholder="Enter room name"
+      {#if currentSection === 'basic'}
+        <RoomBasicSection
+          bind:name
+          bind:deck
         />
-      </div>
-
-      <div class="form-group">
-        <label for="deck">Deck</label>
-        <select id="deck" bind:value={deck}>
-          {#each availableDecks as deckOption}
-            <option value={deckOption}>{deckOption}</option>
-          {/each}
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="playerCount">Player Count</label>
-        <input
-          type="number"
-          id="playerCount"
-          bind:value={playerCount}
-          min="5"
-          max="15"
+      {:else if currentSection === 'roles'}
+        <RoomRolesSection
+          bind:selectedRoles
         />
-      </div>
-
-      {#if deck === 'Custom'}
-        <div class="form-group">
-          <label>Roles</label>
-          <div class="roles-grid">
-            {#each availableRoles as role}
-              <label class="role-checkbox">
-                <input
-                  type="checkbox"
-                  bind:group={selectedRoles}
-                  value={role}
-                />
-                <span>{role}</span>
-              </label>
-            {/each}
-          </div>
-        </div>
+      {:else if currentSection === 'settings'}
+        <RoomSettingsSection />
       {/if}
     </div>
 
@@ -119,7 +101,7 @@
     background-color: var(--bg-secondary);
     border-radius: 12px;
     width: 90%;
-    max-width: 500px;
+    max-width: 800px;
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -135,6 +117,35 @@
   .modal-header h3 {
     font-size: 1.25rem;
     font-weight: 600;
+  }
+
+  .sections-nav {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--bg-tertiary);
+    background-color: var(--bg-tertiary);
+  }
+
+  .section-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .section-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  .section-btn.active {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
   }
 
   .close-btn {
@@ -154,49 +165,7 @@
 
   .modal-content {
     padding: 1.5rem;
-  }
-
-  .form-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 0.75rem;
-    background-color: var(--bg-tertiary);
-    border: 1px solid var(--bg-tertiary);
-    color: var(--text-primary);
-    border-radius: 6px;
-    transition: all 0.2s ease;
-  }
-
-  input:focus, select:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-
-  .roles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 0.75rem;
-  }
-
-  .role-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-  }
-
-  .role-checkbox input {
-    width: auto;
+    min-height: 400px;
   }
 
   .modal-footer {
