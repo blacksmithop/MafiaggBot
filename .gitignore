@@ -24,7 +24,3 @@ dist-ssr
 *.sw?
 
 build
-/mafiagg
-/.venv
-example_bot.py
-.env
