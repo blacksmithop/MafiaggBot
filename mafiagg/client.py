@@ -15,8 +15,8 @@ from mafiagg.helper.tools import (
 from mafiagg.credential_manager import CredentialManager
 from mafiagg.bot.botbase import BotBase
 from typing import Dict, List, Optional, Union
-from langchain_core.messages import HumanMessage
-from mafiagg.chatbot.agent import graph
+from mafiagg.chatbot.chat import get_bot_response
+
 
 class UserCache:
     data = dict()
@@ -54,6 +54,7 @@ class Bot(BotBase):
 
     def reset_cache(self):
         self.cache.data = dict()
+
     @ignore_bot_message
     def parse(self, payload: Dict) -> Union[Dict, None]:
         if payload["type"] == "chat":
@@ -61,22 +62,21 @@ class Bot(BotBase):
             user_id = payload["from"]["userId"]
 
             if msg[0] != self.command_prefix:
-                config = {"configurable": {"thread_id": user_id}}
-                user_message = [HumanMessage(msg)]
                 try:
-                    bot_response = graph.invoke({"messages": user_message}, config)
-                    bot_message = bot_response["messages"][-1].content
-                    return {
-                        "type": "chat",
-                        "message": f"[AI] {bot_message}"
-                    }               
+                    bot_message = get_bot_response(user_query=msg, user_id=user_id)
+                    if bot_message:
+                        return {"type": "chat", "message": f"[AI] {bot_message}"}
                 except Exception as e:
                     print(f"Could not chat with user {user_id}, Error:\n{e}")
                 return
             cmd, args = self.parse_command(msg[1:])
             if cmd == None:
                 pass
-            if hasattr(cmd, 'isAdmin') and cmd.isAdmin and user_id not in self.admin_users: # TODO: Keep track of user (history)
+            if (
+                hasattr(cmd, "isAdmin")
+                and cmd.isAdmin
+                and user_id not in self.admin_users
+            ):  # TODO: Keep track of user (history)
                 return {
                     "type": "chat",
                     "message": "❌ You do not have permission to run this command",
@@ -173,7 +173,9 @@ class Bot(BotBase):
             try:
                 role_name, role_count = get_role_name_and_count(args=args)
                 if role_count < 1:
-                    return self.send(f"⛔ Role count {args[1]} should be greater than 0")
+                    return self.send(
+                        f"⛔ Role count {args[1]} should be greater than 0"
+                    )
             except ValueError:
                 return self.send(f"⛔ Role count cannot accept {args[1]}")
         _, selected_role = self.Role.get_role(role_name=role_name)
@@ -208,7 +210,6 @@ class Bot(BotBase):
             return self.send(f"⛔ Could not find a role by the name {args}")
 
         role_id = selected_role.id
-
 
         if role_id in self.role_cache:
             if role_count < self.role_cache[role_id]:
@@ -271,22 +272,22 @@ class Bot(BotBase):
     def _welcome(self, user_id: int) -> Optional[dict]:
         if user_id in self.cache.data:
             return
-        # If present in cache no welcome, use lru instead
+        # TODO: Add user to cache/db
         userData = self.User.get_user(user_id)
         user_name = userData.username
-        config = {"configurable": {"thread_id": user_id}}
 
-        greet_user_query = f"Say a witty greeting for a person named {user_name}. Keep it short and sngraphy"
-        user_message = [HumanMessage(greet_user_query)]
+        message = f"Welcome {user_name}👋! My prefix is {self.command_prefix}"
+        # This is the fallback
+
+        greet_user_query = f"Say a short witty greeting for a person named {user_name}"
+        # TODO: Custom chain/tool for greeting
+
         try:
-            bot_response = graph.invoke({"messages": user_message}, config)
-            bot_message = bot_response["messages"][-1].content
-            return {
-                "type": "chat",
-                "message": f"[AI] {bot_message}. My prefix is {self.command_prefix}"
-            }
-        except Exception as e:              
-            message = f"Welcome {user_name}👋 .My prefix is {self.command_prefix}"
+            bot_message = get_bot_response(user_query=greet_user_query, user_id=user_id)
+            if bot_message:
+                message = f"[AI] {bot_message}. My prefix is {self.command_prefix}"
+        except Exception as e:
+            print(f"Failed to send greeting due to {str(e)}")
 
         print(f"User joined: {user_name}")
         self.cache.data[user_id] = userData
@@ -325,7 +326,7 @@ class Bot(BotBase):
         return [{"type": "ping"}, self.send("Pong! 🏓")]
 
     @register_command("edit room", isAdmin=True)
-    def edit(self, args) -> Union[Dict, List]: # edit room options
+    def edit(self, args) -> Union[Dict, List]:  # edit room options
         """Edits the room settings. Add options to see all options"""
         args = args.split()
         if len(args) == 1:
@@ -333,8 +334,7 @@ class Bot(BotBase):
             exist = self.Setting.is_valid(opt)
             if exist is None or opt == "list":
                 self.response["message"] = (
-                    f"📜 Valid options are"
-                    f" {', '.join(self.Setting.allowed_values)}"
+                    f"📜 Valid options are" f" {', '.join(self.Setting.allowed_values)}"
                 )
                 return self.response
             else:
@@ -344,13 +344,13 @@ class Bot(BotBase):
                         f"{', '.join(exist['options'])}"
                     )
                 elif exist["allowed"] == "bool":
-                    self.response[
-                        "message"
-                    ] = f"📜 Valid options for {opt} are True, False"
+                    self.response["message"] = (
+                        f"📜 Valid options for {opt} are True, False"
+                    )
                 else:
-                    self.response[
-                        "message"
-                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                    self.response["message"] = (
+                        f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                    )
                 return self.response
         else:
             opt, new = args
@@ -369,13 +369,13 @@ class Bot(BotBase):
                         f"{', '.join(exist['options'])}"
                     )
                 elif exist["allowed"] == "bool":
-                    self.response[
-                        "message"
-                    ] = f"⛔ Valid options for {opt} are True, False"
+                    self.response["message"] = (
+                        f"⛔ Valid options for {opt} are True, False"
+                    )
                 else:
-                    self.response[
-                        "message"
-                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                    self.response["message"] = (
+                        f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
+                    )
                 return self.response
         self.response["message"] = f"✅ Set {opt} to {new}"
         return [self.response, setting]
