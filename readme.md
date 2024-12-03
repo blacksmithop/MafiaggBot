@@ -1,8 +1,12 @@
 # MafiaggBot
 
 ![PyPI - Version](https://img.shields.io/pypi/v/mafiagg)
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F&up_message=%E2%9C%85&up_color=%E2%9D%8C&logo=github&label=Docs&link=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F)
+![Docs](https://img.shields.io/website?url=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F&up_message=%E2%9C%85&up_color=%E2%9D%8C&logo=github&label=Docs&link=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F)
+![Website](https://img.shields.io/website?url=https://mafiaggstats.netlify.app/%2F&up_message=%E2%9C%85&up_color=%E2%9D%8C&logo=github&label=Dashboard&link=https%3A%2F%2Fblacksmithop.github.io%2FMafiaggBot%2F)
 
+[Dashboard](https://mafiaggstats.netlify.app/)
+
+[API Docs](https://blacksmithop.github.io/MafiaggBot/)
 
 ## Usage
 
@@ -23,6 +27,18 @@ pip install -U python-dotenv
 MAFIA_USERNAME=username
 MAFIA_PASSWORD=password
 ```
+
+If you wish to enable the chatbot, set these variables
+```
+LLM_PROVIDER=
+GOOGLE_API_KEY=
+OLLAMA_URL=
+AGENT_VERBOSE=
+```
+`LLM_PROVIDER` can  be`ollama`, `google` or `openai`
+
+> TODO: Detailed instructions for LLM's
+
 
 ### Example
 
@@ -80,6 +96,15 @@ except KeyboardInterrupt:
   - [ ] Formatted / multi-message help command
 - [x] Host only commands
     - [ ] Host can add admins
+- [x] AI
+    - [x] Chatbot
+    - [x] Multiple LLM support
+      - [x] Tool usage with Langgraph
+    - [] Robust memory
+    - [] Play games with AI
+      - [] Document in game action payloads
+- [] Keep player game statistics
+- [] Create REST Api for [mafiaggstats](https://mafiaggstats.netlify.app/)
 
 ### Tasklist
 
