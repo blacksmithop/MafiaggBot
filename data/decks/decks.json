@@ -2,6 +2,686 @@
     "decks": [
         {
             "builtin": false,
+            "deckSize": 52,
+            "key": "1730945023127",
+            "name": "Love Live Icons",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1730945023127/img-0.png",
+                    "backgroundColor": "#e7609e",
+                    "name": "Battery",
+                    "playerId": 0
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730945023127/img-1.png",
+                    "backgroundColor": "#8c9395",
+                    "name": "Birb",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730945023127/img-2.png",
+                    "backgroundColor": "#39b184",
+                    "name": "Bookmark",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730945023127/img-3.png",
+                    "backgroundColor": "#1660a5",
+                    "name": "Bow and Arrow",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730945023127/img-4.png",
+                    "backgroundColor": "#8ec225",
+                    "name": "Bread",
+                    "playerId": 4
+                }
+            ],
+            "uploadTimestamp": 1730946816998,
+            "version": 8
+        },
+        {
+            "builtin": false,
+            "deckSize": 210,
+            "key": "1730688667888",
+            "name": "Plants vs. Zombies Heroes Plants",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1730688667888/img-121.png",
+                    "backgroundColor": "#a0a15f",
+                    "name": "Admiral Navy Bean",
+                    "playerId": 121
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730688667888/img-171.png",
+                    "backgroundColor": "#277c69",
+                    "name": "Aloesaurus",
+                    "playerId": 171
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730688667888/img-41.png",
+                    "backgroundColor": "#ccab64",
+                    "name": "Apotatosaurus",
+                    "playerId": 41
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730688667888/img-172.png",
+                    "backgroundColor": "#e4676a",
+                    "name": "Apple-Saucer",
+                    "playerId": 172
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730688667888/img-173.png",
+                    "backgroundColor": "#c7eb91",
+                    "name": "Astro Vera",
+                    "playerId": 173
+                }
+            ],
+            "uploadTimestamp": 1730751213399,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 31,
+            "key": "1730689231071",
+            "name": "Hazbin Hotel",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1730689231071/img-1.png",
+                    "backgroundColor": "#e8a54e",
+                    "name": "Adam",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730689231071/img-2.png",
+                    "backgroundColor": "#ae5066",
+                    "name": "Alastor",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730689231071/img-45.png",
+                    "backgroundColor": "#ff0661",
+                    "name": "Angel",
+                    "playerId": 45
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730689231071/img-11.png",
+                    "backgroundColor": "#b69a44",
+                    "name": "Carmilla ",
+                    "playerId": 11
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730689231071/img-12.png",
+                    "backgroundColor": "#aa1837",
+                    "name": "Charlie",
+                    "playerId": 12
+                }
+            ],
+            "uploadTimestamp": 1730689624872,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 32,
+            "key": "1730519148660",
+            "name": "Super Danganronpa Another",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1730519148660/img-30.png",
+                    "backgroundColor": "#d70f10",
+                    "name": " Ayame Hatano",
+                    "playerId": 30
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730519148660/img-21.png",
+                    "backgroundColor": "#8c5033",
+                    "name": "Akane Taira",
+                    "playerId": 21
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730519148660/img-1.png",
+                    "backgroundColor": "#b6e3d6",
+                    "name": "Emma Magarobi",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730519148660/img-3.png",
+                    "backgroundColor": "#f6ffa0",
+                    "name": "Hajime Makunouchi",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1730519148660/img-26.png",
+                    "backgroundColor": "#cf774e",
+                    "name": "Haruhiko Kobashikawa",
+                    "playerId": 26
+                }
+            ],
+            "uploadTimestamp": 1730519154839,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 147,
+            "key": "1729820102483",
+            "name": "The Prince of Tennis (All Characters)",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729820102483/img-85.png",
+                    "backgroundColor": "#f7d3d3",
+                    "name": "Akaya",
+                    "playerId": 85
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820102483/img-40.png",
+                    "backgroundColor": "#ecd6bd",
+                    "name": "Akazawa",
+                    "playerId": 40
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820102483/img-50.png",
+                    "backgroundColor": "#f3bfbf",
+                    "name": "Akutsu",
+                    "playerId": 50
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820102483/img-92.png",
+                    "backgroundColor": "#ec9c8c",
+                    "name": "Alexander",
+                    "playerId": 92
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820102483/img-75.png",
+                    "backgroundColor": "#efccfc",
+                    "name": "Amane",
+                    "playerId": 75
+                }
+            ],
+            "uploadTimestamp": 1729820515619,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 24,
+            "key": "1729820331677",
+            "name": "Plants vs. Zombies Heroes",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729820331677/img-2.png",
+                    "backgroundColor": "#ac6a23",
+                    "name": "Beta-Carrotina",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820331677/img-12.png",
+                    "backgroundColor": "#224a59",
+                    "name": "Brain Freeze",
+                    "playerId": 12
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820331677/img-3.png",
+                    "backgroundColor": "#401206",
+                    "name": "Captain Combustible",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820331677/img-10.png",
+                    "backgroundColor": "#8c5d7d",
+                    "name": "Chompzilla",
+                    "playerId": 10
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729820331677/img-11.png",
+                    "backgroundColor": "#212707",
+                    "name": "Citron",
+                    "playerId": 11
+                }
+            ],
+            "uploadTimestamp": 1729820511116,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 28,
+            "key": "1729718993995",
+            "name": "Technoroid",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729718993995/img-1.png",
+                    "backgroundColor": "#addadf",
+                    "name": "Alto",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729718993995/img-2.png",
+                    "backgroundColor": "#5c7bb8",
+                    "name": "Auru",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729718993995/img-3.png",
+                    "backgroundColor": "#868e9d",
+                    "name": "Bora",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729718993995/img-4.png",
+                    "backgroundColor": "#daa7f2",
+                    "name": "Chrom",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729718993995/img-5.png",
+                    "backgroundColor": "#a7d3f2",
+                    "name": "Cobalt",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1729719430825,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 28,
+            "key": "1729036133417",
+            "name": "Witch's Heart",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729036133417/img-1.png",
+                    "backgroundColor": "#1f7467",
+                    "name": "Ashe ",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729036133417/img-2.png",
+                    "backgroundColor": "#ea915f",
+                    "name": "Charlotte",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729036133417/img-3.png",
+                    "backgroundColor": "#7bcbf3",
+                    "name": "Claire ",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729036133417/img-4.png",
+                    "backgroundColor": "#046c04",
+                    "name": "Coco",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729036133417/img-5.png",
+                    "backgroundColor": "#745ed4",
+                    "name": "Dorothy",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1729036214162,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 204,
+            "key": "1729035934424",
+            "name": "My Singing Monsters",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729035934424/img-151.png",
+                    "backgroundColor": "#bea1f5",
+                    "name": "Anglow",
+                    "playerId": 151
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035934424/img-100.png",
+                    "backgroundColor": "#39d75e",
+                    "name": "Arackulele",
+                    "playerId": 100
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035934424/img-131.png",
+                    "backgroundColor": "#aac6d2",
+                    "name": "Astropod",
+                    "playerId": 131
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035934424/img-152.png",
+                    "backgroundColor": "#a87cdc",
+                    "name": "Attmoz",
+                    "playerId": 152
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035934424/img-101.png",
+                    "backgroundColor": "#623a16",
+                    "name": "Auglur",
+                    "playerId": 101
+                }
+            ],
+            "uploadTimestamp": 1729036210786,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 28,
+            "key": "1729035491154",
+            "name": "Clash of Clans",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729035491154/img-1.png",
+                    "backgroundColor": "#b961f5",
+                    "name": "Apprentice Warden",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035491154/img-2.png",
+                    "backgroundColor": "#c89f9b",
+                    "name": "Archer",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035491154/img-3.png",
+                    "backgroundColor": "#b6c268",
+                    "name": "Baby Dragon",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035491154/img-4.png",
+                    "backgroundColor": "#c6e6a0",
+                    "name": "Balloon",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035491154/img-5.png",
+                    "backgroundColor": "#4e8582",
+                    "name": "Barbarian",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1729036173499,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 26,
+            "key": "1729035529099",
+            "name": "Apex Legends",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1729035529099/img-8.png",
+                    "backgroundColor": "#24191f",
+                    "name": "Alter",
+                    "playerId": 8
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035529099/img-5.png",
+                    "backgroundColor": "#4d6972",
+                    "name": "Ash",
+                    "playerId": 5
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035529099/img-2.png",
+                    "backgroundColor": "#722821",
+                    "name": "Ballistic",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035529099/img-4.png",
+                    "backgroundColor": "#890808",
+                    "name": "Bangalore",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1729035529099/img-28.png",
+                    "backgroundColor": "#bd2929",
+                    "name": "Bloodhound",
+                    "playerId": 28
+                }
+            ],
+            "uploadTimestamp": 1729036169412,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 51,
+            "key": "1713822284190",
+            "name": "Town of Salem 2 Characters",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1713822284190/img-1.png",
+                    "backgroundColor": "#ffde7b",
+                    "name": "Anubis",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713822284190/img-2.png",
+                    "backgroundColor": "#7d2323",
+                    "name": "Artemys",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713822284190/img-3.png",
+                    "backgroundColor": "#a6673e",
+                    "name": "Avery",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713822284190/img-4.png",
+                    "backgroundColor": "#e6d5ce",
+                    "name": "Bessie",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713822284190/img-5.png",
+                    "backgroundColor": "#8e6994",
+                    "name": "Betty",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1713829942670,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 19,
+            "key": "1713829876897",
+            "name": "OneShot",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1713829876897/img-1.png",
+                    "backgroundColor": "#180f3d",
+                    "name": "Alula",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713829876897/img-3.png",
+                    "backgroundColor": "#6c4c8c",
+                    "name": "Bookbot",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713829876897/img-4.png",
+                    "backgroundColor": "#802a55",
+                    "name": "Calamus",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713829876897/img-5.png",
+                    "backgroundColor": "#5eab88",
+                    "name": "Cedric",
+                    "playerId": 5
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713829876897/img-6.png",
+                    "backgroundColor": "#60447c",
+                    "name": "George",
+                    "playerId": 6
+                }
+            ],
+            "uploadTimestamp": 1713829939783,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 29,
+            "key": "1713142462819",
+            "name": "Devil May Cry",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1713142462819/img-3.png",
+                    "backgroundColor": "#442a30",
+                    "name": "1 Dante",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713142462819/img-8.png",
+                    "backgroundColor": "#652928",
+                    "name": "2 Dante",
+                    "playerId": 8
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713142462819/img-10.png",
+                    "backgroundColor": "#ad121b",
+                    "name": "3 Dante",
+                    "playerId": 10
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713142462819/img-25.png",
+                    "backgroundColor": "#2c5060",
+                    "name": "3 Vergil",
+                    "playerId": 25
+                },
+                {
+                    "avatarUrl": "/assets/decks/1713142462819/img-6.png",
+                    "backgroundColor": "#c87382",
+                    "name": "4 Dante",
+                    "playerId": 6
+                }
+            ],
+            "uploadTimestamp": 1713142475120,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 25,
+            "key": "1711853621476",
+            "name": "Star Trek TOS",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1711853621476/img-2.png",
+                    "backgroundColor": "#ae8d6c",
+                    "name": "Arex",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711853621476/img-3.png",
+                    "backgroundColor": "#4f77a0",
+                    "name": "Ayal",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711853621476/img-4.png",
+                    "backgroundColor": "#cdcb79",
+                    "name": "Bright Eyes",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711853621476/img-5.png",
+                    "backgroundColor": "#67a6b9",
+                    "name": "Chapel",
+                    "playerId": 5
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711853621476/img-6.png",
+                    "backgroundColor": "#bd7c54",
+                    "name": "Chekov",
+                    "playerId": 6
+                }
+            ],
+            "uploadTimestamp": 1711853777079,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 25,
+            "key": "1711759656336",
+            "name": "The Great Ace Attorney",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1711759656336/img-1.png",
+                    "backgroundColor": "#ab743a",
+                    "name": "Ryuunosuke",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711759656336/img-2.png",
+                    "backgroundColor": "#e5c5c3",
+                    "name": "Susato",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711759656336/img-3.png",
+                    "backgroundColor": "#8a2026",
+                    "name": "Kazuma",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711759656336/img-4.png",
+                    "backgroundColor": "#8e8a81",
+                    "name": "Sherlock",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1711759656336/img-5.png",
+                    "backgroundColor": "#8b595e",
+                    "name": "Iris",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1711823889040,
+            "version": 1
+        },
+        {
+            "builtin": false,
+            "deckSize": 49,
+            "key": "1705888065912",
+            "name": "THE IDOLM@STER SideM",
+            "sampleCharacters": [
+                {
+                    "avatarUrl": "/assets/decks/1705888065912/img-1.png",
+                    "backgroundColor": "#ec2333",
+                    "name": "Touma",
+                    "playerId": 1
+                },
+                {
+                    "avatarUrl": "/assets/decks/1705888065912/img-2.png",
+                    "backgroundColor": "#9cd517",
+                    "name": "Shouta",
+                    "playerId": 2
+                },
+                {
+                    "avatarUrl": "/assets/decks/1705888065912/img-3.png",
+                    "backgroundColor": "#232ab8",
+                    "name": "Hokuto",
+                    "playerId": 3
+                },
+                {
+                    "avatarUrl": "/assets/decks/1705888065912/img-4.png",
+                    "backgroundColor": "#dd1c18",
+                    "name": "Teru",
+                    "playerId": 4
+                },
+                {
+                    "avatarUrl": "/assets/decks/1705888065912/img-5.png",
+                    "backgroundColor": "#2448bc",
+                    "name": "Kaoru",
+                    "playerId": 5
+                }
+            ],
+            "uploadTimestamp": 1705888529783,
+            "version": 1
+        },
+        {
+            "builtin": false,
             "deckSize": 35,
             "key": "1699890083681",
             "name": "Phighting!",
@@ -399,46 +1079,6 @@
             ],
             "uploadTimestamp": 1676180225109,
             "version": 1
-        },
-        {
-            "builtin": false,
-            "deckSize": 41,
-            "key": "1673218186935",
-            "name": "Love Live Icons",
-            "sampleCharacters": [
-                {
-                    "avatarUrl": "/assets/decks/1673218186935/img-0.png",
-                    "backgroundColor": "#8c9395",
-                    "name": "Birb",
-                    "playerId": 0
-                },
-                {
-                    "avatarUrl": "/assets/decks/1673218186935/img-1.png",
-                    "backgroundColor": "#1660a5",
-                    "name": "Bow and Arrow",
-                    "playerId": 1
-                },
-                {
-                    "avatarUrl": "/assets/decks/1673218186935/img-2.png",
-                    "backgroundColor": "#8ec225",
-                    "name": "Bread",
-                    "playerId": 2
-                },
-                {
-                    "avatarUrl": "/assets/decks/1673218186935/img-3.png",
-                    "backgroundColor": "#cecbbe",
-                    "name": "Bunny",
-                    "playerId": 3
-                },
-                {
-                    "avatarUrl": "/assets/decks/1673218186935/img-4.png",
-                    "backgroundColor": "#f1c51f",
-                    "name": "Cat",
-                    "playerId": 4
-                }
-            ],
-            "uploadTimestamp": 1673218240038,
-            "version": 7
         },
         {
             "builtin": false,
@@ -12922,8 +13562,8 @@
         }
     ],
     "pagination": {
-        "numPages": 13,
-        "page": 13,
-        "total": 323
+        "numPages": 14,
+        "page": 14,
+        "total": 339
     }
 }
