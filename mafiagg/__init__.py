@@ -2,7 +2,7 @@
 Mafiag GG API Wrapper
 ~~~~~~~~~~~~~~~~~~~
 
-A basic wrapper for the Mafia API.
+A basic wrapper for the Mafia.gg API.
 
 :copyright: (c) 2021-present blacksmithop
 :license: MIT, see LICENSE for more details.
@@ -13,7 +13,7 @@ __title__ = "mafiagg"
 __author__ = "blacksmithop"
 __license__ = "MIT"
 __copyright__ = "Copyright 2021-present blacksmithop"
-__version__ = "1.0.3"
+__version__ = "1.0.4"
 
 __path__ = __import__("pkgutil").extend_path(__path__, __name__)
 
