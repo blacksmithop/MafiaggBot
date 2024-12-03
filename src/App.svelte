@@ -8,6 +8,8 @@
   import Dashboard from "./lib/components/Dashboard.svelte";
   import Settings from "./lib/components/Settings.svelte";
   import Privacy from "./lib/components/Privacy.svelte";
+  import Profile from "./lib/components/Profile.svelte";
+  import BotManagement from "./lib/components/bot/BotManagement.svelte";
 </script>
 
 <Router>
@@ -21,6 +23,8 @@
         <Route path="/game-stats" component={GameStats} />
         <Route path="/settings" component={Settings} />
         <Route path="/privacy" component={Privacy} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/bot" component={BotManagement} />
       </main>
       <Footer />
     </div>

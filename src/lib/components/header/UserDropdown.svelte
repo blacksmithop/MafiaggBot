@@ -1,7 +1,7 @@
 <script lang="ts">
   import { navigate } from "svelte-routing";
   import { LogOut, Settings, User } from 'lucide-svelte';
-
+  
   const menuItems = [
     { icon: User, label: 'Profile', href: '/profile' },
     { icon: Settings, label: 'Settings', href: '/settings' },
@@ -26,7 +26,6 @@
     />
     <div class="user-details">
       <div class="name">Player123</div>
-      <div class="email">player123@mafia.gg</div>
     </div>
   </div>
   
@@ -73,12 +72,6 @@
 
   .name {
     font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .email {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
   }
 
   .menu-items {
