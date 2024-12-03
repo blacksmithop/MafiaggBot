@@ -48,7 +48,6 @@ def call_model(state):
 
     config = {"configurable": {"model_name": getenv("LLM_PROVIDER")}}
     model_name = config.get("configurable", {}).get("model_name", "openai")
-    print(f"Model NAME: {model_name}")
     model = _get_model(model_name)
     response = model.invoke(messages)
     # We return a list, because this will get added to the existing list
