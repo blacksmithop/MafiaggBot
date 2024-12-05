@@ -37,7 +37,7 @@
                 style:background-color={character.backgroundColor}
               >
                 <img 
-                  src={getImageUrl(character.avatarUrl)} 
+                  src=https://mafia.gg{getImageUrl(character.avatarUrl)} 
                   alt={character.name}
                   class="avatar-image"
                 />
