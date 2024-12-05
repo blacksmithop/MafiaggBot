@@ -1,9 +1,14 @@
 <script lang="ts">
-  // Room settings will be implemented later
+  import RoomSettings from '../RoomSettings.svelte';
+
+  export let roomSettings: { [key: string]: any } = {};
 </script>
 
 <div class="section">
-  <p class="placeholder">Room settings coming soon...</p>
+  <RoomSettings 
+    {roomSettings}
+    onChange={(settings) => roomSettings = settings}
+  />
 </div>
 
 <style>
