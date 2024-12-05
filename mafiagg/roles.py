@@ -22,7 +22,15 @@ class GetRole:
             print("Loaded roles")
             with open(file_path, "r", encoding="utf8") as f:
                 roles = load(f)["roles"]
-                self.roles = [Role(**item) for item in roles]
+
+                self.roles = []
+                for item in roles:
+                    try:
+                        entry = Role(**item)
+                        self.roles.append(entry)
+                    except Exception as e:
+                        print(item)
+                        pass
 
         else:
             self.download_roles()

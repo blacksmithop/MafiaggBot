@@ -24,7 +24,7 @@ class Role(BaseModel):
     description: str = ""
     id: int = -1
     alignment: str = None
-    new: bool = None
+    new: Optional[bool] = None
     disabled: bool = False
     holiday: str = "none"
     tags: List[str] = []
