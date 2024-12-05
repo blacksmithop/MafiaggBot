@@ -1,16 +1,24 @@
 <script lang="ts">
   import { Link } from "svelte-routing";
   import type { ComponentType } from 'svelte';
+  import { currentPath } from '../../stores/navigation';
+  import { navigate } from "svelte-routing";
 
   export let icon: ComponentType;
   export let text: string;
   export let path: string;
   export let isExpanded: boolean;
-  export let isActive = false;
+
+  $: isActive = $currentPath === path;
+
+  function handleClick() {
+    currentPath.set(path);
+    navigate(path);
+  }
 </script>
 
 <div class="nav-item-wrapper" class:active={isActive}>
-  <Link to={path}>
+  <button class="nav-button" on:click={handleClick}>
     <div class="nav-item">
       <div class="icon-wrapper">
         <svelte:component this={icon} size={20} />
@@ -19,7 +27,7 @@
         <span class="text" class:fade-in={isExpanded}>{text}</span>
       {/if}
     </div>
-  </Link>
+  </button>
 </div>
 
 <style>
@@ -28,6 +36,15 @@
     border-radius: 8px;
     background-color: transparent;
     transition: all 0.2s ease;
+  }
+
+  .nav-button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
   }
 
   .nav-item-wrapper:hover {
@@ -40,10 +57,6 @@
 
   .nav-item-wrapper.active:hover {
     opacity: 0.9;
-  }
-
-  :global(.nav-item-wrapper a) {
-    text-decoration: none;
   }
 
   .nav-item {

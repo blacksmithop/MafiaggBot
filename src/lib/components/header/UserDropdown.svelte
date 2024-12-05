@@ -1,9 +1,10 @@
 <script lang="ts">
   import { navigate } from "svelte-routing";
-  import { LogOut, Settings, User } from 'lucide-svelte';
+  import { LogOut, Settings, User, FileText } from 'lucide-svelte';
   
   const menuItems = [
     { icon: User, label: 'Profile', href: '/profile' },
+    { icon: FileText, label: 'Reports', href: '/notifications' }, // Game reports, notifications
     { icon: Settings, label: 'Settings', href: '/settings' },
     { icon: LogOut, label: 'Logout', href: '/logout' }
   ];

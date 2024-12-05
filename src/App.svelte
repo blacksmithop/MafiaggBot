@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { Router, Route } from "svelte-routing";
+  import { Router, Link, Route } from "svelte-routing";
+  import { onMount } from "svelte";
+  import { currentPath } from "./lib/stores/navigation";
   import Sidebar from "./lib/components/Sidebar.svelte";
   import Header from "./lib/components/Header.svelte";
   import Footer from "./lib/components/Footer.svelte";
@@ -10,9 +12,20 @@
   import Privacy from "./lib/components/Privacy.svelte";
   import Profile from "./lib/components/Profile.svelte";
   import BotManagement from "./lib/components/bot/BotManagement.svelte";
+
+  export let url = "";
+
+  onMount(() => {
+    currentPath.set(window.location.pathname);
+    
+    // Update current path on navigation
+    window.addEventListener('popstate', () => {
+      currentPath.set(window.location.pathname);
+    });
+  });
 </script>
 
-<Router>
+<Router {url}>
   <div class="app-layout">
     <Sidebar />
     <div class="main-content">

@@ -7,7 +7,14 @@
   export let onChange: (roles: { [key: string]: number }) => void;
 
   const roles: Role[] = roleData.roles;
-  const alignments = ['town', 'mafia', 'neutral'];
+  const alignments = ['town', 'mafia', 'third'];
+  let activeAlignment = 'town';
+
+  const alignmentColors = {
+    town: '#4180DB',    // Mafia.gg town blue
+    mafia: '#C94A4A',   // Mafia.gg mafia red
+    third: '#B85DE6'    // Mafia.gg third purple
+  };
 
   function getRolesByAlignment(alignment: string) {
     return roles.filter(role => role.alignment === alignment);
@@ -26,73 +33,112 @@
       onChange(updatedRoles);
     }
   }
+
+  $: alignmentColor = alignmentColors[activeAlignment];
 </script>
 
 <div class="role-selector">
-  {#each alignments as alignment}
-    <div class="alignment-section">
-      <h3 class="alignment-title">{alignment.charAt(0).toUpperCase() + alignment.slice(1)}</h3>
-      <div class="roles-list">
-        {#each getRolesByAlignment(alignment) as role}
-          <div class="role-item">
-            <div class="role-info">
-              <span class="role-name">{role.name}</span>
-              <div class="role-tags">
-                {#each role.tags as tag}
-                  <span class="tag">{tag}</span>
-                {/each}
-              </div>
-            </div>
-            <div class="role-controls">
-              <button 
-                class="control-btn"
-                on:click={() => updateRoleCount(role.id, false)}
-                disabled={!selectedRoles[role.id]}
-              >
-                <Minus size={16} />
-              </button>
-              <span class="count">{selectedRoles[role.id] || 0}</span>
-              <button 
-                class="control-btn"
-                on:click={() => updateRoleCount(role.id, true)}
-              >
-                <Plus size={16} />
-              </button>
+  <div class="alignment-tabs">
+    {#each alignments as alignment}
+      <button
+        class="tab-btn"
+        class:active={activeAlignment === alignment}
+        style="--alignment-color: {alignmentColors[alignment]}"
+        on:click={() => activeAlignment = alignment}
+      >
+        {alignment.charAt(0).toUpperCase() + alignment.slice(1)}
+      </button>
+    {/each}
+  </div>
+
+  <div class="roles-content">
+    <div class="roles-list">
+      {#each getRolesByAlignment(activeAlignment) as role}
+        <div 
+          class="role-item"
+          style="--role-color: {alignmentColor}"
+        >
+          <div class="role-info">
+            <span class="role-name">{role.name}</span>
+            <div class="role-tags">
+              {#each role.tags as tag}
+                <span class="tag">{tag}</span>
+              {/each}
             </div>
           </div>
-        {/each}
-      </div>
+          <div class="role-controls">
+            <button 
+              class="control-btn"
+              on:click={() => updateRoleCount(role.id, false)}
+              disabled={!selectedRoles[role.id]}
+            >
+              <Minus size={16} />
+            </button>
+            <span class="count">{selectedRoles[role.id] || 0}</span>
+            <button 
+              class="control-btn"
+              on:click={() => updateRoleCount(role.id, true)}
+            >
+              <Plus size={16} />
+            </button>
+          </div>
+        </div>
+      {/each}
     </div>
-  {/each}
+  </div>
 </div>
 
 <style>
   .role-selector {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    max-height: 400px;
-    overflow-y: auto;
-  }
-
-  .alignment-section {
-    display: flex;
-    flex-direction: column;
     gap: 1rem;
+    height: 100%;
+    max-height: 500px;
   }
 
-  .alignment-title {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--bg-tertiary);
+  .alignment-tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+
+  .tab-btn:hover {
+    color: var(--alignment-color);
+    background-color: var(--bg-secondary);
+  }
+
+  .tab-btn.active {
+    color: var(--alignment-color);
+    background-color: var(--bg-secondary);
+    border-color: var(--alignment-color);
+  }
+
+  .roles-content {
+    flex: 1;
+    overflow-y: auto;
   }
 
   .roles-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    padding: 0.5rem;
   }
 
   .role-item {
@@ -102,6 +148,13 @@
     padding: 0.75rem;
     background-color: var(--bg-tertiary);
     border-radius: 6px;
+    border-left: 3px solid var(--role-color);
+    transition: all 0.2s ease;
+  }
+
+  .role-item:hover {
+    transform: translateX(4px);
+    background-color: color-mix(in srgb, var(--role-color) 10%, var(--bg-tertiary));
   }
 
   .role-info {
@@ -149,7 +202,7 @@
   }
 
   .control-btn:hover:not(:disabled) {
-    background-color: var(--accent);
+    background-color: var(--role-color);
     color: white;
   }
 
