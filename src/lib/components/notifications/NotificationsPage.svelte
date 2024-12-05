@@ -2,66 +2,80 @@
   import { notifications } from '../../data/notifications';
   import NotificationItem from './NotificationItem.svelte';
   import InviteModal from './InviteModal.svelte';
-  import type { Notification } from '../../types/Notification';
-  
-  let selectedInvite = null;
-  let filter = 'all';
-  
-  $: filteredNotifications = filter === 'all' 
-    ? notifications 
-    : notifications.filter(n => n.type === filter);
-    
+  import type { Notification, GameInvite } from '../../types/Notification';
+  import { Trophy, FileText, Users } from 'lucide-svelte';
+
+  let selectedInvite: GameInvite | null = null;
+  let activeCategory: 'all' | 'achievement' | 'game_report' | 'invite' = 'all';
+
+  const categories = [
+    { id: 'all', label: 'All Notifications', icon: null },
+    { id: 'achievement', label: 'Achievements', icon: Trophy, color: 'var(--success)' },
+    { id: 'game_report', label: 'Game Reports', icon: FileText, color: 'var(--accent)' },
+    { id: 'invite', label: 'Invites', icon: Users, color: 'var(--neutral)' }
+  ];
+
+  $: filteredNotifications = activeCategory === 'all'
+    ? notifications
+    : notifications.filter(n => n.type === activeCategory);
+
   function handleNotificationClick(event: CustomEvent<Notification>) {
     const notification = event.detail;
     if (notification.type === 'invite') {
       selectedInvite = notification.data;
     }
   }
+
+  function markAllAsRead() {
+    // In a real app, this would update the backend
+    console.log('Marking all notifications as read');
+  }
 </script>
 
 <div class="notifications-page">
   <div class="header">
-    <h2 class="section-title">Notifications</h2>
-    <div class="filters">
-      <button 
-        class:active={filter === 'all'} 
-        on:click={() => filter = 'all'}
-      >
-        All
-      </button>
-      <button 
-        class:active={filter === 'achievement'} 
-        on:click={() => filter = 'achievement'}
-      >
-        Achievements
-      </button>
-      <button 
-        class:active={filter === 'game_report'} 
-        on:click={() => filter = 'game_report'}
-      >
-        Reports
-      </button>
-      <button 
-        class:active={filter === 'invite'} 
-        on:click={() => filter = 'invite'}
-      >
-        Invites
+    <div class="title-section">
+      <h2 class="section-title">Notifications</h2>
+      <button class="mark-read-btn" on:click={markAllAsRead}>
+        Mark all as read
       </button>
     </div>
+
+    <div class="categories">
+      {#each categories as category}
+        <button
+          class="category-btn"
+          class:active={activeCategory === category.id}
+          style="--category-color: {category.color || 'var(--text-primary)'}"
+          on:click={() => activeCategory = category.id}
+        >
+          {#if category.icon}
+            <svelte:component this={category.icon} size={16} />
+          {/if}
+          <span>{category.label}</span>
+        </button>
+      {/each}
+    </div>
   </div>
-  
+
   <div class="notifications-list">
-    {#each filteredNotifications as notification (notification.id)}
-      <NotificationItem 
-        {notification}
-        on:click={handleNotificationClick}
-      />
-    {/each}
+    {#if filteredNotifications.length === 0}
+      <div class="empty-state">
+        <p>No notifications in this category</p>
+      </div>
+    {:else}
+      {#each filteredNotifications as notification (notification.id)}
+        <NotificationItem
+          {notification}
+          on:click={handleNotificationClick}
+        />
+      {/each}
+    {/if}
   </div>
 </div>
 
 {#if selectedInvite}
-  <InviteModal 
+  <InviteModal
     invite={selectedInvite}
     on:close={() => selectedInvite = null}
     on:join={(event) => {
@@ -81,17 +95,42 @@
     margin-bottom: 2rem;
   }
 
-  .filters {
+  .title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .mark-read-btn {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .mark-read-btn:hover {
+    background-color: var(--bg-tertiary);
+  }
+
+  .categories {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
     background-color: var(--bg-tertiary);
     padding: 0.5rem;
     border-radius: 8px;
   }
 
-  .filters button {
+  .category-btn {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     padding: 0.75rem;
     border: none;
     background: none;
@@ -99,15 +138,16 @@
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-size: 0.875rem;
   }
 
-  .filters button:hover {
-    color: var(--text-primary);
+  .category-btn:hover {
+    color: var(--category-color);
     background-color: var(--bg-secondary);
   }
 
-  .filters button.active {
-    color: var(--text-primary);
+  .category-btn.active {
+    color: var(--category-color);
     background-color: var(--bg-secondary);
   }
 
@@ -115,5 +155,23 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-tertiary);
+    border-radius: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .categories {
+      flex-direction: column;
+    }
+
+    .category-btn {
+      justify-content: flex-start;
+    }
   }
 </style>

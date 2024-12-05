@@ -12,6 +12,7 @@
   import Privacy from "./lib/components/Privacy.svelte";
   import Profile from "./lib/components/Profile.svelte";
   import BotManagement from "./lib/components/bot/BotManagement.svelte";
+  import NotificationsPage from "./lib/components/notifications/NotificationsPage.svelte";
 
   export let url = "";
 
@@ -38,6 +39,7 @@
         <Route path="/privacy" component={Privacy} />
         <Route path="/profile" component={Profile} />
         <Route path="/bot" component={BotManagement} />
+        <Route path="/notifications" component={NotificationsPage} />
       </main>
       <Footer />
     </div>

@@ -2,6 +2,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { Notification } from '../../types/Notification';
   import { Trophy, FileText, Users } from 'lucide-svelte';
+  import { navigate } from 'svelte-routing';
   
   export let notification: Notification;
   
@@ -12,9 +13,19 @@
     game_report: FileText,
     invite: Users
   };
+
+  const typeColors = {
+    achievement: 'var(--success)',
+    game_report: 'var(--accent)',
+    invite: 'var(--neutral)'
+  };
   
   function handleClick() {
-    dispatch('click', notification);
+    if (notification.type === 'game_report') {
+      navigate('/game-stats');
+    } else {
+      dispatch('click', notification);
+    }
   }
 </script>
 
@@ -22,8 +33,9 @@
   class="notification-item" 
   class:unread={!notification.read}
   on:click={handleClick}
+  style="--notification-color: {typeColors[notification.type]}"
 >
-  <div class="icon-wrapper" class:achievement={notification.type === 'achievement'}>
+  <div class="icon-wrapper" style="background-color: {typeColors[notification.type]}">
     <svelte:component this={typeIcons[notification.type]} size={20} />
   </div>
   <div class="content">
@@ -44,14 +56,16 @@
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s ease;
+    border-left: 4px solid var(--notification-color);
   }
 
   .notification-item:hover {
     transform: translateX(4px);
+    background-color: color-mix(in srgb, var(--notification-color) 10%, var(--bg-tertiary));
   }
 
   .notification-item.unread {
-    background-color: color-mix(in srgb, var(--accent) 10%, var(--bg-tertiary));
+    background-color: color-mix(in srgb, var(--notification-color) 5%, var(--bg-tertiary));
   }
 
   .icon-wrapper {
@@ -60,13 +74,7 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: var(--bg-secondary);
     border-radius: 8px;
-    color: var(--text-secondary);
-  }
-
-  .icon-wrapper.achievement {
-    background-color: var(--accent);
     color: white;
   }
 
@@ -77,6 +85,7 @@
   .title {
     font-weight: 500;
     margin-bottom: 0.25rem;
+    color: var(--notification-color);
   }
 
   .message {

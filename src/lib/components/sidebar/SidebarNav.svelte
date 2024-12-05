@@ -4,7 +4,8 @@
     Users,
     GamepadIcon,
     Github,
-    Bot
+    Bot,
+    Bell
   } from 'lucide-svelte';
   import SidebarItem from './SidebarItem.svelte';
   
@@ -14,6 +15,7 @@
     { path: "/", icon: LayoutDashboard, text: "Dashboard" },
     { path: "/player-stats", icon: Users, text: "Player Stats" },
     { path: "/game-stats", icon: GamepadIcon, text: "Game Stats" },
+    { path: "/notifications", icon: Bell, text: "Notifications" },
     { path: "/bot", icon: Bot, text: "Bot" },
     { 
       path: "https://github.com/blacksmithop/MafiaggBot",
