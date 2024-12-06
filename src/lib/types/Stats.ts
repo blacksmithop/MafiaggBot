@@ -22,14 +22,24 @@ export interface FactionStats {
   totalGames: number;
 }
 
+export interface HostUser {
+  id: number;
+  username: string;
+  activePatreon: boolean;
+  hostBannedUsernames: Array<string>;
+  isPatreonLinked: boolean;
+  needsVerification: boolean;
+  createdAt: string;
+}
+
 export interface GameLobby {
   id: string;
   name: string;
-  host: string;
+  hasStarted: boolean;
   playerCount: number;
-  maxPlayers: number;
-  status: 'Waiting' | 'In Progress';
-  link: string;
+  setupSize: number;
+  hostUser: HostUser;
+  createdAt: string;
 }
 
 export interface PlayerReport {
