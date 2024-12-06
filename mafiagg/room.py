@@ -16,8 +16,3 @@ class GetRoom:
         rooms = data["rooms"]
         self.rooms = [Room(**item) for item in rooms]
         return self.rooms
-
-
-if __name__ == "__main__":
-    r = get_rooms()
-    print(r.get_rooms())

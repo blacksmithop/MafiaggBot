@@ -1,4 +1,4 @@
-from mafiagg.models.models import User
+from mafiagg.models.models import SearchUser
 from requests import Session
 
 
@@ -9,5 +9,5 @@ class GetUser:
         if len(res) == 0:
             return None
         res = res[0]
-        user = User(**res)
+        user = SearchUser(**res)
         return user
