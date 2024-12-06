@@ -1,7 +1,20 @@
-export interface PlayerStats {
-  id: string;
+export interface UnregisteredPlayer {
+  id: number;
   username: string;
-  joinedDate: string;
+  createdAt: string;
+}
+
+
+export interface RegisteredPlayer {
+  id: number;
+  username: string;
+  createdAt: string;
+}
+
+export interface RegisteredPlayerReport {
+  id: number;
+  username: string;
+  createdAt: string;
   totalGames: number;
   winRate: number;
   townWinRate: number;

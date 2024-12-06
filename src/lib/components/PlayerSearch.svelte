@@ -1,19 +1,21 @@
 <script lang="ts">
   import { mockPlayerStats } from '../data/mockData';
-  import type { PlayerStats } from '../types/Stats';
+  import type { RegisteredPlayer, RegisteredPlayerReport } from '../types/Stats';
+  import { getPlayerByName, getPlayerReport } from "../services";
   
-  let searchQuery = '';
-  let searchResults: PlayerStats[] = [];
-  let selectedPlayer: PlayerStats | null = null;
+  let searchQuery: string = '';
+  let searchResults: RegisteredPlayer[] = [];
+  let selectedPlayer: RegisteredPlayerReport | null = null;
   
-  function handleSearch() {
-    searchResults = mockPlayerStats.filter(player => 
-      player.username.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+  async function handleSearch() {
+    const response = await getPlayerByName(searchQuery);
+    searchResults = response;
   }
 
-  function selectPlayer(player: PlayerStats) {
-    selectedPlayer = selectedPlayer?.id === player.id ? null : player;
+  async function selectPlayer(player: RegisteredPlayer) {
+    const response = await getPlayerReport(player.username);
+    selectedPlayer = response;
+    console.log(selectedPlayer)
   }
 </script>
 
@@ -34,7 +36,6 @@
         <div class="player-card" on:click={() => selectPlayer(player)}>
           <div class="player-header">
             <h3>{player.username}</h3>
-            <span class="games-count">{player.totalGames} games</span>
           </div>
           
           {#if selectedPlayer?.id === player.id}
@@ -45,7 +46,11 @@
               </div>
               <div class="detail-row">
                 <span class="label">Joined:</span>
-                <span class="value">{player.joinedDate}</span>
+                <span class="value">{player.createdAt}</span>
+              </div>
+              <div class="detail-row">
+                <span class="label">Total Games:</span>
+                <span class="value">{player.totalGames}</span>
               </div>
               <div class="faction-stats">
                 <div class="faction town">
