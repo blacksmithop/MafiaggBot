@@ -14,7 +14,6 @@
   async function selectPlayer(player: RegisteredPlayer) {
     const response = await getPlayerReport(player.username);
     selectedPlayer = response;
-    console.log(selectedPlayer)
   }
 </script>
 

@@ -13,7 +13,6 @@
       loading = true;
       error = null;
       const response = await getLobbies();
-      console.log(response);
 
       if (Array.isArray(response)) {
         gameLobbies = response;
