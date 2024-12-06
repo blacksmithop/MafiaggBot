@@ -1,7 +1,7 @@
-export const API_BASE_URL = 'https://api.mafia.gg';
+export const API_BASE_URL = 'http://localhost';
 
 export const API_ENDPOINTS = {
-  lobbies: '/lobbies',
+  lobbies: '/get_rooms',
   players: '/players',
   games: '/games',
   notifications: '/notifications',

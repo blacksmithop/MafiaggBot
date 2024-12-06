@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { getLobbies } from '../services';
-  import type { GameLobby } from '../types/Stats';
-  import { Users, Plus } from 'lucide-svelte';
+  import { onMount } from "svelte";
+  import { getLobbies } from "../services";
+  import type { GameLobby } from "../types/Stats";
+  import { Users, Plus } from "lucide-svelte";
 
   let loading = true;
   let error: string | null = null;
@@ -12,10 +12,16 @@
     try {
       loading = true;
       error = null;
-      const response = await getLobbies({ status: 'active' });
-      gameLobbies = response.data;
+      const response = await getLobbies();
+      console.log(response);
+
+      if (Array.isArray(response)) {
+        gameLobbies = response;
+      } else {
+        throw new Error("Unexpected response format");
+      }
     } catch (e) {
-      error = e instanceof Error ? e.message : 'Failed to load game lobbies';
+      error = e instanceof Error ? e.message : "Failed to load game lobbies";
     } finally {
       loading = false;
     }
@@ -27,7 +33,7 @@
 <div class="dashboard">
   <div class="card">
     <h2 class="section-title">Active Games</h2>
-    
+
     {#if loading}
       <div class="loading-state">
         <div class="loader"></div>
@@ -49,18 +55,23 @@
     {:else}
       <div class="lobbies-list">
         {#each gameLobbies as lobby}
-          <a href={lobby.link} target="_blank" rel="noopener noreferrer" class="lobby-card">
+          <a
+            href="https://mafia.gg/game/{lobby.id}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="lobby-card"
+          >
             <div class="lobby-info">
               <h3>{lobby.name}</h3>
-              <span class="host">Hosted by {lobby.host}</span>
+              <span class="host">Hosted by {lobby.hostUser.username}</span>
             </div>
             <div class="lobby-stats">
               <div class="players-count">
                 <Users size={16} />
-                <span>{lobby.playerCount}/{lobby.maxPlayers}</span>
+                <span>{lobby.playerCount}/{lobby.setupSize}</span>
               </div>
-              <span class="status" class:in-progress={lobby.status === 'In Progress'}>
-                {lobby.status}
+              <span class="status" class:in-progress={lobby.hasStarted == true}>
+                {lobby.hasStarted ? "Ongoing" : "In lobby"}
               </span>
             </div>
           </a>
@@ -99,7 +110,9 @@
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   .retry-btn,
