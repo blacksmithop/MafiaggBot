@@ -1,0 +1,23 @@
+export const API_BASE_URL = 'https://api.mafia.gg';
+
+export const API_ENDPOINTS = {
+  lobbies: '/lobbies',
+  players: '/players',
+  games: '/games',
+  notifications: '/notifications',
+  bot: '/bot'
+} as const;
+
+export const DEFAULT_HEADERS = {
+  'Content-Type': 'application/json'
+};
+
+export type ApiResponse<T> = {
+  data: T;
+  error?: string;
+  meta?: {
+    total: number;
+    page: number;
+    limit: number;
+  };
+};
