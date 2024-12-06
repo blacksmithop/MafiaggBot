@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { mockPlayerStats } from '../data/mockData';
   import type { RegisteredPlayer, RegisteredPlayerReport } from '../types/Stats';
   import { getPlayerByName, getPlayerReport } from "../services";
   
