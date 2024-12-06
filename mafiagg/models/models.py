@@ -41,6 +41,12 @@ class Role(BaseModel):
         alignment = alignmentMapping.get(alignment, None)
         return alignment
 
+# Search User
+class SearchUser(BaseModel):
+    id: int
+    username: str
+    createdAt: str
+
 # User
 class User(BaseModel):
     id: int
