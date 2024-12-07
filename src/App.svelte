@@ -13,7 +13,9 @@
   import Profile from "./lib/components/Profile.svelte";
   import BotManagement from "./lib/components/bot/BotManagement.svelte";
   import NotificationsPage from "./lib/components/notifications/NotificationsPage.svelte";
-
+  import Login from './lib/components/Login.svelte';
+  
+  let isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
   export let url = "";
 
   onMount(() => {
@@ -27,6 +29,7 @@
 </script>
 
 <Router {url}>
+  {#if isAuthenticated}
   <div class="app-layout">
     <Sidebar />
     <div class="main-content">
@@ -44,6 +47,9 @@
       <Footer />
     </div>
   </div>
+  {:else}
+  <Login />
+  {/if}
 </Router>
 
 <style>
