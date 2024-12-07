@@ -1,6 +1,6 @@
 import { fetchWithAuth } from './api';
 import { API_ENDPOINTS } from './config';
-import type { PlayerReport, RegisteredPlayer, RegisteredPlayerReport, UnregisteredPlayer } from '../types/Stats';
+import type { RegisteredPlayer, RegisteredPlayerReport, UnregisteredPlayer } from '../types/Stats';
 
 
 export async function getPlayerById(player_id: number) {
@@ -20,9 +20,3 @@ export async function getPlayerReport(username: string) {
     `${API_ENDPOINTS.players}/get_player_report/${username}`
   );
 }
-
-// export async function searchPlayers(query: string) {
-//   return fetchWithAuth<PlayerStats[]>(
-//     `${API_ENDPOINTS.players}/search?q=${encodeURIComponent(query)}`
-//   );
-// }

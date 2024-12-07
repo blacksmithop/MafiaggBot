@@ -5,11 +5,11 @@ export const API_ENDPOINTS = {
   players: '/players',
   games: '/games',
   notifications: '/notifications',
-  bot: '/bot'
+  bot: '/bot',
 } as const;
 
 export const DEFAULT_HEADERS = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
 };
 
 export type ApiResponse<T> = {
