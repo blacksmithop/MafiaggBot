@@ -20,6 +20,7 @@
 
   onMount(() => {
     currentPath.set(window.location.pathname);
+    isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
     
     // Update current path on navigation
     window.addEventListener('popstate', () => {
