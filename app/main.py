@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.router import dashboard, player_stats
+from app.router import auth, dashboard, player_stats
 
 app = FastAPI()
 
@@ -12,7 +12,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-routes = [dashboard, player_stats]
+routes = [auth, dashboard, player_stats]
 
 for route in routes:
     app.include_router(route.router)
