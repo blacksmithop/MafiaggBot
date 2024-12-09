@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { MatchAction } from '../../types/Report';
   import { 
-    Vote, Gun, Zap, Shield, Eye, 
+    Vote, ArrowRight, Zap, Shield, Eye, 
     MessageCircle, UserX, UserCheck 
   } from 'lucide-svelte';
 
@@ -9,7 +9,7 @@
 
   const actionIcons = {
     vote: Vote,
-    shoot: Gun,
+    shoot: ArrowRight,
     taze: Zap,
     protect: Shield,
     investigate: Eye,
