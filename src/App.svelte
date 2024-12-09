@@ -13,14 +13,17 @@
   import Profile from "./lib/components/Profile.svelte";
   import BotManagement from "./lib/components/bot/BotManagement.svelte";
   import NotificationsPage from "./lib/components/notifications/NotificationsPage.svelte";
+  import ReportsPage from "./lib/components/reports/ReportsPage.svelte";
   import Login from './lib/components/Login.svelte';
   
   let isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+  isAuthenticated = true; // Temporary for development
   export let url = "";
 
   onMount(() => {
     currentPath.set(window.location.pathname);
     isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
+    isAuthenticated = true; // Temporary for development
     
     // Update current path on navigation
     window.addEventListener('popstate', () => {
@@ -44,6 +47,7 @@
         <Route path="/profile" component={Profile} />
         <Route path="/bot" component={BotManagement} />
         <Route path="/notifications" component={NotificationsPage} />
+        <Route path="/reports" component={ReportsPage} />
       </main>
       <Footer />
     </div>
