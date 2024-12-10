@@ -36,6 +36,7 @@ class CredentialManager:
                 json=self.credentials,
                 headers=self.headers,
             )
+            print(f"{resp.content}")
             self.user = User(**resp.json())
 
         if resp.status_code == 401:

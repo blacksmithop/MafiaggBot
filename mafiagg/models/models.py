@@ -51,13 +51,7 @@ class SearchUser(BaseModel):
 class User(BaseModel):
     id: int
     username: str
-    activePatreon: bool
     createdAt: str
-    hostBannedUsernames: List[str] = []
-    isPatreonLinked: bool = False
-    needsVerification: bool = False
-    createdAt: str = ""
-
 
 # Rooms
 class Room(BaseModel):

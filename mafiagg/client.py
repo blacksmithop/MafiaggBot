@@ -44,7 +44,7 @@ class Bot(BotBase):
     def register_modules(self):
         self.Role = GetRole()
         self.Deck = GetDeck(cookie=self.cookie)
-        self.User = GetUser()
+        self.User = GetUser(cookie=self.cookie)
         self.Room = GetRoom(cookie=self.cookie)
         self.Setup = GetSetup()
         self.Setting = EditSetting()

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from mafiagg.user import GetUser
 
 
-player = GetUser()
+player = GetUser(cookie=None) # We dont need auth to fetch players
 
 class PlayerStats(BaseModel):
     id: int
@@ -20,7 +20,6 @@ class PlayerStats(BaseModel):
 def get_player_data(id: int=None, username: str= None, report=False):
     if id:
         player = GetUser().get_user(id=id)
-        # player = PlayerStats(id=data.id, username=data.username, createdAt=data.createdAt)
         return player
     if username:
         player = GetUser().get_user(id=533610) # TODO: Look up DB for game reports
