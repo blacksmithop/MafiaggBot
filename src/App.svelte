@@ -15,6 +15,8 @@
   import NotificationsPage from "./lib/components/notifications/NotificationsPage.svelte";
   import ReportsPage from "./lib/components/reports/ReportsPage.svelte";
   import Login from './lib/components/Login.svelte';
+  import ChatButton from './lib/components/chat/ChatButton.svelte';
+  import ChatWindow from './lib/components/chat/ChatWindow.svelte';
   
   let isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
   isAuthenticated = true; // Temporary for development
@@ -49,6 +51,8 @@
         <Route path="/notifications" component={NotificationsPage} />
         <Route path="/reports" component={ReportsPage} />
       </main>
+      <ChatButton />
+      <ChatWindow />
       <Footer />
     </div>
   </div>
