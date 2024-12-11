@@ -73,7 +73,7 @@
     align-items: center;
     padding: 0 2rem;
     height: 100%;
-    max-width: 1400px;
+    /* max-width: 1400px; */
     margin: 0 auto;
   }
 
