@@ -1,5 +1,6 @@
 <script lang="ts">
   import { format } from "date-fns";
+  import { Save, Shuffle } from "lucide-svelte";
 
   let displayName = "Player123";
   let avatarSeed = "user123";
@@ -27,7 +28,7 @@
           <img src={avatarUrl} alt="User Avatar" class="avatar" />
         </div>
         <button class="randomize-btn" on:click={generateRandomSeed}>
-          Randomize Avatar
+          <Shuffle size={16} />
         </button>
       </div>
 
@@ -46,6 +47,13 @@
         <div class="info-group">
           <label>Join Date</label>
           <span class="join-date">{format(joinDate, "MMMM d, yyyy")}</span>
+        </div>
+
+        <div class="save-btn-container">
+          <button class="save-btn">
+            <Save size={16} />
+            Save
+          </button>
         </div>
       </div>
     </div>
@@ -68,6 +76,7 @@
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
+
   .avatar-section {
     display: flex;
     flex-direction: column;
@@ -91,11 +100,14 @@
   }
 
   .randomize-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     background-color: var(--accent);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
-    border-radius: 6px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: 500;
     transition: opacity 0.2s;
@@ -103,6 +115,31 @@
 
   .randomize-btn:hover {
     opacity: 0.9;
+  }
+
+  .save-btn-container {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 1rem;
+  }
+
+  .save-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+
+  .save-btn:hover {
+    opacity: 0.9;
+    /* background-color: var(--accent-dark); */
   }
 
   .profile-details {
