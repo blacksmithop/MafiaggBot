@@ -1,26 +1,26 @@
 <script lang="ts">
-  import { format } from 'date-fns';
-  
+  import { format } from "date-fns";
+
   let displayName = "Player123";
   let avatarSeed = "user123";
   let joinDate = new Date(2023, 0, 15); // January 15, 2023
-  
+
   function generateRandomSeed() {
     avatarSeed = Math.random().toString(36).substring(7);
   }
-  
+
   function handleDisplayNameChange(event: Event) {
     const input = event.target as HTMLInputElement;
     displayName = input.value;
   }
-  
+
   $: avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}`;
 </script>
 
 <div class="profile-container">
   <div class="card">
-    <h2 class="section-title">Profile Settings</h2>
-    
+    <h2 class="section-title">Edit Profile</h2>
+
     <div class="profile-content">
       <div class="avatar-section">
         <div class="avatar-container">
@@ -30,7 +30,7 @@
           Randomize Avatar
         </button>
       </div>
-      
+
       <div class="profile-details">
         <div class="form-group">
           <label for="displayName">Display Name</label>
@@ -42,10 +42,10 @@
             maxlength="20"
           />
         </div>
-        
+
         <div class="info-group">
           <label>Join Date</label>
-          <span class="join-date">{format(joinDate, 'MMMM d, yyyy')}</span>
+          <span class="join-date">{format(joinDate, "MMMM d, yyyy")}</span>
         </div>
       </div>
     </div>
@@ -63,6 +63,11 @@
     gap: 2rem;
   }
 
+  .section-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
   .avatar-section {
     display: flex;
     flex-direction: column;
@@ -105,7 +110,8 @@
     gap: 1.5rem;
   }
 
-  .form-group, .info-group {
+  .form-group,
+  .info-group {
     display: grid;
     gap: 0.5rem;
   }
