@@ -5,5 +5,5 @@ router = APIRouter()
 
 
 @router.get("/chat/load_chat")
-async def get_player_by_id(request: Request, player_id: int) -> List:
+async def get_player_by_id(request: Request) -> List:
     return []

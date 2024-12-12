@@ -11,7 +11,8 @@ router = APIRouter()
 
 user_db = UserCollection()
 
-
+# Get player info from token (Cookie, Player ID)
+# TODO: Implement dependency
 @router.post("/login")
 async def get_rooms(request: Request, payload: Login) -> Dict:
     cred = CredentialManager(username=payload.username, password=payload.password)
