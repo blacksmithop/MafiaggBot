@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Request
-from app.utils.player_stats import get_player_data, PlayerStats
+from app.utils.player_stats import get_player_data
 from typing import List, Union
 from mafiagg.models.models import SearchUser
-from app.utils.player_stats import PlayerStats
+from app.utils.models import PlayerStats
 
 router = APIRouter()
 
