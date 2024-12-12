@@ -1,17 +1,12 @@
 from fastapi import APIRouter, Request
-from pydantic import BaseModel
 from typing import Dict
 from mafiagg.credential_manager import CredentialManager
 from app.utils.database import UserCollection
+from app.utils.models import Login
 from mafiagg.models.models import SearchUser
 
 
 router = APIRouter()
-
-
-class Login(BaseModel):
-    username: str
-    password: str
 
 
 user_db = UserCollection()
