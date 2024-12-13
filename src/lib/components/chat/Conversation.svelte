@@ -2,43 +2,46 @@
   import { ArrowLeft, Send, Smile } from 'lucide-svelte';
   import { selectedChat } from '../../stores/chat';
   import type { Chat, Message } from '../../types/Chat';
+  import { loadChatMessages } from "../../services";
   
   export let chat: Chat;
   
+  let messages: Message[] = loadChatMessages();
+  console.log(messages)
   let messageInput = '';
   let messagesContainer: HTMLDivElement;
   
-  let messages: Message[] = [
-    {
-      id: '1',
-      sender: chat.username,
-      content: 'Hey there! Great game yesterday!',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60),
-      type: 'text'
-    },
-    {
-      id: '2',
-      sender: 'You',
-      content: 'Thanks! That Jester play was amazing 😄',
-      timestamp: new Date(Date.now() - 1000 * 60 * 30),
-      type: 'text'
-    },
-    {
-      id: '3',
-      sender: chat.username,
-      content: '😂',
-      timestamp: new Date(Date.now() - 1000 * 60 * 29),
-      type: 'emoji'
-    },
-    {
-      id: '4',
-      sender: chat.username,
-      content: 'Want to play another round?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 5),
-      type: 'text'
-    }
-  ];
-
+  // [
+  //   {
+  //     id: '1',
+  //     sender: chat.username,
+  //     content: 'Hey there! Great game yesterday!',
+  //     timestamp: new Date(Date.now() - 1000 * 60 * 60),
+  //     type: 'text'
+  //   },
+  //   {
+  //     id: '2',
+  //     sender: 'You',
+  //     content: 'Thanks! That Jester play was amazing 😄',
+  //     timestamp: new Date(Date.now() - 1000 * 60 * 30),
+  //     type: 'text'
+  //   },
+  //   {
+  //     id: '3',
+  //     sender: chat.username,
+  //     content: '😂',
+  //     timestamp: new Date(Date.now() - 1000 * 60 * 29),
+  //     type: 'emoji'
+  //   },
+  //   {
+  //     id: '4',
+  //     sender: chat.username,
+  //     content: 'Want to play another round?',
+  //     timestamp: new Date(Date.now() - 1000 * 60 * 5),
+  //     type: 'text'
+  //   }
+  // ];
+  // let messages: Message[] = [];
   function sendMessage() {
     if (!messageInput.trim()) return;
     
