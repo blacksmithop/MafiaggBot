@@ -5,7 +5,8 @@
     GamepadIcon,
     Github,
     Bot,
-    Bell
+    Bell,
+    FileText
   } from 'lucide-svelte';
   import SidebarItem from './SidebarItem.svelte';
   
@@ -15,6 +16,7 @@
     { path: "/", icon: LayoutDashboard, text: "Dashboard" },
     { path: "/player-stats", icon: Users, text: "Player Stats" },
     { path: "/game-stats", icon: GamepadIcon, text: "Game Stats" },
+    { path: "/reports", icon: FileText, text: "Reports" },
     { path: "/notifications", icon: Bell, text: "Notifications" },
     { path: "/bot", icon: Bot, text: "Bot" },
     { 

@@ -30,7 +30,7 @@
       name,
       deck,
       playerCount: 15,
-      roles: Object.entries(selectedRoles).map(([roleId, count]) => ({
+      roles: Object.entries(selectedRoles).map(([roleId, count]) => ({ // TODO: Roles as Objects/List?
         id: parseInt(roleId),
         count
       })),

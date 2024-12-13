@@ -1,9 +1,10 @@
 export interface BotRoom {
-  id: string;
-  name: string;
-  deck: string;
-  playerCount: number;
-  status: 'active' | 'inactive';
-  uptime: string;
-  roles?: string[];
-}
+    id: string; // Unique identifier
+    deck: string;
+    name: string; // Room name
+    playerCount: number;
+    roles: Array<object>;
+    status: string;
+    uptime: string;
+  }
+  

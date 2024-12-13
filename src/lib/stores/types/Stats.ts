@@ -1,7 +1,20 @@
-export interface PlayerStats {
-  id: string;
+export interface UnregisteredPlayer {
+  id: number;
   username: string;
-  joinedDate: string;
+  createdAt: string;
+}
+
+
+export interface RegisteredPlayer {
+  id: number;
+  username: string;
+  createdAt: string;
+}
+
+export interface RegisteredPlayerReport {
+  id: number;
+  username: string;
+  createdAt: string;
   totalGames: number;
   winRate: number;
   townWinRate: number;
@@ -22,14 +35,24 @@ export interface FactionStats {
   totalGames: number;
 }
 
+export interface HostUser {
+  id: number;
+  username: string;
+  activePatreon: boolean;
+  hostBannedUsernames: Array<string>;
+  isPatreonLinked: boolean;
+  needsVerification: boolean;
+  createdAt: string;
+}
+
 export interface GameLobby {
   id: string;
   name: string;
-  host: string;
+  hasStarted: boolean;
   playerCount: number;
-  maxPlayers: number;
-  status: 'Waiting' | 'In Progress';
-  link: string;
+  setupSize: number;
+  hostUser: HostUser;
+  createdAt: string;
 }
 
 export interface PlayerReport {
