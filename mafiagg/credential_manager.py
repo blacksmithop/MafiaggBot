@@ -31,17 +31,21 @@ class CredentialManager:
 
     def login(self):
         with Session() as s:
-            resp = s.post(
-                self.URL,
-                json=self.credentials,
-                headers=self.headers,
-            )
-            self.user = User(**resp.json())
+            try:
+                resp = s.post(
+                    self.URL,
+                    json=self.credentials,
+                    headers=self.headers,
+                )
 
-        if resp.status_code == 401:
-            raise WrongPassword("Provided username/password is incorrect")
+                if resp.status_code == 401:
+                    raise WrongPassword("Provided username/password is incorrect")
+                self.user = User(**resp.json())
 
-        self.cookies = resp.cookies.get_dict()
+                self.cookies = resp.cookies.get_dict()
+            except Exception as e:
+                print(f"Failed to login due to {e}")
+                self.cookies = {}
 
     def logout(self):
         with Session() as s:

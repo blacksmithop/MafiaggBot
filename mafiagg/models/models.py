@@ -24,7 +24,7 @@ class Role(BaseModel):
     description: str = ""
     id: int = -1
     alignment: str = None
-    new: bool = None
+    new: Optional[bool] = None
     disabled: bool = False
     holiday: str = "none"
     tags: List[str] = []
@@ -41,17 +41,17 @@ class Role(BaseModel):
         alignment = alignmentMapping.get(alignment, None)
         return alignment
 
+# Search User
+class SearchUser(BaseModel):
+    id: int
+    username: str
+    createdAt: str
+
 # User
 class User(BaseModel):
     id: int
     username: str
-    activePatreon: bool
     createdAt: str
-    hostBannedUsernames: List[str] = []
-    isPatreonLinked: bool = False
-    needsVerification: bool = False
-    createdAt: str = ""
-
 
 # Rooms
 class Room(BaseModel):
