@@ -2,8 +2,8 @@
   import { format } from "date-fns";
   import { Save, Shuffle } from "lucide-svelte";
 
-  let displayName = "Player123";
-  let avatarSeed = "user123";
+  let username = localStorage.getItem("user_name") || "Guest";
+  let avatarSeed = username
   let joinDate = new Date(2023, 0, 15); // January 15, 2023
 
   function generateRandomSeed() {
@@ -12,7 +12,7 @@
 
   function handleDisplayNameChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    displayName = input.value;
+    username = input.value;
   }
 
   $: avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}`;
@@ -38,7 +38,7 @@
           <input
             type="text"
             id="displayName"
-            value={displayName}
+            value={username}
             on:input={handleDisplayNameChange}
             maxlength="20"
           />
