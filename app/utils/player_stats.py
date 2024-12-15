@@ -9,10 +9,10 @@ player = GetUser(cookie=None)  # We dont need auth to fetch players
 
 def get_player_data(id: int = None, username: str = None, report=False):
     if id:
-        player = GetUser().get_user(id=id)
+        player = GetUser(cookie=None).get_user(id=id)
         return player
     if username:
-        player = GetUser().get_user(id=533610)  # TODO: Look up DB for game reports
+        player = GetUser(cookie=None).get_user(id=533610)  # TODO: Look up DB for game reports
         if report:
             player = PlayerStats(
                 id=player.id, username=player.username, createdAt=player.createdAt
