@@ -42,7 +42,7 @@
       type: "text",
     };
 
-    messages.push(newMessage);
+    messages = [...messages, newMessage];
     messageInput = "";
 
     // Scroll to bottom after sending a message
@@ -79,11 +79,12 @@
   <div class="messages" bind:this={messagesContainer}>
     {#each messages as message}
       <div class="message" class:sent={message.sender === user_id}>
-        <div class="message-content" class:emoji={message.type === "emoji"}>
+        <div class="message-content">
+          <!-- class:emoji={message.type === "emoji"} -->
           {message.content}
         </div>
         <span class="time">
-          {message.timestamp.toLocaleTimeString([], {
+          {new Date(message.timestamp).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })}

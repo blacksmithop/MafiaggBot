@@ -1,15 +1,14 @@
 export interface Chat {
   _id: string;
-  senderId: string;
-  receiverId: string;
+  senderId: number;
+  receiverId: number;
   content: string;
   timestamp: Date;
 }
 
 export interface Message {
-  id: string;
-  sender: string;
+  id?: string;
+  sender: number;
   content: string;
   timestamp: Date;
-  type: 'text' | 'emoji';
 }
