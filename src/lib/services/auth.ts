@@ -15,8 +15,10 @@ export async function login(username: string, password: string): Promise<void> {
   }
 
   const data = await response.json();
+  let user_id = data.user_id
+  user_id = Number(user_id)
   localStorage.setItem("cookie", data.cookie);
-  localStorage.setItem("user_id", data.user_id);
+  localStorage.setItem("user_id", user_id);
   localStorage.setItem("user_name", data.user_name);
   localStorage.setItem("isAuthenticated", "true");
 }

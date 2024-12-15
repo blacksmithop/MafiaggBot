@@ -34,12 +34,11 @@ export async function loadChatMessages(
       },
       body: JSON.stringify({ message: "Hello" }) // Initial greeting
     });
-
     if (!response.ok) {
       throw new Error(`Failed to load chatbot messages: ${response.statusText}`);
     }
 
-    const messages: Message[] = await response.json();
+    const messages: Chat[] = await response.json();
     return messages.map((message) => ({
       ...message,
       timestamp: new Date(message.timestamp),
@@ -56,11 +55,8 @@ export async function loadChatMessages(
     body: JSON.stringify({ senderId, receiverId }),
   });
 
-  if (!response.ok) {
-    throw new Error(`Failed to load chat messages: ${response.statusText}`);
-  }
-
-  const messages: Message[] = await response.json();
+  const messages: Chat[] = await response
+  // .json();
   return messages.map((message) => ({
     ...message,
     timestamp: new Date(message.timestamp),
