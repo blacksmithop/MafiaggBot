@@ -1,10 +1,7 @@
 from pymongo import MongoClient
-from urllib.parse import quote_plus
 from mafiagg.user import GetUser
+from app.utils.database import uri
 
-username = quote_plus('user')
-password = quote_plus('password')
-uri = 'mongodb://%s:%s@localhost' % (username, password)
 
 class UserCollection:
     def __init__(self):
@@ -34,18 +31,3 @@ class UserCollection:
         return user
 
     
-# def add_user_game_report(self, user_id, game_report):
-#     report = {
-#         "user_id": user_id,
-#         "game_report": game_report
-#     }
-#     result = self.reports_collection.insert_one(report)
-#     return result.inserted_id
-
-# def get_user_game_report(self, user_id):
-#     reports = list(self.reports_collection.find({"user_id": user_id}))
-#     return reports
-
-# def get_notifications_by_user_id(self, user_id):
-#     notifications = list(self.notifications_collection.find({"user_id": user_id}))
-#     return notifications

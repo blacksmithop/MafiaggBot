@@ -17,8 +17,12 @@ class PlayerStats(BaseModel):
     neutralWinRate: int = 0
 
 class ChatMessage(BaseModel):
-    id: str
-    sender: str
+    _id: str
+    senderId: int
+    receiverId: int
     content: str
     timestamp: datetime
-    type: str = Literal["text", "image"]
+
+class MessageAuthor(BaseModel):
+    senderId: int
+    receiverId: int
