@@ -7,7 +7,8 @@ export const API_ENDPOINTS = {
   notifications: '/notifications',
   bot: '/bot',
   recent_chat: '/get_recent_messages',
-  chat_from_user: '/get_chat_with_user'
+  chat_from_user: '/get_chat_with_user',
+  chatbot: '/chatbot'
 } as const;
 
 export const DEFAULT_HEADERS = {

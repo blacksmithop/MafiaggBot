@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { Bell, User } from 'lucide-svelte';
-  import NotificationDropdown from './header/NotificationDropdown.svelte';
-  import UserDropdown from './header/UserDropdown.svelte';
-  
+  import { Bell, User } from "lucide-svelte";
+  import NotificationDropdown from "./header/NotificationDropdown.svelte";
+  import UserDropdown from "./header/UserDropdown.svelte";
+
   let showNotifications = false;
   let showUserMenu = false;
-  
+  const username = localStorage.getItem("user_name") || "Guest";
+
   function handleClickOutside(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.notification-btn')) showNotifications = false;
-    if (!target.closest('.user-profile')) showUserMenu = false;
+    if (!target.closest(".notification-btn")) showNotifications = false;
+    if (!target.closest(".user-profile")) showUserMenu = false;
   }
 </script>
 
@@ -22,9 +23,9 @@
     </div>
     <div class="header-actions">
       <div class="notification-wrapper">
-        <button 
+        <button
           class="notification-btn"
-          on:click={() => showNotifications = !showNotifications}
+          on:click={() => (showNotifications = !showNotifications)}
         >
           <Bell size={20} />
           <span class="notification-badge">3</span>
@@ -33,18 +34,18 @@
           <NotificationDropdown />
         {/if}
       </div>
-      
+
       <div class="user-wrapper">
-        <button 
+        <button
           class="user-profile"
-          on:click={() => showUserMenu = !showUserMenu}
+          on:click={() => (showUserMenu = !showUserMenu)}
         >
-          <img 
-            src="https://api.dicebear.com/7.x/avataaars/svg?seed=user123" 
-            alt="User" 
+          <img
+            src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${username}`}
+            alt="User"
             class="avatar"
           />
-          <span class="username">Player123</span>
+          <span class="username">{username}</span>
         </button>
         {#if showUserMenu}
           <UserDropdown />
@@ -89,7 +90,8 @@
     gap: 1.5rem;
   }
 
-  .notification-wrapper, .user-wrapper {
+  .notification-wrapper,
+  .user-wrapper {
     position: relative;
   }
 

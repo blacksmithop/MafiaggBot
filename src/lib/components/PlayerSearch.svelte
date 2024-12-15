@@ -1,13 +1,19 @@
 <script lang="ts">
   import type { RegisteredPlayer, RegisteredPlayerReport } from '../types/Stats';
   import { getPlayerByName, getPlayerReport, getPlayerById } from "../services";
-  import { Search } from 'lucide-svelte';
+  import { Search, UserPlus, UserCheck } from 'lucide-svelte';
   
   let searchQuery: string = '';
   let selectedPlayer: RegisteredPlayer | RegisteredPlayerReport | null = null;
   let loading = false;
   let error: string | null = null;
-  
+  let isFriend = false;
+
+  async function toggleFriend() {
+    // Implement friend request/remove logic here
+    isFriend = !isFriend;
+  }
+
   async function handleSearch() {
     if (!searchQuery.trim()) return;
     
@@ -69,9 +75,17 @@
     <div class="player-card">
       <div class="player-header">
         <h3>{selectedPlayer.username}</h3>
+        <button class="friend-btn" on:click={toggleFriend}>
+          {#if isFriend}
+            <UserCheck size={20} />
+            <span>Friends</span>
+          {:else}
+            <UserPlus size={20} />
+            <span>Add Friend</span>
+          {/if}
+        </button>
         <span class="player-id">ID: {selectedPlayer.id}</span>
       </div>
-      
       <div class="player-details">
         <div class="detail-row">
           <span class="label">Joined:</span>
@@ -270,5 +284,23 @@
     .faction-stats {
       grid-template-columns: 1fr;
     }
+  }
+
+  .friend-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-tertiary);
+    border: none;
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .friend-btn:hover {
+    background-color: var(--accent);
+    color: white;
   }
 </style>
