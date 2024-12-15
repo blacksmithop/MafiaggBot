@@ -6,7 +6,8 @@ export const API_ENDPOINTS = {
   games: '/games',
   notifications: '/notifications',
   bot: '/bot',
-  load_chat_messages: '/load_chat_messages',
+  recent_chat: '/get_recent_messages',
+  chat_from_user: '/get_chat_with_user'
 } as const;
 
 export const DEFAULT_HEADERS = {

@@ -1,61 +1,51 @@
 <script lang="ts">
-  import { ArrowLeft, Send, Smile } from 'lucide-svelte';
-  import { selectedChat } from '../../stores/chat';
-  import type { Chat, Message } from '../../types/Chat';
+  import { ArrowLeft, Send, Smile } from "lucide-svelte";
+  import { selectedChat } from "../../stores/chat";
+  import type { Chat, Message } from "../../types/Chat";
   import { loadChatMessages } from "../../services";
-  
+  import { onMount } from "svelte";
+    import { login } from "../../services/auth";
+
   export let chat: Chat;
-  
-  let messages: Message[] = loadChatMessages();
-  console.log(messages)
-  let messageInput = '';
+
+  let messages: Message[] = [];
+  let messageInput = "";
   let messagesContainer: HTMLDivElement;
-  
-  // [
-  //   {
-  //     id: '1',
-  //     sender: chat.username,
-  //     content: 'Hey there! Great game yesterday!',
-  //     timestamp: new Date(Date.now() - 1000 * 60 * 60),
-  //     type: 'text'
-  //   },
-  //   {
-  //     id: '2',
-  //     sender: 'You',
-  //     content: 'Thanks! That Jester play was amazing 😄',
-  //     timestamp: new Date(Date.now() - 1000 * 60 * 30),
-  //     type: 'text'
-  //   },
-  //   {
-  //     id: '3',
-  //     sender: chat.username,
-  //     content: '😂',
-  //     timestamp: new Date(Date.now() - 1000 * 60 * 29),
-  //     type: 'emoji'
-  //   },
-  //   {
-  //     id: '4',
-  //     sender: chat.username,
-  //     content: 'Want to play another round?',
-  //     timestamp: new Date(Date.now() - 1000 * 60 * 5),
-  //     type: 'text'
-  //   }
-  // ];
-  // let messages: Message[] = [];
+  const user_id = Number(localStorage.getItem("user_id"));
+
+  // Load messages when a chat is selected
+  async function loadMessages() {
+    if (chat.senderId && user_id) {
+      messages = await loadChatMessages(user_id, chat.senderId);
+    }
+
+    // Scroll to bottom after loading messages
+    setTimeout(() => {
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }
+    });
+  }
+
+  onMount(() => {
+    loadMessages();
+  });
+
   function sendMessage() {
     if (!messageInput.trim()) return;
-    
-    messages.push({
+
+    const newMessage: Message = {
       id: Date.now().toString(),
-      sender: 'You',
+      sender: user_id, // Set sender as user_id
       content: messageInput,
       timestamp: new Date(),
-      type: 'text'
-    });
-    
-    messageInput = '';
-    messages = messages;
-    
+      type: "text",
+    };
+
+    messages.push(newMessage);
+    messageInput = "";
+
+    // Scroll to bottom after sending a message
     setTimeout(() => {
       if (messagesContainer) {
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -64,7 +54,7 @@
   }
 
   function handleKeyDown(event: KeyboardEvent) {
-    if (event.key === 'Enter' && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
       sendMessage();
     }
@@ -77,23 +67,26 @@
       <ArrowLeft size={20} />
     </button>
     <div class="user-info">
-      <img 
-        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${chat.avatar}`} 
-        alt={chat.username}
+      <img
+        src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${chat.senderId}`}
+        alt={chat.senderId}
         class="avatar"
       />
-      <span class="username">{chat.username}</span>
+      <span class="username">{chat.senderId}</span>
     </div>
   </div>
 
   <div class="messages" bind:this={messagesContainer}>
     {#each messages as message}
-      <div class="message" class:sent={message.sender === 'You'}>
-        <div class="message-content" class:emoji={message.type === 'emoji'}>
+      <div class="message" class:sent={message.sender === user_id}>
+        <div class="message-content" class:emoji={message.type === "emoji"}>
           {message.content}
         </div>
         <span class="time">
-          {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          {message.timestamp.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
         </span>
       </div>
     {/each}
@@ -109,7 +102,11 @@
       on:keydown={handleKeyDown}
       rows="1"
     />
-    <button class="send-btn" on:click={sendMessage} disabled={!messageInput.trim()}>
+    <button
+      class="send-btn"
+      on:click={sendMessage}
+      disabled={!messageInput.trim()}
+    >
       <Send size={20} />
     </button>
   </div>
@@ -216,7 +213,8 @@
     gap: 0.75rem;
   }
 
-  .emoji-btn, .send-btn {
+  .emoji-btn,
+  .send-btn {
     background: none;
     border: none;
     color: var(--text-secondary);
@@ -229,7 +227,8 @@
     justify-content: center;
   }
 
-  .emoji-btn:hover, .send-btn:hover:not(:disabled) {
+  .emoji-btn:hover,
+  .send-btn:hover:not(:disabled) {
     background-color: var(--bg-tertiary);
     color: var(--text-primary);
   }

@@ -37,11 +37,7 @@
       }
 
       // Attempt login
-      const response = await login(username, password);
-      
-      // Store session token and auth state
-      localStorage.setItem("userSessionToken", response.userSessionToken);
-      localStorage.setItem("isAuthenticated", "true");
+      await login(username, password);
       
       // Redirect to dashboard
       navigate("/");

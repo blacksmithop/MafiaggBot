@@ -19,13 +19,11 @@
   import ChatWindow from './lib/components/chat/ChatWindow.svelte';
   
   let isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-  isAuthenticated = true; // Temporary for development
   export let url = "";
 
   onMount(() => {
     currentPath.set(window.location.pathname);
     isAuthenticated = localStorage.getItem("isAuthenticated") === "true";
-    isAuthenticated = true; // Temporary for development
     
     // Update current path on navigation
     window.addEventListener('popstate', () => {

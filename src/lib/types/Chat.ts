@@ -1,10 +1,9 @@
 export interface Chat {
-  id: string;
-  username: string;
-  avatar: string;
-  lastMessage: string;
+  _id: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
   timestamp: Date;
-  unread: number;
 }
 
 export interface Message {

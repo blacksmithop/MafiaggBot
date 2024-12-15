@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_ENDPOINTS, DEFAULT_HEADERS } from './config';
+import { API_BASE_URL, DEFAULT_HEADERS } from './config';
 import type { ApiResponse } from './config';
 
 async function handleResponse<T>(response: Response): Promise<ApiResponse<T>> {

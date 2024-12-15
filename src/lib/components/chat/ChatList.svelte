@@ -1,34 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import { Search } from 'lucide-svelte';
   import { selectedChat } from '../../stores/chat';
   import type { Chat } from '../../types/Chat';
+  import { loadRecentMessages } from "../../services";
   
-  const chats: Chat[] = [
-    {
-      id: '1',
-      username: 'Alice',
-      avatar: 'alice123',
-      lastMessage: 'Good game! That was intense!',
-      timestamp: new Date(Date.now() - 1000 * 60 * 5),
-      unread: 2
-    },
-    {
-      id: '2',
-      username: 'Bob',
-      avatar: 'bob456',
-      lastMessage: 'I think the Jester is trying to get lynched',
-      timestamp: new Date(Date.now() - 1000 * 60 * 30),
-      unread: 0
-    },
-    {
-      id: '3',
-      username: 'Charlie',
-      avatar: 'charlie789',
-      lastMessage: '😂 That was hilarious!',
-      timestamp: new Date(Date.now() - 1000 * 60 * 60),
-      unread: 1
-    }
-  ];
+  let chats: Chat[] = []
+
+  onMount(async () => {
+    chats = (await loadRecentMessages()) || [];
+  });
+
 
   function selectChat(chat: Chat) {
     selectedChat.set(chat);
@@ -60,24 +42,23 @@
     {#each chats as chat}
       <button 
         class="chat-item" 
-        class:unread={chat.unread > 0}
         on:click={() => selectChat(chat)}
       >
         <img 
-          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${chat.avatar}`} 
-          alt={chat.username}
+          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${chat.senderId}`} 
+          alt={chat.senderId}
           class="avatar"
         />
         <div class="chat-info">
           <div class="top-line">
-            <span class="username">{chat.username}</span>
+            <span class="username">{chat.senderId}</span>
             <span class="time">{getTimeString(chat.timestamp)}</span>
           </div>
           <div class="bottom-line">
-            <span class="last-message">{chat.lastMessage}</span>
-            {#if chat.unread > 0}
-              <span class="unread-badge">{chat.unread}</span>
-            {/if}
+            <span class="last-message">{chat.content}</span>
+            <!-- {#if true}
+              <span class="unread-badge">1</span>
+            {/if} -->
           </div>
         </div>
       </button>

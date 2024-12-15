@@ -1,4 +1,3 @@
-import { fetchWithAuth } from './api';
 import { API_BASE_URL } from './config';
 
 export async function login(username: string, password: string): Promise<void> {
@@ -16,12 +15,16 @@ export async function login(username: string, password: string): Promise<void> {
   }
 
   const data = await response.json();
-  localStorage.setItem('auth_token', data.token); // Store token
-  localStorage.setItem('isAuthenticated', 'true'); // Update auth state
+  localStorage.setItem("cookie", data.cookie);
+  localStorage.setItem("user_id", data.user_id);
+  localStorage.setItem("user_name", data.user_name);
+  localStorage.setItem("isAuthenticated", "true");
 }
 
 export function logout(): void {
-  localStorage.removeItem('auth_token'); // Clear token
+  localStorage.removeItem('cookie'); // Clear token
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("user_name");
   localStorage.removeItem('isAuthenticated'); // Clear auth state
   window.location.href = '/'; // Redirect
 }
