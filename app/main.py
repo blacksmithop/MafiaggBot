@@ -17,8 +17,7 @@ routes = [auth, chat, dashboard, player_stats]
 for route in routes:
     app.include_router(route.router)
 
+
 @app.get("/")
 async def index():
-    return {
-        "version": 0.1
-    }
+    return {"version": 0.1}

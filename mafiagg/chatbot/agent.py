@@ -7,7 +7,9 @@ from mafiagg.helper.custom_exceptions import FailedToLoadAgent
 
 if getenv("AGENT_VERBOSE") == "true":
     from langchain.globals import set_verbose, set_debug
+
     set_debug(True)
+
 
 class GraphConfig(TypedDict):
     model_name: Literal["anthropic", "openai"]

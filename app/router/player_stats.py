@@ -14,7 +14,9 @@ async def get_player_by_id(request: Request, player_id: int) -> SearchUser:
 
 
 @router.get("/players/get_player_by_name/{username}")
-async def get_player_by_name(request: Request, username: str) -> Union[List[SearchUser], List]:
+async def get_player_by_name(
+    request: Request, username: str
+) -> Union[List[SearchUser], List]:
     try:
         matched_players = get_player_data(username=username)
     except Exception:

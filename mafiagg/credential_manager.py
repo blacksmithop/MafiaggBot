@@ -6,8 +6,6 @@ from mafiagg.helper.custom_exceptions import WrongPassword
 from typing import Optional
 
 
-
-
 class CredentialManager:
     URL = "https://mafia.gg/api/user-session"
     headers = {

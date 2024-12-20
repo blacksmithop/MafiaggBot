@@ -25,7 +25,14 @@ extras_require = {
     ]
 }
 
-packages = ["mafiagg", "mafiagg.bot", "mafiagg.helper", "mafiagg.models", "mafiagg.chatbot", "mafiagg.chatbot.tools"]
+packages = [
+    "mafiagg",
+    "mafiagg.bot",
+    "mafiagg.helper",
+    "mafiagg.models",
+    "mafiagg.chatbot",
+    "mafiagg.chatbot.tools",
+]
 
 setup(
     name="mafiagg",

@@ -1,5 +1,6 @@
 from pymongo import MongoClient, ASCENDING, DESCENDING
 from app.utils.database import uri
+from app.utils.models import ChatMessage
 
 
 class ChatCollection:
@@ -7,6 +8,9 @@ class ChatCollection:
         self.client = MongoClient(uri)
         self.db = self.client["mafiagg"]
         self.chat_collection = self.db["chat"]
+
+    def add_message_to_db(self, chat_payload: ChatMessage):
+        return self.chat_collection.insert_one(chat_payload)
 
     def get_chat_between_users(self, user_a, user_b):
         # Fetch all messages between user_a and user_b, sorted by timestamp

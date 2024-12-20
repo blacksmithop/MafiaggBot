@@ -7,6 +7,7 @@ try:
 except FailedToLoadAgent:
     graph = None
 
+
 def get_bot_response(user_query: str, user_id: int = None):
     if graph == None:
         return None

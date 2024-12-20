@@ -48,7 +48,6 @@ class WebsocketBase:
         except Exception as e:
             print(f"Error in sending to websocket: {e}")
 
-
     async def listen_and_respond(self):
         while True:
             try:
@@ -75,7 +74,7 @@ class WebsocketBase:
                     self.reset_cache()
                 else:
                     await self.ws.send(dumps(resp))
-                    
+
     def run(self):
         self.establish_connection()
         asyncio.get_event_loop().run_until_complete(

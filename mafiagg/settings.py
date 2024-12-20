@@ -95,7 +95,7 @@ class EditSetting:
 
     def __init__(self) -> None:
         self.allowed_values = list(self.edits.keys())
-        
+
     def is_valid(self, option):
         return self.edits.get(option)
 

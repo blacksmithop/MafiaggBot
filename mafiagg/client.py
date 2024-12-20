@@ -173,9 +173,7 @@ class Bot(BotBase):
             try:
                 role_name, role_count = get_role_name_and_count(args=args)
                 if role_count < 1:
-                    return self.send(
-                        f"⛔ Role count {args[1]} should be greater than 0"
-                    )
+                    return self.send(f"⛔ Role count {args[1]} should be greater than 0")
             except ValueError:
                 return self.send(f"⛔ Role count cannot accept {args[1]}")
         _, selected_role = self.Role.get_role(role_name=role_name)
@@ -344,13 +342,13 @@ class Bot(BotBase):
                         f"{', '.join(exist['options'])}"
                     )
                 elif exist["allowed"] == "bool":
-                    self.response["message"] = (
-                        f"📜 Valid options for {opt} are True, False"
-                    )
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are True, False"
                 else:
-                    self.response["message"] = (
-                        f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
-                    )
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
                 return self.response
         else:
             opt, new = args
@@ -369,13 +367,13 @@ class Bot(BotBase):
                         f"{', '.join(exist['options'])}"
                     )
                 elif exist["allowed"] == "bool":
-                    self.response["message"] = (
-                        f"⛔ Valid options for {opt} are True, False"
-                    )
+                    self.response[
+                        "message"
+                    ] = f"⛔ Valid options for {opt} are True, False"
                 else:
-                    self.response["message"] = (
-                        f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
-                    )
+                    self.response[
+                        "message"
+                    ] = f"📜 Valid options for {opt} are between {exist['minmax'][0]} and {exist['minmax'][1]}"
                 return self.response
         self.response["message"] = f"✅ Set {opt} to {new}"
         return [self.response, setting]

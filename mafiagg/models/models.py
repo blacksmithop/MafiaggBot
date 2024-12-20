@@ -15,8 +15,9 @@ alignmentMapping = {
     "third": "Third-party",
     "mafia": "Mafia-aligned",
     "town": "Town-aligned",
-    "none": "None"
+    "none": "None",
 }
+
 
 # Role
 class Role(BaseModel):
@@ -41,17 +42,20 @@ class Role(BaseModel):
         alignment = alignmentMapping.get(alignment, None)
         return alignment
 
+
 # Search User
 class SearchUser(BaseModel):
     id: int
     username: str
     createdAt: str
 
+
 # User
 class User(BaseModel):
     id: int
     username: str
     createdAt: str
+
 
 # Rooms
 class Room(BaseModel):

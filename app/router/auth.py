@@ -14,7 +14,6 @@ user_db = UserCollection()
 
 @router.post("/login")
 async def get_rooms(request: Request, payload: Login) -> Dict:
-
     cred = CredentialManager(username=payload.username, password=payload.password)
     cookie = cred.get_cookie_data()
 

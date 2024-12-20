@@ -60,7 +60,7 @@ class GetRole:
         response = None
         for role in self.roles:
             score = get_similar_score(role.name, role_name)
-            if score > 0.7: # TODO: Use chunkee vector
+            if score > 0.7:  # TODO: Use chunkee vector
                 matches[score] = role
         if matches != {}:
             matches = OrderedDict(sorted(matches.items()))
