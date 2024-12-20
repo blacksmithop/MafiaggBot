@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from mafiagg.user import GetUser
 from app.utils.database import uri
+from app.utils.models import PlayerStats
 
 
 class UserCollection:
@@ -18,8 +19,8 @@ class UserCollection:
         return self.user_collection.count_documents({"user_id": user_id}, limit=1) != 0
 
     def add_user(self, user_id, user_name):
-        user = {"user_id": user_id, "user_name": user_name}
-        result = self.user_collection.insert_one(user)
+        user_obj = PlayerStats(user_id=user_id, username=user_name)
+        result = self.user_collection.insert_one(user_obj)
         return result.inserted_id
 
     def get_user_by_id(self, user_id):

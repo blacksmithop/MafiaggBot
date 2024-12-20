@@ -1,7 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Literal
 from datetime import datetime
-
 
 class Login(BaseModel):
     username: str
@@ -9,7 +7,7 @@ class Login(BaseModel):
 
 
 class PlayerStats(BaseModel):
-    id: int
+    user_id: int
     username: str
     createdAt: str
     totalGames: int = 1
